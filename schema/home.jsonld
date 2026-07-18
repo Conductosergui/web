@@ -20,7 +20,7 @@
     "name": "Cunit",
     "sameAs": [
       "https://es.wikipedia.org/wiki/Cunit",
-      "https://www.wikidata.org/wiki/Special:Search?search=Cunit"
+      "https://www.wikidata.org/wiki/Q474489"
     ]
   },
   "areaServed": [
@@ -29,7 +29,7 @@
       "name": "Baix Penedès",
       "sameAs": [
         "https://es.wikipedia.org/wiki/Baix_Peneds%C3%A8s",
-        "https://www.wikidata.org/wiki/Special:Search?search=Baix%20Pened%C3%A8s"
+        "https://www.wikidata.org/wiki/Q15367"
       ]
     },
     {
@@ -37,7 +37,7 @@
       "name": "Garraf",
       "sameAs": [
         "https://es.wikipedia.org/wiki/Garraf_(comarca)",
-        "https://www.wikidata.org/wiki/Special:Search?search=Garraf%20comarca"
+        "https://www.wikidata.org/wiki/Q15366"
       ]
     },
     { "@type": "AdministrativeArea", "name": "Alt Penedès" },
@@ -103,6 +103,5 @@
         ]
       }
     ]
-  },
-  "_schemaNotes": "Los enlaces de Wikidata apuntan a una búsqueda por nombre porque los identificadores Q exactos no han sido verificados. Antes de publicar en producción, reemplazar por el QID correcto de cada entidad (Cunit, Baix Penedès, Garraf)."
+  }
 }
