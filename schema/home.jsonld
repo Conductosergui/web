@@ -1,0 +1,108 @@
+{
+  "@context": "https://schema.org",
+  "@type": ["HVACContractor", "DrywallContractor"],
+  "name": "Conductos Ergui",
+  "description": "Empresa especializada en instalación y mantenimiento de conductos de climatización y sistemas de Pladur, con sede en Cunit (Tarragona) y cobertura en un radio de 50 km.",
+  "url": "https://www.conductosergui.com/",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Cunit",
+    "addressRegion": "Tarragona",
+    "addressCountry": "ES"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 41.2394,
+    "longitude": 1.6386
+  },
+  "location": {
+    "@type": "Place",
+    "name": "Cunit",
+    "sameAs": [
+      "https://es.wikipedia.org/wiki/Cunit",
+      "https://www.wikidata.org/wiki/Special:Search?search=Cunit"
+    ]
+  },
+  "areaServed": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "Baix Penedès",
+      "sameAs": [
+        "https://es.wikipedia.org/wiki/Baix_Peneds%C3%A8s",
+        "https://www.wikidata.org/wiki/Special:Search?search=Baix%20Pened%C3%A8s"
+      ]
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Garraf",
+      "sameAs": [
+        "https://es.wikipedia.org/wiki/Garraf_(comarca)",
+        "https://www.wikidata.org/wiki/Special:Search?search=Garraf%20comarca"
+      ]
+    },
+    { "@type": "AdministrativeArea", "name": "Alt Penedès" },
+    { "@type": "AdministrativeArea", "name": "Tarragonès" },
+    { "@type": "AdministrativeArea", "name": "Baix Llobregat" }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios de Conductos Ergui",
+    "itemListElement": [
+      {
+        "@type": "OfferCatalog",
+        "name": "Conductos de climatización",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Instalación de conductos de aire acondicionado"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Mantenimiento y reparación de sistemas de climatización"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Diseño e instalación de redes de ventilación"
+            }
+          }
+        ]
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "Pladur",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Instalación de tabiquería y trasdosados en Pladur"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Techos técnicos y decorativos en Pladur"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Aislamiento acústico y térmico con placas de yeso laminado"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "_schemaNotes": "Los enlaces de Wikidata apuntan a una búsqueda por nombre porque los identificadores Q exactos no han sido verificados. Antes de publicar en producción, reemplazar por el QID correcto de cada entidad (Cunit, Baix Penedès, Garraf)."
+}
