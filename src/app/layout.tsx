@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "./globals.css";
 
 // Root layout del App Router (Next.js).
 // Metadatos base del sitio. Ajustar/ampliar por página con `export const metadata`.
