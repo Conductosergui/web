@@ -2,7 +2,7 @@
 
 ## 🎯 Autoridad Semántica en la Capital del Baix Penedès
 
-Conductos Ergui consolida su presencia local en El Vendrell, ofreciendo soluciones integrales de construcción en seco y climatización. Conectamos la logística de materiales desde nuestra base en Cunit para ejecutar obras con rapidez y total conformidad con el Código Técnico de la Edificación (CTE).
+Conductos Ergui consolida su presencia local en El Vendrell, ofreciendo soluciones integrales de construcción en seco y climatización. Conectamos la logística de materiales desde nuestra base en El Vendrell para ejecutar obras con rapidez y total conformidad con el Código Técnico de la Edificación (CTE).
 
 ## 🛠️ Soluciones Específicas en El Vendrell
 

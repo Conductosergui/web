@@ -114,9 +114,9 @@ export default function HomePage() {
 
               <div className="ce-reveal-2 my-12 lg:my-16">
                 <h1 className="ce-display text-[clamp(3rem,8vw,7.5rem)] text-white">
-                  Aire que fluye.
+                  Climatización y Pladur
                   <br />
-                  <span className="serif-it text-white/35">Espacios que funcionan.</span>
+                  <span className="serif-it text-white/35">en El Vendrell y Baix Penedès</span>
                 </h1>
                 <p className="mt-8 max-w-xl text-[17px] font-medium leading-[1.7] text-white/60 md:text-lg">
                   Se realizan instalación, mantenimiento y reparación de conductos de aire acondicionado y soluciones de pladur, con estándares técnicos rigurosos, atención al detalle y comunicación transparente en cada fase del proyecto.

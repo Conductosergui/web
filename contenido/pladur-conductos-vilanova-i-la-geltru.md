@@ -2,7 +2,7 @@
 
 ## 🎯 Cobertura Técnica en el Garraf
 
-En Conductos Ergui extendemos nuestro radio operativo desde Cunit para ofrecer servicios especializados de tabiquería seca (Pladur) y montaje de sistemas de climatización por conductos en todo el municipio de Vilanova i la Geltrú. Atendemos proyectos de reforma residencial en zonas céntricas y despliegues logísticos en áreas comerciales e industriales de la localidad.
+En Conductos Ergui extendemos nuestro radio operativo desde El Vendrell para ofrecer servicios especializados de tabiquería seca (Pladur) y montaje de sistemas de climatización por conductos en todo el municipio de Vilanova i la Geltrú. Atendemos proyectos de reforma residencial en zonas céntricas y despliegues logísticos en áreas comerciales e industriales de la localidad.
 
 ## 🛠️ Servicios Destacados en Vilanova
 

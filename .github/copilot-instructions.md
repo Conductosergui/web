@@ -2,7 +2,7 @@
 
 ## 🎯 Contexto del Proyecto
 
-Este repositorio contiene el código fuente y la arquitectura de datos para la web de Conductos Ergui, una empresa de servicios locales (HVAC y Pladur) basada en Cunit (Tarragona, España) con un radio de acción de 50 km (Baix Penedès, Garraf, Alt Penedès, Tarragonès, Baix Llobregat).
+Este repositorio contiene el código fuente y la arquitectura de datos para la web de Conductos Ergui, una empresa de servicios locales (HVAC y Pladur) basada en El Vendrell (Tarragona, España), con área de servicio en la comarca del Baix Penedès.
 
 ## 🛠️ Estándares de Código y Arquitectura
 
@@ -14,7 +14,7 @@ Este repositorio contiene el código fuente y la arquitectura de datos para la w
  
   - - Entidades Core: Utilizar tipos múltiples como ["HVACContractor", "DrywallContractor"] para la Home, y relacionar los nodos mediante propiedades como areaServed, offersService y locatedIn.
    
-    - - Validación Factual: Conectar siempre las ubicaciones con sus identificadores Q absolutos de Wikidata verificados (ej. Cunit: Q474489, Baix Penedès: Q15367, Garraf: Q15366) en el array sameAs.
+    - - Validación Factual: Conectar siempre las ubicaciones con sus identificadores Q absolutos de Wikidata verificados (ej. Baix Penedès: Q15367, Garraf: Q15366; verificar cada identificador Q en Wikidata antes de usarlo) en el array sameAs.
      
       - ### 2. Estructura de Contenido y URLs (Silo Web)
      
