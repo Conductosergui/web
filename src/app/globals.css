@@ -1,3 +1,63 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #07182d;
+  --color-navy: #0b2748;
+  --color-blue: #145da0;
+  --color-sky: #dcecf7;
+  --color-mist: #f2f5f7;
+  --color-lead: #5f6b76;
+  --color-plomo: #5f6b76;
+  --color-plomo-light: #aeb8c1;
+  --color-line: #d9e0e6;
+  --color-accent: #d6dde3;
+  --font-sans: "Google Sans Flex", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+body {
+  margin: 0;
+  color: #07182d;
+  background: #f7f9fa;
+  font-family: var(--font-sans-app), "Google Sans Flex", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: #d6dde3; color: #07182d; }
+a, button { -webkit-tap-highlight-color: transparent; }
+button, input, textarea, select { font: inherit; }
+
+.shell { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
+.eyebrow { font-size: .72rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+.display { font-size: clamp(3.2rem, 7.4vw, 7.25rem); line-height: .88; letter-spacing: -.065em; font-weight: 500; }
+.heading { font-size: clamp(2.25rem, 5vw, 4.75rem); line-height: .97; letter-spacing: -.055em; font-weight: 500; }
+.grid-noise {
+  background-image: linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+.image-wash { position: relative; overflow: hidden; }
+.image-wash::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,24,45,.03), rgba(7,24,45,.68)); }
+.marquee { overflow: hidden; white-space: nowrap; }
+.marquee > div { display: inline-flex; animation: ticker 26s linear infinite; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.reveal { animation: reveal .75s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes reveal { from { opacity: 0; transform: translateY(20px); } }
+
+.field { width: 100%; border: 1px solid #d9e0e6; background: white; border-radius: 12px; padding: 14px 16px; outline: none; transition: .2s; }
+.field:focus { border-color: #145da0; box-shadow: 0 0 0 4px rgba(20,93,160,.1); }
+
+.serif-it { font-family: var(--font-instrument-serif), "Instrument Serif", ui-serif, Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -0.01em; line-height: 0.95; }
+
+.ce-link { position: relative; }
+.ce-link::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1); }
+.ce-link:hover::after { transform: scaleX(1); transform-origin: left; }
+
+@media (max-width: 767px) {
+  .shell { width: min(100% - 28px, 1180px); }
+  .display { font-size: clamp(3rem, 15vw, 5rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .marquee > div, .reveal { animation: none; }
+}
