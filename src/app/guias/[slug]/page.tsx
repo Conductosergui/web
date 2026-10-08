@@ -3,17 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Calendar, ChevronRight, Clock, ExternalLink, HelpCircle, Scale, Tag, User } from "lucide-react";
 import { ArticleBody, type RenderBlock } from "@/components/ArticleBody";
-import {
-  AUTHOR,
-  AUTHOR_ROLE,
-  AUTHOR_SLUG,
-  BASE_URL,
-  PUBLISHER,
-  formatDate,
-  getGuia,
-  getRelacionadas,
-  GUIAS,
-} from "@/data/guias";
+import { JsonLd } from "@/components/JsonLd";
+import { AUTHOR, AUTHOR_ROLE, AUTHOR_SLUG, BASE_URL, formatDate, getGuia, getRelacionadas, GUIAS } from "@/data/guias";
+import { ID, pageId } from "@/lib/entidad";
+import { breadcrumbNode, pageNode, personNode, ref } from "@/lib/schema";
+import { buildMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return GUIAS.map((g) => ({ slug: g.slug }));
@@ -22,21 +16,19 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const guia = getGuia(slug);
-  if (!guia) return { title: "Guía no encontrada | Conductos Ergui" };
-  return {
-    title: `${guia.title} | Guías | Conductos Ergui`,
+  if (!guia) return { title: "Guía no encontrada" };
+  return buildMetadata({
+    title: `${guia.title} | Guías`,
     description: guia.excerpt,
+    path: `/guias/${guia.slug}`,
+    type: "article",
     openGraph: {
-      title: guia.title,
-      description: guia.excerpt,
-      locale: "es_ES",
-      type: "article",
       publishedTime: guia.datePublished,
       modifiedTime: guia.dateModified,
       section: guia.articleSection,
-      authors: [AUTHOR],
+      authors: [`${BASE_URL}/autor/${AUTHOR_SLUG}`],
     },
-  };
+  });
 }
 
 export default async function GuiaPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -46,52 +38,63 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
 
   const relacionadas = getRelacionadas(guia);
   const url = `${BASE_URL}/guias/${guia.slug}`;
-  const authorUrl = `${BASE_URL}/autor/${AUTHOR_SLUG}`;
+  const authorPath = `/autor/${AUTHOR_SLUG}`;
 
   const body: RenderBlock[] = [...guia.blocks];
   if (guia.related[0]) body.splice(3, 0, { kind: "internallink", slug: guia.related[0] });
   body.splice(Math.min(body.length, 6), 0, { kind: "topiclink", cluster: guia.cluster });
 
-  const blogPostingLd = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: guia.title,
-    description: guia.excerpt,
-    inLanguage: "es",
-    articleSection: guia.articleSection,
-    datePublished: guia.datePublished,
-    dateModified: guia.dateModified,
-    author: { "@type": "Person", name: AUTHOR, jobTitle: AUTHOR_ROLE, url: authorUrl },
-    publisher: { "@type": "Organization", name: PUBLISHER, logo: { "@type": "ImageObject", url: `${BASE_URL}/logo.svg` } },
-    about: { "@type": "Thing", name: guia.cluster },
-    mentions: [
-      ...guia.fabricantes.map((f) => ({ "@type": "Brand", name: f.name, url: f.url })),
-      ...guia.normativa.map((n) => ({ "@type": "Organization", name: n.name, url: n.url })),
-    ],
-    mainEntityOfPage: { "@type": "WebPage", "@id": url },
-  };
+  const path = `/guias/${guia.slug}`;
+  const articleId = `${url}#articulo`;
+  const hasFaq = guia.faq.length > 0;
 
-  const breadcrumbLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Inicio", item: `${BASE_URL}/` },
-      { "@type": "ListItem", position: 2, name: "Guías", item: `${BASE_URL}/guias` },
-      { "@type": "ListItem", position: 3, name: guia.title, item: url },
-    ],
-  };
-
-  const faqLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: guia.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
-  };
+  // Un único grafo por guía: página → artículo → autor/empresa por @id, más breadcrumb y FAQ.
+  const graph = [
+    pageNode({
+      path,
+      name: guia.title,
+      description: guia.excerpt,
+      type: hasFaq ? ["WebPage", "FAQPage"] : "WebPage",
+      about: { "@type": "Thing", name: guia.cluster },
+      ...(hasFaq
+        ? {
+            mainEntity: guia.faq.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          }
+        : {}),
+    }),
+    {
+      "@type": "BlogPosting",
+      "@id": articleId,
+      headline: guia.title,
+      description: guia.excerpt,
+      inLanguage: "es-ES",
+      articleSection: guia.articleSection,
+      datePublished: guia.datePublished,
+      dateModified: guia.dateModified,
+      author: ref(ID.persona),
+      publisher: ref(ID.negocio),
+      isPartOf: ref(ID.website),
+      mainEntityOfPage: ref(pageId(path)),
+      about: { "@type": "Thing", name: guia.cluster },
+      mentions: [
+        ...guia.fabricantes.map((f) => ({ "@type": "Brand", name: f.name, url: f.url })),
+        ...guia.normativa.map((n) => ({ "@type": "Organization", name: n.name, url: n.url })),
+      ],
+    },
+    personNode({ jobTitle: AUTHOR_ROLE }),
+    breadcrumbNode(path, [
+      { name: "Guías", path: "/guias" },
+      { name: guia.title, path },
+    ]),
+  ];
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+      <JsonLd graph={graph} />
 
       <article className="relative overflow-hidden bg-[#05111f]">
         <div
@@ -101,7 +104,7 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
         />
 
         <div className="shell relative pt-12 md:pt-16">
-          <nav aria-label="Migas de pan" className="flex flex-wrap items-center gap-2 text-[12px] font-medium uppercase tracking-[0.12em] text-white/45">
+          <nav aria-label="Migas de pan" className="flex flex-wrap items-center gap-2 text-[12px] font-medium uppercase tracking-[0.12em] text-white/50">
             <Link href="/" className="transition-colors hover:text-white">Inicio</Link>
             <ChevronRight size={13} className="text-white/25" />
             <Link href="/guias" className="transition-colors hover:text-white">Guías</Link>
@@ -112,21 +115,21 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
           <header className="mt-8 max-w-3xl">
             <div className="flex items-center gap-3">
               <span className="rounded-full border border-[#c7f35b]/30 bg-[#c7f35b]/10 px-3 py-1 text-[10.5px] font-bold uppercase tracking-[0.16em] text-[#c7f35b]">{guia.cluster}</span>
-              <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/35">{guia.articleSection}</span>
+              <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/50">{guia.articleSection}</span>
             </div>
             <h1 className="display mt-6 text-white">
               {guia.title}
               <span className="mt-3 block text-[clamp(1.4rem,3vw,2.4rem)]">
-                <span className="serif-it text-white/40">{guia.heroAccent}</span>
+                <span className="serif-it text-white/50">{guia.heroAccent}</span>
               </span>
             </h1>
             <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-[12.5px] font-medium text-white/50">
-              <Link href={authorUrl} className="flex items-center gap-2 transition-colors hover:text-white"><User size={14} className="text-[#c7f35b]" /> {AUTHOR}</Link>
+              <Link href={authorPath} className="flex items-center gap-2 transition-colors hover:text-white"><User size={14} className="text-[#c7f35b]" /> {AUTHOR}</Link>
               <span className="flex items-center gap-2"><Calendar size={14} className="text-[#c7f35b]" /> {formatDate(guia.datePublished)}</span>
               <span className="flex items-center gap-2"><Clock size={14} className="text-[#c7f35b]" /> {guia.readingMinutes} min de lectura</span>
               <span className="flex items-center gap-2"><Tag size={14} className="text-[#c7f35b]" /> {guia.articleSection}</span>
             </div>
-            <p className="mt-4 text-[12px] font-medium uppercase tracking-[0.14em] text-white/35">Revisado el {formatDate(guia.dateModified)}</p>
+            <p className="mt-4 text-[12px] font-medium uppercase tracking-[0.14em] text-white/50">Revisado el {formatDate(guia.dateModified)}</p>
             <p className="mt-6 text-[17px] leading-[1.8] text-white/65">{guia.excerpt}</p>
           </header>
         </div>
@@ -168,7 +171,7 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
 
           {guia.faq.length > 0 && (
             <section className="mx-auto mt-10 max-w-3xl">
-              <p className="eyebrow text-white/45 flex items-center gap-2"><HelpCircle size={14} /> Preguntas frecuentes</p>
+              <p className="eyebrow text-white/50 flex items-center gap-2"><HelpCircle size={14} /> Preguntas frecuentes</p>
               <div className="mt-5 divide-y divide-white/10 rounded-[24px] border border-white/10 bg-[#07182d]">
                 {guia.faq.map((f, i) => (
                   <details key={i} className="group p-6">
@@ -185,7 +188,7 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
 
           {relacionadas.length > 0 && (
             <section className="mx-auto mt-10 max-w-3xl">
-              <p className="eyebrow text-white/45">Seguir leyendo</p>
+              <p className="eyebrow text-white/50">Seguir leyendo</p>
               <div className="mt-5 grid gap-4 sm:grid-cols-2">
                 {relacionadas.map((r) => (
                   <Link key={r.slug} href={`/guias/${r.slug}`} className="group rounded-2xl border border-white/10 bg-[#07182d] p-5 transition hover:border-[#c7f35b]/45 hover:bg-[#0b2748]">

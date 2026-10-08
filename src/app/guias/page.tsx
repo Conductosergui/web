@@ -2,39 +2,31 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { GuiasExplorer } from "@/components/GuiasExplorer";
+import { JsonLd } from "@/components/JsonLd";
 import { BASE_URL, CLUSTERS, clusterSlug, GUIAS } from "@/data/guias";
+import { breadcrumbNode, pageNode, ref } from "@/lib/schema";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Guías técnicas | Conductos Ergui",
-  description: "Notas y recomendaciones sobre conductos, pladur, HVAC, mantenimiento y aislamiento, con fuentes de fabricantes y marco normativo.",
-  openGraph: {
-    title: "Guías técnicas — Conductos Ergui",
-    description: "Guías prácticas sobre conductos, pladur, climatización, mantenimiento y aislamiento.",
-    locale: "es_ES",
-    type: "website",
+const DESCRIPTION =
+  "Notas y recomendaciones sobre conductos, pladur, HVAC, mantenimiento y aislamiento, con fuentes de fabricantes y marco normativo.";
+
+export const metadata: Metadata = buildMetadata({ title: "Guías técnicas", description: DESCRIPTION, path: "/guias" });
+
+const listId = `${BASE_URL}/guias#lista`;
+const graph = [
+  pageNode({ path: "/guias", name: "Guías técnicas", description: DESCRIPTION, type: "CollectionPage", mainEntity: ref(listId) }),
+  {
+    "@type": "ItemList",
+    "@id": listId,
+    itemListElement: GUIAS.map((g, i) => ({ "@type": "ListItem", position: i + 1, name: g.title, url: `${BASE_URL}/guias/${g.slug}` })),
   },
-};
-
-const breadcrumbLd = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Inicio", item: `${BASE_URL}/` },
-    { "@type": "ListItem", position: 2, name: "Guías", item: `${BASE_URL}/guias` },
-  ],
-};
-
-const itemListLd = {
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  itemListElement: GUIAS.map((g, i) => ({ "@type": "ListItem", position: i + 1, name: g.title, url: `${BASE_URL}/guias/${g.slug}` })),
-};
+  breadcrumbNode("/guias", [{ name: "Guías", path: "/guias" }]),
+];
 
 export default function GuiasPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }} />
+      <JsonLd graph={graph} />
 
       <section className="relative overflow-hidden bg-[#05111f] pt-20 pb-12 md:pt-28">
         <div aria-hidden="true" className="pointer-events-none absolute -left-32 -top-24 h-[460px] w-[460px] rounded-full opacity-40 blur-3xl" style={{ background: "radial-gradient(circle, rgba(20,93,160,0.4), transparent 65%)" }} />
@@ -62,7 +54,7 @@ export default function GuiasPage() {
       <section className="bg-[#05111f] pb-12">
         <div className="shell">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-            <h2 className="text-[13px] font-bold uppercase tracking-[0.2em] text-white/45">Explora por temática</h2>
+            <h2 className="text-[13px] font-bold uppercase tracking-[0.2em] text-white/50">Explora por temática</h2>
             <Link href="/glosario" className="ce-link inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.12em] text-white/60 hover:text-[#c7f35b]">
               <BookOpen size={14} /> Glosario técnico
             </Link>
@@ -87,8 +79,8 @@ export default function GuiasPage() {
       <section className="bg-[#05111f] pb-24 md:pb-32">
         <div className="shell">
           <div className="mb-8 flex items-end justify-between gap-6 border-b border-white/10 pb-6">
-            <h2 className="text-[13px] font-bold uppercase tracking-[0.2em] text-white/45">Filtrar por temática</h2>
-            <span className="text-[12px] font-medium uppercase tracking-[0.14em] text-white/35">{GUIAS.length} guías</span>
+            <h2 className="text-[13px] font-bold uppercase tracking-[0.2em] text-white/50">Filtrar por temática</h2>
+            <span className="text-[12px] font-medium uppercase tracking-[0.14em] text-white/50">{GUIAS.length} guías</span>
           </div>
           <GuiasExplorer />
         </div>

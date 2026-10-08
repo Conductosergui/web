@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Plus } from "lucide-react";
+import { JsonLd } from "@/components/JsonLd";
+import { pageNode } from "@/lib/schema";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Preguntas frecuentes",
-  description: "Respuestas sobre conductos de aire acondicionado y pladur en El Vendrell y el Baix Penedès.",
-};
+const DESCRIPTION = "Respuestas sobre conductos de aire acondicionado y pladur en El Vendrell y el Baix Penedès.";
+
+export const metadata: Metadata = buildMetadata({ title: "Preguntas frecuentes", description: DESCRIPTION, path: "/faq" });
+
+// El esquema FAQPage se incorpora en la Fase 4 con src/data/faqs.ts; aquí solo se enlaza la página al grafo.
+const graph = [pageNode({ path: "/faq", name: "Preguntas frecuentes", description: DESCRIPTION, withBreadcrumb: false })];
 
 const faqs: [string, string][] = [
   [
@@ -61,6 +66,7 @@ const faqs: [string, string][] = [
 export default function FAQPage() {
   return (
     <>
+      <JsonLd graph={graph} />
       <section className="bg-sky py-20 md:py-28">
         <div className="shell">
           <p className="eyebrow text-blue">Antes de comenzar</p>

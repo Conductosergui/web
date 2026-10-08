@@ -1,12 +1,14 @@
+import { AUTHOR_NAME, BRAND, SITE_URL } from "@/lib/entidad";
+
 export type Cluster = "Conductos" | "Pladur" | "HVAC" | "Mantenimiento" | "Aislamiento";
 
 export const CLUSTERS: Cluster[] = ["Conductos", "Pladur", "HVAC", "Mantenimiento", "Aislamiento"];
 
-export const AUTHOR = "Aitor Ergui";
+export const AUTHOR = AUTHOR_NAME;
 export const AUTHOR_ROLE = "Especialista en climatización y construcción en seco";
 export const AUTHOR_SLUG = "aitor-ergui";
-export const PUBLISHER = "Conductos Ergui";
-export const BASE_URL = "https://conductosergui.es";
+export const PUBLISHER = BRAND;
+export const BASE_URL = SITE_URL;
 
 export type Fabricante = { name: string; url: string; note: string };
 export type FAQ = { q: string; a: string };

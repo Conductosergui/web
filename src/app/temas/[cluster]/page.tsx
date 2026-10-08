@@ -3,6 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { GuiaCard } from "@/components/GuiaCard";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbNode, pageNode, ref } from "@/lib/schema";
+import { buildMetadata } from "@/lib/seo";
 import {
   BASE_URL,
   CLUSTER_PILLAR,
@@ -21,13 +24,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ cluster: string }> }): Promise<Metadata> {
   const { cluster: slug } = await params;
   const cluster = getClusterBySlug(slug);
-  if (!cluster) return { title: "Tema no encontrado | Conductos Ergui" };
+  if (!cluster) return { title: "Tema no encontrado" };
   const pillar = CLUSTER_PILLAR[cluster];
-  return {
-    title: `${cluster} | Temas | Conductos Ergui`,
-    description: pillar.intro,
-    openGraph: { title: `${cluster} — Conductos Ergui`, description: pillar.intro, locale: "es_ES", type: "website" },
-  };
+  return buildMetadata({ title: `${cluster} | Temas`, description: pillar.intro, path: `/temas/${slug}` });
 }
 
 export default async function TemaPage({ params }: { params: Promise<{ cluster: string }> }) {
@@ -40,43 +39,45 @@ export default async function TemaPage({ params }: { params: Promise<{ cluster: 
   const relacionados = CLUSTER_RELATED[cluster];
   const url = `${BASE_URL}/temas/${slug}`;
 
-  const collectionLd = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    name: `${cluster} — Conductos Ergui`,
-    description: pillar.intro,
-    url,
-    about: { "@type": "Thing", name: cluster },
-    isPartOf: { "@type": "WebSite", name: "Conductos Ergui", url: BASE_URL },
-  };
+  const path = `/temas/${slug}`;
+  const listId = `${url}#guias`;
 
-  const itemListLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: `Guías sobre ${cluster}`,
-    itemListElement: notas.map((g, i) => ({ "@type": "ListItem", position: i + 1, name: g.title, url: `${BASE_URL}/guias/${g.slug}` })),
-  };
-
-  const breadcrumbLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Inicio", item: `${BASE_URL}/` },
-      { "@type": "ListItem", position: 2, name: "Temas", item: `${BASE_URL}/temas/${slug}` },
-      { "@type": "ListItem", position: 3, name: cluster, item: url },
-    ],
-  };
+  // Migas: Inicio › Guías › {tema}, igual que la navegación visible.
+  // Cuando exista /temas como índice, basta con insertar { name: "Temas", path: "/temas" } aquí.
+  const graph = [
+    pageNode({
+      path,
+      name: `${cluster} — Conductos Ergui`,
+      description: pillar.intro,
+      type: "CollectionPage",
+      about: { "@type": "Thing", name: cluster },
+      mainEntity: ref(listId),
+    }),
+    {
+      "@type": "ItemList",
+      "@id": listId,
+      name: `Guías sobre ${cluster}`,
+      itemListElement: notas.map((g, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: g.title,
+        url: `${BASE_URL}/guias/${g.slug}`,
+      })),
+    },
+    breadcrumbNode(path, [
+      { name: "Guías", path: "/guias" },
+      { name: cluster, path },
+    ]),
+  ];
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <JsonLd graph={graph} />
 
       <section className="relative overflow-hidden bg-[#05111f] pt-16 pb-12 md:pt-24">
         <div aria-hidden="true" className="pointer-events-none absolute -left-32 -top-24 h-[460px] w-[460px] rounded-full opacity-40 blur-3xl" style={{ background: "radial-gradient(circle, rgba(20,93,160,0.4), transparent 65%)" }} />
         <div className="shell relative">
-          <nav aria-label="Migas de pan" className="flex flex-wrap items-center gap-2 text-[12px] font-medium uppercase tracking-[0.12em] text-white/45">
+          <nav aria-label="Migas de pan" className="flex flex-wrap items-center gap-2 text-[12px] font-medium uppercase tracking-[0.12em] text-white/50">
             <Link href="/" className="transition-colors hover:text-white">Inicio</Link>
             <ChevronRight size={13} className="text-white/25" />
             <Link href="/guias" className="transition-colors hover:text-white">Guías</Link>
@@ -89,7 +90,7 @@ export default async function TemaPage({ params }: { params: Promise<{ cluster: 
             <h1 className="display mt-5 text-white">
               {cluster}
               <span className="mt-2 block text-[clamp(1.3rem,3vw,2.2rem)]">
-                <span className="serif-it text-white/40">{pillar.accent}</span>
+                <span className="serif-it text-white/50">{pillar.accent}</span>
               </span>
             </h1>
             <p className="mt-7 text-[17px] leading-[1.8] text-white/65">{pillar.intro}</p>
@@ -109,8 +110,8 @@ export default async function TemaPage({ params }: { params: Promise<{ cluster: 
       <section className="bg-[#05111f] pb-12">
         <div className="shell">
           <div className="mb-8 flex items-end justify-between gap-6 border-b border-white/10 pb-6">
-            <h2 className="text-[13px] font-bold uppercase tracking-[0.2em] text-white/45">Notas del tema</h2>
-            <span className="text-[12px] font-medium uppercase tracking-[0.14em] text-white/35">{notas.length} guías</span>
+            <h2 className="text-[13px] font-bold uppercase tracking-[0.2em] text-white/50">Notas del tema</h2>
+            <span className="text-[12px] font-medium uppercase tracking-[0.14em] text-white/50">{notas.length} guías</span>
           </div>
           {notas.length > 0 ? (
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -126,7 +127,7 @@ export default async function TemaPage({ params }: { params: Promise<{ cluster: 
 
       <section className="bg-[#05111f] pb-12">
         <div className="shell">
-          <p className="eyebrow text-white/45">Temas relacionados</p>
+          <p className="eyebrow text-white/50">Temas relacionados</p>
           <div className="mt-5 flex flex-wrap gap-3">
             {relacionados.map((r: Cluster) => (
               <Link key={r} href={`/temas/${clusterSlug(r)}`} className="ce-link inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2.5 text-[12.5px] font-bold uppercase tracking-[0.1em] text-white/70 transition hover:border-[#c7f35b]/50 hover:text-[#c7f35b]">

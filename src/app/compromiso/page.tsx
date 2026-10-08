@@ -1,5 +1,16 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Check, Eye, Handshake, ShieldCheck, Sparkles } from "lucide-react";
+import { JsonLd } from "@/components/JsonLd";
+import { pageNode } from "@/lib/schema";
+import { buildMetadata } from "@/lib/seo";
+
+const DESCRIPTION =
+  "Principios de trabajo de Conductos Ergui: alcance claro antes de empezar, criterio técnico, respeto por el espacio y trato directo en cada intervención.";
+
+export const metadata: Metadata = buildMetadata({ title: "Compromiso de trabajo", description: DESCRIPTION, path: "/compromiso" });
+
+const graph = [pageNode({ path: "/compromiso", name: "Compromiso de trabajo", description: DESCRIPTION, withBreadcrumb: false })];
 
 const principles = [
   [Eye, "Claridad desde el inicio", "Se explican el alcance, los materiales previstos y las limitaciones antes de aceptar el trabajo."],
@@ -19,6 +30,7 @@ const expectations = [
 export default function CompromisoPage() {
   return (
     <>
+      <JsonLd graph={graph} />
       <section className="bg-ink py-24 text-white md:py-32">
         <div className="shell">
           <p className="eyebrow text-lime">Compromiso</p>

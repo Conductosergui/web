@@ -1,8 +1,19 @@
+import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
 import { LegalPage } from "@/components/LegalPage";
+import { pageNode } from "@/lib/schema";
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildMetadata({
+  title: "Política de cookies",
+  description: "Uso de almacenamiento local y cookies en el sitio de Conductos Ergui y cómo gestionar las preferencias.",
+  path: "/legal/cookies",
+});
 
 export default function CookiesPage() {
   return (
     <LegalPage eyebrow="Preferencias" title="Política de cookies">
+      <JsonLd graph={[pageNode({ path: "/legal/cookies", name: "Política de cookies", withBreadcrumb: false })]} />
       <p>
         Este sitio utiliza almacenamiento local y, si se habilitan en el futuro, cookies para prestar el servicio y conocer de forma agregada cómo se utiliza.
       </p>

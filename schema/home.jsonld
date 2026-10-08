@@ -12,24 +12,11 @@
       }
     },
     {
-      "@type": "WebPage",
-      "@id": "https://conductosergui.es/#webpage",
-      "url": "https://conductosergui.es",
-      "name": "Conductos Ergui | Climatización, Conductos y Pladur en El Vendrell",
-      "description": "Instalación y mantenimiento de climatización por conductos, tabiquería de pladur y aislamiento térmico y acústico en El Vendrell y la comarca del Baix Penedès (Tarragona).",
-      "inLanguage": "es-ES",
-      "isPartOf": {
-        "@id": "https://conductosergui.es/#website"
-      },
-      "about": {
-        "@id": "https://conductosergui.es/#negocio"
-      },
-      "mainEntity": {
-        "@id": "https://conductosergui.es/#negocio"
-      }
-    },
-    {
-      "@type": "LocalBusiness",
+      "@type": [
+        "Organization",
+        "LocalBusiness",
+        "HomeAndConstructionBusiness"
+      ],
       "@id": "https://conductosergui.es/#negocio",
       "name": "Conductos Ergui",
       "url": "https://conductosergui.es",
@@ -39,7 +26,8 @@
       "logo": {
         "@type": "ImageObject",
         "@id": "https://conductosergui.es/#logo",
-        "url": "https://conductosergui.es/logo.svg"
+        "url": "https://conductosergui.es/logo.svg",
+        "contentUrl": "https://conductosergui.es/logo.svg"
       },
       "image": {
         "@id": "https://conductosergui.es/#logo"
@@ -284,6 +272,26 @@
       "containedInPlace": {
         "@type": "AdministrativeArea",
         "name": "Provincia de Tarragona"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://conductosergui.es/#webpage",
+      "url": "https://conductosergui.es",
+      "name": "Conductos Ergui | Climatización, Conductos y Pladur en El Vendrell",
+      "description": "Instalación y mantenimiento de climatización por conductos, tabiquería de pladur y aislamiento térmico y acústico en El Vendrell y la comarca del Baix Penedès (Tarragona).",
+      "inLanguage": "es-ES",
+      "isPartOf": {
+        "@id": "https://conductosergui.es/#website"
+      },
+      "publisher": {
+        "@id": "https://conductosergui.es/#negocio"
+      },
+      "about": {
+        "@id": "https://conductosergui.es/#negocio"
+      },
+      "mainEntity": {
+        "@id": "https://conductosergui.es/#negocio"
       }
     }
   ]

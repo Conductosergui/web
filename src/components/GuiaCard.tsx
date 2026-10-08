@@ -14,7 +14,7 @@ export function GuiaCard({ guia }: { guia: Guia }) {
           <span className="rounded-full border border-[#c7f35b]/30 bg-[#c7f35b]/10 px-3 py-1 text-[10.5px] font-bold uppercase tracking-[0.16em] text-[#c7f35b]">
             {guia.cluster}
           </span>
-          <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/35">{guia.readingMinutes} min</span>
+          <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/50">{guia.readingMinutes} min</span>
         </div>
         <h3 className="mt-5 text-[clamp(1.25rem,2vw,1.7rem)] font-bold leading-[1.1] tracking-[-0.03em] text-white transition-colors group-hover:text-[#c7f35b]">
           {guia.title}
@@ -22,7 +22,7 @@ export function GuiaCard({ guia }: { guia: Guia }) {
         <p className="mt-4 text-[14.5px] leading-[1.7] text-white/55">{guia.excerpt}</p>
       </div>
       <div className="mt-7 flex items-center justify-between border-t border-white/10 pt-5">
-        <time className="text-[12px] font-medium uppercase tracking-[0.12em] text-white/40" dateTime={guia.datePublished}>
+        <time className="text-[12px] font-medium uppercase tracking-[0.12em] text-white/50" dateTime={guia.datePublished}>
           {formatDate(guia.datePublished)}
         </time>
         <span className="flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.12em] text-white/70 transition-colors group-hover:text-[#c7f35b]">

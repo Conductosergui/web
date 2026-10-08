@@ -251,7 +251,7 @@ export default function PresupuestadorPage() {
               })}
             </div>
             <div className="mt-8 border-t border-white/15 pt-7">
-              <small className="text-white/40">Contacto directo</small>
+              <small className="text-white/50">Contacto directo</small>
               <a href={`mailto:${CONTACT_EMAIL}`} className="mt-2 block text-sm font-bold">
                 {CONTACT_EMAIL}
               </a>

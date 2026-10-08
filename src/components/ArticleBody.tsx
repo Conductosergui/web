@@ -36,7 +36,7 @@ export function ArticleBody({ blocks }: { blocks: RenderBlock[] }) {
           return (
             <figure key={i} className="my-8 border-l-2 border-[#c7f35b] pl-5">
               <blockquote className="text-[17px] leading-[1.7] text-white/85">{b.text}</blockquote>
-              <figcaption className="mt-3 text-[12px] font-bold uppercase tracking-[0.16em] text-white/40">Fuente · {b.cite}</figcaption>
+              <figcaption className="mt-3 text-[12px] font-bold uppercase tracking-[0.16em] text-white/50">Fuente · {b.cite}</figcaption>
             </figure>
           );
         }

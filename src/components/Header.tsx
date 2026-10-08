@@ -68,7 +68,7 @@ export function Header() {
       }`}
     >
       <div className="shell flex h-[76px] items-center justify-between">
-        <Link href="/" className="group flex items-center gap-3" aria-label="Conductos Ergui, inicio">
+        <Link href="/" className="group flex items-center gap-3">
           <svg
             width="26"
             height="26"
@@ -82,9 +82,10 @@ export function Header() {
           </svg>
           <span className="leading-none">
             <strong className="block text-[15px] font-extrabold tracking-[-0.01em] text-white">CONDUCTOS ERGUI</strong>
-            <small className="mt-1 block text-[9px] font-bold tracking-[0.22em] text-white/45 transition-colors duration-300 group-hover:text-white/70">
+            <small className="mt-1 block text-[9px] font-bold tracking-[0.22em] text-white/55 transition-colors duration-300 group-hover:text-white/70">
               AIRE ACONDICIONADO · PLADUR
             </small>
+            <span className="sr-only"> (inicio)</span>
           </span>
         </Link>
 

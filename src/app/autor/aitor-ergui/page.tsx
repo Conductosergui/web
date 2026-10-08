@@ -1,40 +1,37 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ChevronRight } from "lucide-react";
-import { AUTHOR, AUTHOR_ROLE, BASE_URL, PUBLISHER, formatDate, GUIAS } from "@/data/guias";
+import { JsonLd } from "@/components/JsonLd";
+import { AUTHOR, AUTHOR_ROLE, PUBLISHER, formatDate, GUIAS } from "@/data/guias";
+import { AUTHOR_PATH, ID, pageId } from "@/lib/entidad";
+import { breadcrumbNode, pageNode, personNode, ref } from "@/lib/schema";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `${AUTHOR} | Autor | Conductos Ergui`,
-  description: `Notas técnicas sobre climatización y construcción en seco escritas por ${AUTHOR}, ${AUTHOR_ROLE.toLowerCase()} en ${PUBLISHER}.`,
-  openGraph: { title: `${AUTHOR} — Autor`, description: `Artículos técnicos de ${AUTHOR}.`, locale: "es_ES", type: "profile" },
-};
+const DESCRIPTION = `Notas técnicas sobre climatización y construcción en seco escritas por ${AUTHOR}, ${AUTHOR_ROLE.toLowerCase()} en ${PUBLISHER}.`;
 
-const personLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: AUTHOR,
-  jobTitle: AUTHOR_ROLE,
-  worksFor: { "@type": "Organization", name: PUBLISHER, url: BASE_URL },
-  url: `${BASE_URL}/autor/aitor-ergui`,
-};
+export const metadata: Metadata = buildMetadata({
+  title: `${AUTHOR} | Autor`,
+  description: DESCRIPTION,
+  path: AUTHOR_PATH,
+  type: "profile",
+});
 
-const breadcrumbLd = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Inicio", item: `${BASE_URL}/` },
-    { "@type": "ListItem", position: 2, name: "Guías", item: `${BASE_URL}/guias` },
-    { "@type": "ListItem", position: 3, name: AUTHOR },
-  ],
-};
+// ProfilePage cuyo sujeto es el nodo Person único del autor, vinculado a la empresa por @id.
+const graph = [
+  pageNode({ path: AUTHOR_PATH, name: `${AUTHOR} — Autor`, description: DESCRIPTION, type: "ProfilePage", mainEntity: ref(ID.persona) }),
+  personNode({ jobTitle: AUTHOR_ROLE, mainEntityOfPage: ref(pageId(AUTHOR_PATH)) }),
+  breadcrumbNode(AUTHOR_PATH, [
+    { name: "Guías", path: "/guias" },
+    { name: AUTHOR, path: AUTHOR_PATH },
+  ]),
+];
 
 export default function AutorPage() {
   const notas = [...GUIAS].sort((a, b) => (a.datePublished < b.datePublished ? 1 : -1));
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <JsonLd graph={graph} />
 
       <section className="relative overflow-hidden bg-[#05111f] pt-16 pb-12 md:pt-24">
         <div
@@ -43,7 +40,7 @@ export default function AutorPage() {
           style={{ background: "radial-gradient(circle, rgba(20,93,160,0.4), transparent 65%)" }}
         />
         <div className="shell relative">
-          <nav aria-label="Migas de pan" className="flex flex-wrap items-center gap-2 text-[12px] font-medium uppercase tracking-[0.12em] text-white/45">
+          <nav aria-label="Migas de pan" className="flex flex-wrap items-center gap-2 text-[12px] font-medium uppercase tracking-[0.12em] text-white/50">
             <Link href="/" className="transition-colors hover:text-white">Inicio</Link>
             <ChevronRight size={13} className="text-white/25" />
             <Link href="/guias" className="transition-colors hover:text-white">Guías</Link>
@@ -77,15 +74,15 @@ export default function AutorPage() {
       <section className="bg-[#05111f] pb-24 md:pb-32">
         <div className="shell">
           <div className="mb-8 flex items-end justify-between gap-6 border-b border-white/10 pb-6">
-            <h2 className="text-[13px] font-bold uppercase tracking-[0.2em] text-white/45">Notas publicadas</h2>
-            <span className="text-[12px] font-medium uppercase tracking-[0.14em] text-white/35">{notas.length} guías</span>
+            <h2 className="text-[13px] font-bold uppercase tracking-[0.2em] text-white/50">Notas publicadas</h2>
+            <span className="text-[12px] font-medium uppercase tracking-[0.14em] text-white/50">{notas.length} guías</span>
           </div>
           <div className="grid gap-4 md:grid-cols-2">
             {notas.map((g) => (
               <Link key={g.slug} href={`/guias/${g.slug}`} className="group flex flex-col gap-2 rounded-[20px] border border-white/10 bg-[#07182d] p-6 transition hover:-translate-y-1 hover:border-[#c7f35b]/45 hover:bg-[#0b2748]">
                 <div className="flex items-center gap-3">
                   <span className="text-[10.5px] font-bold uppercase tracking-[0.16em] text-[#c7f35b]">{g.cluster}</span>
-                  <span className="text-[11px] font-medium uppercase tracking-[0.12em] text-white/35">{formatDate(g.datePublished)}</span>
+                  <span className="text-[11px] font-medium uppercase tracking-[0.12em] text-white/50">{formatDate(g.datePublished)}</span>
                 </div>
                 <p className="text-[16px] font-bold leading-[1.25] tracking-[-0.02em] text-white transition-colors group-hover:text-[#c7f35b]">{g.title}</p>
                 <p className="text-[13.5px] leading-[1.65] text-white/50">{g.excerpt}</p>

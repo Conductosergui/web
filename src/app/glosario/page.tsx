@@ -1,48 +1,46 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ChevronRight } from "lucide-react";
+import { JsonLd } from "@/components/JsonLd";
 import { BASE_URL, clusterSlug, getGlosarioOrdenado } from "@/data/guias";
+import { breadcrumbNode, pageNode, ref } from "@/lib/schema";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Glosario técnico | Conductos Ergui",
-  description: "Términos clave sobre conductos, pladur, HVAC, mantenimiento y aislamiento, con enlaces a las guías y temas relacionados.",
-  openGraph: { title: "Glosario técnico — Conductos Ergui", description: "Definiciones técnicas enlazadas con las guías y los temas.", locale: "es_ES", type: "website" },
-};
+const DESCRIPTION =
+  "Términos clave sobre conductos, pladur, HVAC, mantenimiento y aislamiento, con enlaces a las guías y temas relacionados.";
+
+export const metadata: Metadata = buildMetadata({ title: "Glosario técnico", description: DESCRIPTION, path: "/glosario" });
 
 export default function GlosarioPage() {
   const entries = getGlosarioOrdenado();
 
-  const definedTermSetLd = {
-    "@context": "https://schema.org",
-    "@type": "DefinedTermSet",
-    name: "Glosario técnico de Conductos Ergui",
-    description: "Términos técnicos sobre climatización y construcción en seco.",
-    hasPart: entries.map((e) => ({
-      "@type": "DefinedTerm",
-      name: e.term,
-      description: e.def,
-      url: e.guia ? `${BASE_URL}/guias/${e.guia}` : e.cluster ? `${BASE_URL}/temas/${clusterSlug(e.cluster)}` : undefined,
-    })),
-  };
-
-  const breadcrumbLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Inicio", item: `${BASE_URL}/` },
-      { "@type": "ListItem", position: 2, name: "Glosario", item: `${BASE_URL}/glosario` },
-    ],
-  };
+  const setId = `${BASE_URL}/glosario#terminos`;
+  const graph = [
+    pageNode({ path: "/glosario", name: "Glosario técnico", description: DESCRIPTION, mainEntity: ref(setId) }),
+    {
+      "@type": "DefinedTermSet",
+      "@id": setId,
+      name: "Glosario técnico de Conductos Ergui",
+      description: "Términos técnicos sobre climatización y construcción en seco.",
+      hasDefinedTerm: entries.map((e) => ({
+        "@type": "DefinedTerm",
+        name: e.term,
+        description: e.def,
+        inDefinedTermSet: ref(setId),
+        url: e.guia ? `${BASE_URL}/guias/${e.guia}` : e.cluster ? `${BASE_URL}/temas/${clusterSlug(e.cluster)}` : undefined,
+      })),
+    },
+    breadcrumbNode("/glosario", [{ name: "Glosario", path: "/glosario" }]),
+  ];
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(definedTermSetLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <JsonLd graph={graph} />
 
       <section className="relative overflow-hidden bg-[#05111f] pt-16 pb-12 md:pt-24">
         <div aria-hidden="true" className="pointer-events-none absolute -right-32 -top-24 h-[460px] w-[460px] rounded-full opacity-40 blur-3xl" style={{ background: "radial-gradient(circle, rgba(20,93,160,0.4), transparent 65%)" }} />
         <div className="shell relative">
-          <nav aria-label="Migas de pan" className="flex flex-wrap items-center gap-2 text-[12px] font-medium uppercase tracking-[0.12em] text-white/45">
+          <nav aria-label="Migas de pan" className="flex flex-wrap items-center gap-2 text-[12px] font-medium uppercase tracking-[0.12em] text-white/50">
             <Link href="/" className="transition-colors hover:text-white">Inicio</Link>
             <ChevronRight size={13} className="text-white/25" />
             <span className="text-[#c7f35b]">Glosario</span>

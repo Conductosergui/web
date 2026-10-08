@@ -11,12 +11,12 @@ import {
   BASE_LOCALITY,
   BASE_PROVINCE,
   BRAND,
-  EMAIL,
   GEO,
-  ID,
+  SITE_DESCRIPTION,
+  SITE_TITLE,
   SITE_URL,
-  TELEPHONE,
 } from "@/lib/entidad";
+import { serializeGraph, siteGraph } from "@/lib/schema";
 
 const googleSans = Google_Sans_Flex({
   subsets: ["latin"],
@@ -33,9 +33,8 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
-const TITLE = "Conductos Ergui | Climatización, Conductos y Pladur en El Vendrell";
-const DESCRIPTION =
-  "Instalación y mantenimiento de climatización por conductos, tabiquería de pladur y aislamiento térmico y acústico en El Vendrell y la comarca del Baix Penedès (Tarragona).";
+const TITLE = SITE_TITLE;
+const DESCRIPTION = SITE_DESCRIPTION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -74,161 +73,9 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { themeColor: "#0b2748" };
 
-const vendrell = {
-  "@type": "City",
-  "@id": ID.vendrell,
-  name: BASE_LOCALITY,
-  sameAs: "https://es.wikipedia.org/wiki/El_Vendrell",
-  containedInPlace: { "@id": ID.comarca },
-};
-
-const comarca = {
-  "@type": "AdministrativeArea",
-  "@id": ID.comarca,
-  name: BASE_COMARCA,
-  sameAs: "https://es.wikipedia.org/wiki/Bajo_Panad%C3%A9s",
-  containedInPlace: { "@type": "AdministrativeArea", name: `Provincia de ${BASE_PROVINCE}` },
-};
-
-const address = {
-  "@type": "PostalAddress",
-  addressLocality: BASE_LOCALITY,
-  addressRegion: BASE_PROVINCE,
-  addressCountry: "ES",
-};
-
-const geo = { "@type": "GeoCoordinates", latitude: GEO.latitude, longitude: GEO.longitude };
-const areaServed = [{ "@id": ID.vendrell }, { "@id": ID.comarca }];
-
-// Grafo unificado: LocalBusiness paraguas con dos departamentos (silos) y sus servicios.
-// schema.org no define "PlasteringContractor": el silo de pladur se tipa como GeneralContractor
-// y se desambigua con additionalType.
-const graph = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": ID.website,
-      url: SITE_URL,
-      name: BRAND,
-      inLanguage: "es-ES",
-      publisher: { "@id": ID.negocio },
-    },
-    {
-      "@type": "WebPage",
-      "@id": ID.webpage,
-      url: SITE_URL,
-      name: TITLE,
-      description: DESCRIPTION,
-      inLanguage: "es-ES",
-      isPartOf: { "@id": ID.website },
-      about: { "@id": ID.negocio },
-      mainEntity: { "@id": ID.negocio },
-    },
-    {
-      "@type": "LocalBusiness",
-      "@id": ID.negocio,
-      name: BRAND,
-      url: SITE_URL,
-      description: DESCRIPTION,
-      email: EMAIL,
-      telephone: TELEPHONE,
-      logo: { "@type": "ImageObject", "@id": ID.logo, url: `${SITE_URL}/logo.svg` },
-      image: { "@id": ID.logo },
-      address,
-      geo,
-      areaServed,
-      knowsAbout: [
-        "Climatización por conductos",
-        "Conductos de fibra de vidrio",
-        "Conductos de acero galvanizado",
-        "Ventilación y extracción",
-        "Placa de yeso laminado",
-        "Tabiquería seca",
-        "Aislamiento térmico",
-        "Aislamiento acústico",
-      ],
-      department: [{ "@id": ID.climatizacion }, { "@id": ID.pladur }],
-      makesOffer: [
-        { "@type": "Offer", itemOffered: { "@id": ID.servicioClimatizacion } },
-        { "@type": "Offer", itemOffered: { "@id": ID.servicioPladur } },
-      ],
-      contactPoint: {
-        "@type": "ContactPoint",
-        contactType: "customer service",
-        email: EMAIL,
-        telephone: TELEPHONE,
-        areaServed,
-        availableLanguage: "es",
-      },
-    },
-    {
-      "@type": "HVACBusiness",
-      "@id": ID.climatizacion,
-      name: `${BRAND} · Climatización y Conductos`,
-      url: `${SITE_URL}/#climatizacion`,
-      parentOrganization: { "@id": ID.negocio },
-      email: EMAIL,
-      telephone: TELEPHONE,
-      address,
-      geo,
-      areaServed,
-      hasOfferCatalog: {
-        "@type": "OfferCatalog",
-        name: "Climatización, instalación y mantenimiento de conductos",
-        itemListElement: [
-          "Instalación de conductos de climatización",
-          "Mantenimiento y reparación de sistemas de aire acondicionado",
-          "Diseño e instalación de redes de ventilación",
-          "Limpieza de conductos",
-        ].map((name) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name } })),
-      },
-    },
-    {
-      "@type": "GeneralContractor",
-      "@id": ID.pladur,
-      additionalType: "http://www.productontology.org/id/Drywall",
-      name: `${BRAND} · Pladur y Aislamiento`,
-      url: `${SITE_URL}/#pladur`,
-      parentOrganization: { "@id": ID.negocio },
-      email: EMAIL,
-      telephone: TELEPHONE,
-      address,
-      geo,
-      areaServed,
-      hasOfferCatalog: {
-        "@type": "OfferCatalog",
-        name: "Pladur, tabiquería y aislamiento",
-        itemListElement: [
-          "Tabiquería y trasdosados de pladur",
-          "Falsos techos continuos y registrables",
-          "Aislamiento térmico y acústico con lana de roca",
-        ].map((name) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name } })),
-      },
-    },
-    {
-      "@type": "Service",
-      "@id": ID.servicioClimatizacion,
-      name: "Climatización, instalación y mantenimiento de conductos",
-      serviceType: "Climatización por conductos",
-      provider: { "@id": ID.climatizacion },
-      areaServed,
-    },
-    {
-      "@type": "Service",
-      "@id": ID.servicioPladur,
-      name: "Pladur, tabiquería y aislamiento",
-      serviceType: "Construcción en seco y aislamiento",
-      provider: { "@id": ID.pladur },
-      areaServed,
-    },
-    vendrell,
-    comarca,
-  ],
-};
-
-// Escapa "<" para que ninguna cadena del grafo pueda cerrar la etiqueta <script>.
-const jsonLd = JSON.stringify(graph).replace(/</g, "\\u003c");
+// Nodos comunes a todas las rutas (sitio, entidad raíz, departamentos, servicios y lugares).
+// Cada página añade su propio nodo de página y lo enlaza a estos por @id.
+const jsonLd = serializeGraph(siteGraph());
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -237,8 +84,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
       </head>
       <body className={`min-h-screen ${googleSans.variable} ${instrumentSerif.variable}`}>
+        <a
+          href="#contenido"
+          className="sr-only z-[70] rounded-full bg-lime px-5 py-3 text-sm font-bold text-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        >
+          Saltar al contenido
+        </a>
         <Header />
-        <main id="contenido">{children}</main>
+        <main id="contenido" tabIndex={-1} className="outline-none">
+          {children}
+        </main>
         <Footer />
         <WhatsAppButton />
         <CookieNotice />

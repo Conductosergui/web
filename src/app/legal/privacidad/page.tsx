@@ -1,8 +1,19 @@
+import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
 import { LegalPage } from "@/components/LegalPage";
+import { pageNode } from "@/lib/schema";
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildMetadata({
+  title: "Política de privacidad",
+  description: "Tratamiento de los datos personales enviados a Conductos Ergui a través del sitio web y del correo de contacto.",
+  path: "/legal/privacidad",
+});
 
 export default function PrivacidadPage() {
   return (
     <LegalPage eyebrow="Protección de datos" title="Política de privacidad">
+      <JsonLd graph={[pageNode({ path: "/legal/privacidad", name: "Política de privacidad", withBreadcrumb: false })]} />
       <p>
         Esta política explica cómo se tratan los datos personales enviados a través de Conductos Ergui, dedicada a la instalación, mantenimiento y reparación de conductos de aire acondicionado y a la ejecución de obras de pladur.
       </p>

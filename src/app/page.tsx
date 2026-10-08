@@ -16,12 +16,29 @@ import {
 } from "lucide-react";
 import { ContactoMailto } from "@/components/ContactoMailto";
 import { GuiasExplorer } from "@/components/GuiasExplorer";
-import { BASE_COMARCA, BASE_LOCALITY, EMAIL, MUNICIPIOS_BAIX_PENEDES } from "@/lib/entidad";
+import { JsonLd } from "@/components/JsonLd";
+import { BASE_COMARCA, BASE_LOCALITY, EMAIL, ID, MUNICIPIOS_BAIX_PENEDES, SITE_DESCRIPTION, SITE_TITLE } from "@/lib/entidad";
+import { pageNode, ref } from "@/lib/schema";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/" },
-  openGraph: { url: "/" },
-};
+export const metadata: Metadata = buildMetadata({
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  path: "/",
+  absoluteTitle: true,
+});
+
+// La home es la página cuyo sujeto principal es la entidad raíz.
+const graph = [
+  pageNode({
+    path: "/",
+    name: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    withBreadcrumb: false,
+    about: ref(ID.negocio),
+    mainEntity: ref(ID.negocio),
+  }),
+];
 
 const AREAS = MUNICIPIOS_BAIX_PENEDES.map(([m]) => m);
 
@@ -53,6 +70,7 @@ const GUARANTEES = [
 export default function HomePage() {
   return (
     <>
+      <JsonLd graph={graph} />
       <style
         dangerouslySetInnerHTML={{
           __html: `
@@ -146,7 +164,7 @@ export default function HomePage() {
                 ].map(([n, l]) => (
                   <div key={l}>
                     <strong className="ce-display block text-[34px] text-white md:text-[42px]">{n}</strong>
-                    <small className="mt-1 block text-[11px] font-bold uppercase tracking-[0.14em] text-white/45">{l}</small>
+                    <small className="mt-1 block text-[11px] font-bold uppercase tracking-[0.14em] text-white/50">{l}</small>
                   </div>
                 ))}
               </div>
@@ -155,6 +173,9 @@ export default function HomePage() {
             <div className="ce-reveal-2 relative min-h-[480px] overflow-hidden rounded-[28px] border border-white/10 lg:min-h-full">
               <img
                 fetchPriority="high"
+                decoding="async"
+                width={1100}
+                height={1400}
                 src="https://images.pexels.com/photos/11538226/pexels-photo-11538226.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1400&w=1100"
                 alt="Técnico instalando sistema de conductos de aire acondicionado"
                 className="absolute inset-0 h-full w-full object-cover"
@@ -225,6 +246,10 @@ export default function HomePage() {
             <div className="grid gap-5 lg:grid-cols-12">
               <article id="climatizacion" aria-labelledby="climatizacion-titulo" className="ce-card group relative col-span-12 min-h-[620px] scroll-mt-24 overflow-hidden rounded-[28px] border border-white/10 bg-[#07182d] lg:col-span-7">
                 <img
+                  loading="lazy"
+                  decoding="async"
+                  width={1200}
+                  height={1200}
                   src="https://images.pexels.com/photos/33430528/pexels-photo-33430528.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=1200"
                   alt="Sistema de conductos de aire acondicionado"
                   className="ce-card-img absolute inset-0 h-full w-full object-cover opacity-70"
@@ -255,6 +280,10 @@ export default function HomePage() {
 
               <article id="pladur" aria-labelledby="pladur-titulo" className="ce-card group relative col-span-12 min-h-[620px] scroll-mt-24 overflow-hidden rounded-[28px] border border-white/10 bg-[#0b2748] lg:col-span-5">
                 <img
+                  loading="lazy"
+                  decoding="async"
+                  width={900}
+                  height={1200}
                   src="https://images.pexels.com/photos/5691622/pexels-photo-5691622.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=900"
                   alt="Profesional ejecutando trabajos de pladur"
                   className="ce-card-img absolute inset-0 h-full w-full object-cover opacity-75"
@@ -319,7 +348,7 @@ export default function HomePage() {
                 Desde el primer contacto se conoce qué ocurrirá a continuación. Sin sorpresas, sin intermediarios, sin ambigüedades.
               </p>
               <div className="mt-10 hidden items-center gap-4 lg:flex">
-                <span className="ce-eyebrow text-white/40">Proceso estandarizado</span>
+                <span className="ce-eyebrow text-white/50">Proceso estandarizado</span>
                 <span className="h-px flex-1 bg-white/15" />
                 <span className="ce-display text-2xl text-[#c7f35b]">III</span>
               </div>
@@ -363,12 +392,12 @@ export default function HomePage() {
               <div className="mt-10 flex items-center gap-6 border-t border-white/10 pt-7">
                 <div>
                   <strong className="ce-display block text-[36px] text-white">24–48 h</strong>
-                  <small className="ce-eyebrow text-white/45">Respuesta inicial</small>
+                  <small className="ce-eyebrow text-white/50">Respuesta inicial</small>
                 </div>
                 <div className="h-10 w-px bg-white/10" />
                 <div>
                   <strong className="ce-display block text-[36px] text-white">{MUNICIPIOS_BAIX_PENEDES.length}</strong>
-                  <small className="ce-eyebrow text-white/45">Municipios</small>
+                  <small className="ce-eyebrow text-white/50">Municipios</small>
                 </div>
               </div>
             </div>
@@ -435,7 +464,7 @@ export default function HomePage() {
                       <span className="grid h-12 w-12 place-items-center rounded-full border border-white/15 text-[#c7f35b] transition group-hover:border-[#c7f35b] group-hover:bg-[#c7f35b] group-hover:text-[#05111f]">
                         <Cmp size={20} strokeWidth={2} />
                       </span>
-                      <span className="ce-display text-[54px] text-white/10 transition group-hover:text-[#c7f35b]/30">0{i + 1}</span>
+                      <span aria-hidden="true" data-num={`0${i + 1}`} className="ce-display text-[54px] text-white/10 transition before:content-[attr(data-num)] group-hover:text-[#c7f35b]/30" />
                     </div>
                     <h3 className="ce-display mt-8 text-[26px] text-white md:text-[30px]">{t}</h3>
                     <p className="mt-4 max-w-md text-[14.5px] font-medium leading-[1.75] text-white/55">{d}</p>
@@ -517,7 +546,7 @@ export default function HomePage() {
                 ].map(([n, l]) => (
                   <div key={l}>
                     <strong className="ce-display block text-[28px] text-white md:text-[32px]">{n}</strong>
-                    <small className="ce-eyebrow mt-1 block text-white/45">{l}</small>
+                    <small className="ce-eyebrow mt-1 block text-white/50">{l}</small>
                   </div>
                 ))}
               </div>

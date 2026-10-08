@@ -28,7 +28,10 @@ El Vendrell (base), Calafell, Santa Oliva, Bellvei, Albinyana, Llorenç del Pene
 Next.js 16 (App Router), React 19 y Tailwind CSS 4. Sitio 100 % estático: sin base de datos, sin API y sin Server Actions.
 
 - `src/lib/entidad.ts` — Fuente única de los datos de la entidad (NAP, coordenadas, municipios, IDs del grafo).
-- `src/app/layout.tsx` — Metadatos globales y grafo JSON-LD (`@graph`) inyectado en el `<head>`.
+- `src/app/layout.tsx` — Metadatos globales y nodos comunes del grafo JSON-LD inyectados en el `<head>`.
+- `src/lib/schema.ts` — Constructores del grafo: entidad raíz, autor, páginas y breadcrumbs, enlazados por `@id`.
+- `src/lib/seo.ts` — `buildMetadata()`: canónica, Open Graph y Twitter homogéneos por ruta.
+- `src/app/opengraph-image.tsx`, `src/app/twitter-image.tsx` — Imagen social generada con `next/og` (fuentes en `src/assets/og`).
 - `src/app/page.tsx` — Home con los dos silos (`#climatizacion`, `#pladur`), cobertura y contacto.
 - `src/components/ContactoMailto.tsx` — Formulario que compone un enlace `mailto:` según la selección del usuario.
 - `src/app/guias/`, `src/app/temas/`, `src/app/glosario/` — Contenido técnico enlazado a cada silo.

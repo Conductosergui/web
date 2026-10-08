@@ -16,7 +16,7 @@ export function Footer() {
             </h2>
           </div>
           <div>
-            <p className="mb-5 text-xs font-bold uppercase tracking-[.14em] text-white/40">Secciones</p>
+            <p className="mb-5 text-xs font-bold uppercase tracking-[.14em] text-white/50">Secciones</p>
             <div className="grid gap-3 text-sm">
               <Link href="/#servicios">Servicios</Link>
               <Link href="/#metodo">Método de trabajo</Link>
@@ -27,7 +27,7 @@ export function Footer() {
             </div>
           </div>
           <div>
-            <p className="mb-5 text-xs font-bold uppercase tracking-[.14em] text-white/40">Temas</p>
+            <p className="mb-5 text-xs font-bold uppercase tracking-[.14em] text-white/50">Temas</p>
             <div className="grid gap-3 text-sm">
               {CLUSTERS.map((c) => (
                 <Link key={c} href={`/temas/${clusterSlug(c)}`}>{c}</Link>
@@ -35,7 +35,7 @@ export function Footer() {
             </div>
           </div>
           <div>
-            <p className="mb-5 text-xs font-bold uppercase tracking-[.14em] text-white/40">Contacto</p>
+            <p className="mb-5 text-xs font-bold uppercase tracking-[.14em] text-white/50">Contacto</p>
             <a href="mailto:conductosergui@gmail.com" className="flex items-center gap-2 text-sm">
               <Mail size={16} /> conductosergui@gmail.com
             </a>
@@ -47,7 +47,7 @@ export function Footer() {
             </Link>
           </div>
         </div>
-        <div className="flex flex-col gap-6 pt-8 text-[11px] text-white/45 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-6 pt-8 text-[11px] text-white/50 md:flex-row md:items-center md:justify-between">
           <p>© {new Date().getFullYear()} Conductos Ergui. Todos los derechos reservados.</p>
           <div className="flex flex-wrap gap-5">
             <Link href="/legal/terminos">Términos y condiciones</Link>
