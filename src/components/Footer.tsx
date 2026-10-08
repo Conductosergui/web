@@ -8,7 +8,7 @@ export function Footer() {
       <div className="shell py-16 md:py-24">
         <div className="grid gap-12 border-b border-white/15 pb-16 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
           <div>
-            <span className="eyebrow text-accent">Oficio técnico · trato directo</span>
+            <span className="eyebrow text-lime">Oficio técnico · trato directo</span>
             <h2 className="mt-5 max-w-xl text-4xl font-medium leading-[1] tracking-[-0.045em] md:text-6xl">
               Cada espacio,
               <br />
@@ -42,7 +42,7 @@ export function Footer() {
             <p className="mt-4 flex items-start gap-2 text-sm text-white/60">
               <MapPin size={16} className="mt-0.5 shrink-0" /> El Vendrell y comarca del Baix Penedès (Tarragona)
             </p>
-            <Link href="/presupuestador" className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-accent">
+            <Link href="/presupuestador" className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-lime">
               Solicitar valoración <ArrowUpRight size={16} />
             </Link>
           </div>

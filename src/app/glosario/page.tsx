@@ -45,9 +45,9 @@ export default function GlosarioPage() {
           <nav aria-label="Migas de pan" className="flex flex-wrap items-center gap-2 text-[12px] font-medium uppercase tracking-[0.12em] text-white/45">
             <Link href="/" className="transition-colors hover:text-white">Inicio</Link>
             <ChevronRight size={13} className="text-white/25" />
-            <span className="text-[#d6dde3]">Glosario</span>
+            <span className="text-[#c7f35b]">Glosario</span>
           </nav>
-          <span className="eyebrow mt-8 block text-[#d6dde3]">Cobertura semántica</span>
+          <span className="eyebrow mt-8 block text-[#c7f35b]">Cobertura semántica</span>
           <h1 className="display mt-5 max-w-4xl text-white">
             Glosario técnico,
             <br />
@@ -66,11 +66,11 @@ export default function GlosarioPage() {
               const href = e.guia ? `/guias/${e.guia}` : e.cluster ? `/temas/${clusterSlug(e.cluster)}` : null;
               const label = e.guia ? "Ver guía" : e.cluster ? `Ver tema · ${e.cluster}` : null;
               return (
-                <div key={e.term} className="rounded-[20px] border border-white/10 bg-[#07182d] p-6 transition hover:border-[#d6dde3]/35">
+                <div key={e.term} className="rounded-[20px] border border-white/10 bg-[#07182d] p-6 transition hover:border-[#c7f35b]/35">
                   <h2 className="text-[18px] font-bold tracking-[-0.02em] text-white">{e.term}</h2>
                   <p className="mt-2 text-[14px] leading-[1.7] text-white/60">{e.def}</p>
                   {href && label && (
-                    <Link href={href} className="ce-link mt-4 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.12em] text-[#d6dde3]">
+                    <Link href={href} className="ce-link mt-4 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.12em] text-[#c7f35b]">
                       {label} <ArrowRight size={14} />
                     </Link>
                   )}

@@ -76,9 +76,9 @@ export function Header() {
             aria-hidden="true"
             className="shrink-0 transition-transform duration-300 group-hover:scale-110"
           >
-            <rect x="2" y="10" width="4" height="14" fill="#d6dde3" />
-            <rect x="10" y="4" width="4" height="26" fill="#d6dde3" />
-            <rect x="18" y="8" width="4" height="18" fill="#d6dde3" />
+            <rect x="2" y="10" width="4" height="14" fill="#c7f35b" />
+            <rect x="10" y="4" width="4" height="26" fill="#c7f35b" />
+            <rect x="18" y="8" width="4" height="18" fill="#c7f35b" />
           </svg>
           <span className="leading-none">
             <strong className="block text-[15px] font-extrabold tracking-[-0.01em] text-white">CONDUCTOS ERGUI</strong>
@@ -102,7 +102,7 @@ export function Header() {
               >
                 {label}
                 <span
-                  className={`pointer-events-none absolute -bottom-1.5 left-0 h-px w-full origin-left bg-accent transition-transform duration-300 ${
+                  className={`pointer-events-none absolute -bottom-1.5 left-0 h-px w-full origin-left bg-lime transition-transform duration-300 ${
                     active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                   }`}
                 />
@@ -117,7 +117,7 @@ export function Header() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Urgencias por WhatsApp"
-            className="flex items-center gap-2 rounded-full border border-white/20 bg-navy px-3 py-2 text-[10.5px] font-bold tracking-[0.12em] text-white transition hover:bg-accent hover:text-ink"
+            className="flex items-center gap-2 rounded-full border border-white/20 bg-navy px-3 py-2 text-[10.5px] font-bold tracking-[0.12em] text-white transition hover:bg-lime hover:text-ink"
           >
             <Phone size={13} className="shrink-0" strokeWidth={2.5} />
             URGENCIAS
@@ -145,18 +145,18 @@ export function Header() {
                   onClick={() => setOpen(false)}
                   aria-current={active ? "true" : undefined}
                   className={`flex items-center justify-between border-b border-white/10 py-4 text-lg font-medium transition-colors ${
-                    active ? "text-accent" : "text-white/90 hover:text-accent"
+                    active ? "text-lime" : "text-white/90 hover:text-lime"
                   }`}
                 >
                   {label}
-                  {active && <span className="h-1.5 w-1.5 rounded-full bg-accent" />}
+                  {active && <span className="h-1.5 w-1.5 rounded-full bg-lime" />}
                 </Link>
               );
             })}
             <Link
               href="/presupuestador"
               onClick={() => setOpen(false)}
-              className="mt-6 flex items-center justify-between rounded-xl bg-accent p-4 font-bold text-ink"
+              className="mt-6 flex items-center justify-between rounded-xl bg-lime p-4 font-bold text-ink"
             >
               Solicitar presupuesto <ArrowUpRight size={18} />
             </Link>

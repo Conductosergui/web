@@ -6,11 +6,9 @@
   --color-blue: #145da0;
   --color-sky: #dcecf7;
   --color-mist: #f2f5f7;
-  --color-lead: #5f6b76;
-  --color-plomo: #5f6b76;
-  --color-plomo-light: #aeb8c1;
+  --color-lead: #687480;
   --color-line: #d9e0e6;
-  --color-accent: #d6dde3;
+  --color-lime: #c7f35b;
   --font-sans: "Google Sans Flex", Arial, sans-serif;
 }
 
@@ -23,7 +21,7 @@ body {
   font-family: var(--font-sans-app), "Google Sans Flex", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
-::selection { background: #d6dde3; color: #07182d; }
+::selection { background: #c7f35b; color: #07182d; }
 a, button { -webkit-tap-highlight-color: transparent; }
 button, input, textarea, select { font: inherit; }
 

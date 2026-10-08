@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { ArrowRight, Check, Copy, Mail, MapPin, MessageCircle, ShieldCheck } from "lucide-react";
 
@@ -99,7 +100,7 @@ export default function PresupuestadorPage() {
             {sent && payload ? (
               <div className="grid min-h-[520px] place-items-center text-center">
                 <div>
-                  <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-accent">
+                  <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-lime">
                     <Check size={28} />
                   </span>
                   <h2 className="mt-7 text-3xl font-medium tracking-[-0.04em]">Solicitud enviada</h2>
@@ -117,7 +118,7 @@ export default function PresupuestadorPage() {
                         href={payload.waHref}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-bold text-ink transition hover:brightness-95"
+                        className="inline-flex items-center justify-center gap-2 rounded-full bg-lime px-5 py-3 text-sm font-bold text-ink transition hover:brightness-95"
                       >
                         <MessageCircle size={16} /> Abrir WhatsApp
                       </a>
@@ -138,12 +139,12 @@ export default function PresupuestadorPage() {
                     </div>
                   </div>
 
-                  <a
+                  <Link
                     href="/"
                     className="mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-bold text-white"
                   >
                     Regresar al inicio <ArrowRight size={16} />
-                  </a>
+                  </Link>
                 </div>
               </div>
             ) : (
@@ -232,7 +233,7 @@ export default function PresupuestadorPage() {
           </div>
 
           <aside className="h-fit rounded-[28px] bg-ink p-7 text-white lg:sticky lg:top-28">
-            <p className="eyebrow text-accent">Qué ocurre después</p>
+            <p className="eyebrow text-lime">Qué ocurre después</p>
             <div className="mt-7 grid gap-6">
               {([
                 [Check, "Se recibe la solicitud al instante por WhatsApp o correo."],
@@ -243,7 +244,7 @@ export default function PresupuestadorPage() {
                 const Cmp = Icon as typeof Check;
                 return (
                   <div key={i} className="flex gap-4">
-                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/10 text-xs text-accent">{i + 1}</span>
+                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/10 text-xs text-lime">{i + 1}</span>
                     <p className="pt-1 text-sm text-white/70">{text}</p>
                   </div>
                 );
@@ -258,7 +259,7 @@ export default function PresupuestadorPage() {
                 href={`https://wa.me/${WHATSAPP_NUMBER}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-1 flex items-center gap-2 text-sm font-bold text-accent"
+                className="mt-1 flex items-center gap-2 text-sm font-bold text-lime"
               >
                 <MessageCircle size={14} /> +34 652 55 18 61
               </a>

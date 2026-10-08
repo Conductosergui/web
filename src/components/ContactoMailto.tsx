@@ -76,7 +76,7 @@ export function ContactoMailto() {
       aria-describedby="contacto-nota"
     >
       <label className="md:col-span-2">
-        <span className="text-xs font-bold uppercase tracking-[.14em] text-plomo">Servicio</span>
+        <span className="text-xs font-bold uppercase tracking-[.14em] text-lead">Servicio</span>
         <select name="servicio" required defaultValue="" className="field mt-2">
           <option value="" disabled>
             Selecciona un servicio
@@ -96,7 +96,7 @@ export function ContactoMailto() {
       </label>
 
       <label>
-        <span className="text-xs font-bold uppercase tracking-[.14em] text-plomo">Tipo de inmueble</span>
+        <span className="text-xs font-bold uppercase tracking-[.14em] text-lead">Tipo de inmueble</span>
         <select name="inmueble" required defaultValue={INMUEBLES[0]} className="field mt-2">
           {INMUEBLES.map((i) => (
             <option key={i}>{i}</option>
@@ -105,7 +105,7 @@ export function ContactoMailto() {
       </label>
 
       <label>
-        <span className="text-xs font-bold uppercase tracking-[.14em] text-plomo">Municipio</span>
+        <span className="text-xs font-bold uppercase tracking-[.14em] text-lead">Municipio</span>
         <select name="municipio" required defaultValue={BASE_LOCALITY} className="field mt-2">
           {MUNICIPIOS_BAIX_PENEDES.map(([m]) => (
             <option key={m}>{m}</option>
@@ -114,17 +114,17 @@ export function ContactoMailto() {
       </label>
 
       <label>
-        <span className="text-xs font-bold uppercase tracking-[.14em] text-plomo">Nombre</span>
+        <span className="text-xs font-bold uppercase tracking-[.14em] text-lead">Nombre</span>
         <input name="nombre" required autoComplete="name" className="field mt-2" />
       </label>
 
       <label>
-        <span className="text-xs font-bold uppercase tracking-[.14em] text-plomo">Teléfono (opcional)</span>
+        <span className="text-xs font-bold uppercase tracking-[.14em] text-lead">Teléfono (opcional)</span>
         <input name="telefono" type="tel" autoComplete="tel" inputMode="tel" className="field mt-2" />
       </label>
 
       <label className="md:col-span-2">
-        <span className="text-xs font-bold uppercase tracking-[.14em] text-plomo">Describe el trabajo</span>
+        <span className="text-xs font-bold uppercase tracking-[.14em] text-lead">Describe el trabajo</span>
         <textarea
           name="mensaje"
           rows={4}
@@ -134,26 +134,26 @@ export function ContactoMailto() {
       </label>
 
       <div className="flex flex-col gap-4 md:col-span-2 md:flex-row md:items-center md:justify-between">
-        <p id="contacto-nota" className="max-w-md text-xs leading-relaxed text-plomo">
+        <p id="contacto-nota" className="max-w-md text-xs leading-relaxed text-lead">
           Al enviar se abrirá tu aplicación de correo con el mensaje preparado para {EMAIL}. No se almacena ningún dato en
           este sitio.
         </p>
         <button
           type="submit"
-          className="inline-flex items-center justify-center gap-3 rounded-full bg-navy px-6 py-4 text-sm font-bold text-white transition hover:bg-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
+          className="inline-flex items-center justify-center gap-3 rounded-full bg-ink px-6 py-4 text-sm font-bold text-white transition hover:bg-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
         >
           <Mail size={17} /> Preparar correo <ArrowUpRight size={17} />
         </button>
       </div>
 
       {href && (
-        <p role="status" className="text-sm text-plomo md:col-span-2">
+        <p role="status" className="text-sm text-lead md:col-span-2">
           ¿No se abrió tu correo?{" "}
-          <a href={href} className="font-bold text-navy underline underline-offset-4">
+          <a href={href} className="font-bold text-blue underline underline-offset-4">
             Abrir el mensaje manualmente
           </a>{" "}
           o escribe a{" "}
-          <a href={`mailto:${EMAIL}`} className="font-bold text-navy underline underline-offset-4">
+          <a href={`mailto:${EMAIL}`} className="font-bold text-blue underline underline-offset-4">
             {EMAIL}
           </a>
           .

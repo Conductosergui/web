@@ -81,11 +81,11 @@ export default async function TemaPage({ params }: { params: Promise<{ cluster: 
             <ChevronRight size={13} className="text-white/25" />
             <Link href="/guias" className="transition-colors hover:text-white">Guías</Link>
             <ChevronRight size={13} className="text-white/25" />
-            <span className="text-[#d6dde3]">Tema</span>
+            <span className="text-[#c7f35b]">Tema</span>
           </nav>
 
           <div className="mt-8 max-w-3xl">
-            <span className="eyebrow text-[#d6dde3]">Tema · contenido pilar</span>
+            <span className="eyebrow text-[#c7f35b]">Tema · contenido pilar</span>
             <h1 className="display mt-5 text-white">
               {cluster}
               <span className="mt-2 block text-[clamp(1.3rem,3vw,2.2rem)]">
@@ -98,7 +98,7 @@ export default async function TemaPage({ params }: { params: Promise<{ cluster: 
           <div className="mt-10 grid gap-3 sm:grid-cols-2">
             {pillar.points.map((p) => (
               <div key={p} className="flex gap-3 rounded-2xl border border-white/10 bg-[#07182d] p-5">
-                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#d6dde3]" />
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#c7f35b]" />
                 <p className="text-[14.5px] leading-[1.7] text-white/70">{p}</p>
               </div>
             ))}
@@ -129,7 +129,7 @@ export default async function TemaPage({ params }: { params: Promise<{ cluster: 
           <p className="eyebrow text-white/45">Temas relacionados</p>
           <div className="mt-5 flex flex-wrap gap-3">
             {relacionados.map((r: Cluster) => (
-              <Link key={r} href={`/temas/${clusterSlug(r)}`} className="ce-link inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2.5 text-[12.5px] font-bold uppercase tracking-[0.1em] text-white/70 transition hover:border-[#d6dde3]/50 hover:text-[#d6dde3]">
+              <Link key={r} href={`/temas/${clusterSlug(r)}`} className="ce-link inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2.5 text-[12.5px] font-bold uppercase tracking-[0.1em] text-white/70 transition hover:border-[#c7f35b]/50 hover:text-[#c7f35b]">
                 {r} <ArrowRight size={14} />
               </Link>
             ))}
@@ -139,12 +139,12 @@ export default async function TemaPage({ params }: { params: Promise<{ cluster: 
 
       <section className="bg-[#05111f] pb-24 md:pb-32">
         <div className="shell">
-          <div className="flex flex-col items-start justify-between gap-6 rounded-[24px] border border-[#d6dde3]/25 bg-gradient-to-br from-[#0b2748] to-[#07182d] p-7 md:flex-row md:items-center md:p-9">
+          <div className="flex flex-col items-start justify-between gap-6 rounded-[24px] border border-[#c7f35b]/25 bg-gradient-to-br from-[#0b2748] to-[#07182d] p-7 md:flex-row md:items-center md:p-9">
             <div>
-              <p className="eyebrow text-[#d6dde3]">Aplicar este tema</p>
+              <p className="eyebrow text-[#c7f35b]">Aplicar este tema</p>
               <p className="mt-3 max-w-md text-[15px] leading-[1.7] text-white/65">Se traslada lo descrito a un espacio concreto con una valoración técnica clara y sin compromiso.</p>
             </div>
-            <Link href={pillar.serviceHref} className="inline-flex shrink-0 items-center justify-between gap-8 rounded-full bg-[#d6dde3] px-6 py-4 text-sm font-bold text-[#05111f] transition hover:scale-[1.03]">
+            <Link href={pillar.serviceHref} className="inline-flex shrink-0 items-center justify-between gap-8 rounded-full bg-[#c7f35b] px-6 py-4 text-sm font-bold text-[#05111f] transition hover:scale-[1.03]">
               {pillar.serviceLabel} <ArrowRight size={17} />
             </Link>
           </div>

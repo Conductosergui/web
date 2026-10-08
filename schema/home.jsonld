@@ -1,69 +1,161 @@
 {
   "@context": "https://schema.org",
-  "@type": ["HVACContractor", "DrywallContractor"],
-  "name": "Conductos Ergui",
-  "description": "Empresa especializada en instalación y mantenimiento de conductos de climatización y sistemas de Pladur, con sede en Cunit (Tarragona) y cobertura en un radio de 50 km.",
-  "url": "https://www.conductosergui.com/",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Cunit",
-    "addressRegion": "Tarragona",
-    "addressCountry": "ES"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 41.2394,
-    "longitude": 1.6386
-  },
-  "location": {
-    "@type": "Place",
-    "name": "Cunit",
-    "sameAs": [
-      "https://es.wikipedia.org/wiki/Cunit",
-      "https://www.wikidata.org/wiki/Q474489"
-    ]
-  },
-  "areaServed": [
+  "@graph": [
     {
-      "@type": "AdministrativeArea",
-      "name": "Baix Penedès",
-      "sameAs": [
-        "https://es.wikipedia.org/wiki/Baix_Peneds%C3%A8s",
-        "https://www.wikidata.org/wiki/Q15367"
-      ]
+      "@type": "WebSite",
+      "@id": "https://conductosergui.es/#website",
+      "url": "https://conductosergui.es",
+      "name": "Conductos Ergui",
+      "inLanguage": "es-ES",
+      "publisher": {
+        "@id": "https://conductosergui.es/#negocio"
+      }
     },
     {
-      "@type": "AdministrativeArea",
-      "name": "Garraf",
-      "sameAs": [
-        "https://es.wikipedia.org/wiki/Garraf_(comarca)",
-        "https://www.wikidata.org/wiki/Q15366"
-      ]
+      "@type": "WebPage",
+      "@id": "https://conductosergui.es/#webpage",
+      "url": "https://conductosergui.es",
+      "name": "Conductos Ergui | Climatización, Conductos y Pladur en El Vendrell",
+      "description": "Instalación y mantenimiento de climatización por conductos, tabiquería de pladur y aislamiento térmico y acústico en El Vendrell y la comarca del Baix Penedès (Tarragona).",
+      "inLanguage": "es-ES",
+      "isPartOf": {
+        "@id": "https://conductosergui.es/#website"
+      },
+      "about": {
+        "@id": "https://conductosergui.es/#negocio"
+      },
+      "mainEntity": {
+        "@id": "https://conductosergui.es/#negocio"
+      }
     },
-    { "@type": "AdministrativeArea", "name": "Alt Penedès" },
-    { "@type": "AdministrativeArea", "name": "Tarragonès" },
-    { "@type": "AdministrativeArea", "name": "Baix Llobregat" }
-  ],
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Servicios de Conductos Ergui",
-    "itemListElement": [
-      {
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://conductosergui.es/#negocio",
+      "name": "Conductos Ergui",
+      "url": "https://conductosergui.es",
+      "description": "Instalación y mantenimiento de climatización por conductos, tabiquería de pladur y aislamiento térmico y acústico en El Vendrell y la comarca del Baix Penedès (Tarragona).",
+      "email": "conductosergui@gmail.com",
+      "telephone": "+34652551861",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://conductosergui.es/#logo",
+        "url": "https://conductosergui.es/logo.svg"
+      },
+      "image": {
+        "@id": "https://conductosergui.es/#logo"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "El Vendrell",
+        "addressRegion": "Tarragona",
+        "addressCountry": "ES"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 41.22043,
+        "longitude": 1.53501
+      },
+      "areaServed": [
+        {
+          "@id": "https://conductosergui.es/#el-vendrell"
+        },
+        {
+          "@id": "https://conductosergui.es/#baix-penedes"
+        }
+      ],
+      "knowsAbout": [
+        "Climatización por conductos",
+        "Conductos de fibra de vidrio",
+        "Conductos de acero galvanizado",
+        "Ventilación y extracción",
+        "Placa de yeso laminado",
+        "Tabiquería seca",
+        "Aislamiento térmico",
+        "Aislamiento acústico"
+      ],
+      "department": [
+        {
+          "@id": "https://conductosergui.es/#climatizacion"
+        },
+        {
+          "@id": "https://conductosergui.es/#pladur"
+        }
+      ],
+      "makesOffer": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@id": "https://conductosergui.es/#servicio-climatizacion"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@id": "https://conductosergui.es/#servicio-pladur"
+          }
+        }
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": "conductosergui@gmail.com",
+        "telephone": "+34652551861",
+        "areaServed": [
+          {
+            "@id": "https://conductosergui.es/#el-vendrell"
+          },
+          {
+            "@id": "https://conductosergui.es/#baix-penedes"
+          }
+        ],
+        "availableLanguage": "es"
+      }
+    },
+    {
+      "@type": "HVACBusiness",
+      "@id": "https://conductosergui.es/#climatizacion",
+      "name": "Conductos Ergui · Climatización y Conductos",
+      "url": "https://conductosergui.es/#climatizacion",
+      "parentOrganization": {
+        "@id": "https://conductosergui.es/#negocio"
+      },
+      "email": "conductosergui@gmail.com",
+      "telephone": "+34652551861",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "El Vendrell",
+        "addressRegion": "Tarragona",
+        "addressCountry": "ES"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 41.22043,
+        "longitude": 1.53501
+      },
+      "areaServed": [
+        {
+          "@id": "https://conductosergui.es/#el-vendrell"
+        },
+        {
+          "@id": "https://conductosergui.es/#baix-penedes"
+        }
+      ],
+      "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "Conductos de climatización",
+        "name": "Climatización, instalación y mantenimiento de conductos",
         "itemListElement": [
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Instalación de conductos de aire acondicionado"
+              "name": "Instalación de conductos de climatización"
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Mantenimiento y reparación de sistemas de climatización"
+              "name": "Mantenimiento y reparación de sistemas de aire acondicionado"
             }
           },
           {
@@ -72,36 +164,127 @@
               "@type": "Service",
               "name": "Diseño e instalación de redes de ventilación"
             }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Limpieza de conductos"
+            }
           }
         ]
+      }
+    },
+    {
+      "@type": "GeneralContractor",
+      "@id": "https://conductosergui.es/#pladur",
+      "additionalType": "http://www.productontology.org/id/Drywall",
+      "name": "Conductos Ergui · Pladur y Aislamiento",
+      "url": "https://conductosergui.es/#pladur",
+      "parentOrganization": {
+        "@id": "https://conductosergui.es/#negocio"
       },
-      {
+      "email": "conductosergui@gmail.com",
+      "telephone": "+34652551861",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "El Vendrell",
+        "addressRegion": "Tarragona",
+        "addressCountry": "ES"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 41.22043,
+        "longitude": 1.53501
+      },
+      "areaServed": [
+        {
+          "@id": "https://conductosergui.es/#el-vendrell"
+        },
+        {
+          "@id": "https://conductosergui.es/#baix-penedes"
+        }
+      ],
+      "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "Pladur",
+        "name": "Pladur, tabiquería y aislamiento",
         "itemListElement": [
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Instalación de tabiquería y trasdosados en Pladur"
+              "name": "Tabiquería y trasdosados de pladur"
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Techos técnicos y decorativos en Pladur"
+              "name": "Falsos techos continuos y registrables"
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Aislamiento acústico y térmico con placas de yeso laminado"
+              "name": "Aislamiento térmico y acústico con lana de roca"
             }
           }
         ]
       }
-    ]
-  }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://conductosergui.es/#servicio-climatizacion",
+      "name": "Climatización, instalación y mantenimiento de conductos",
+      "serviceType": "Climatización por conductos",
+      "provider": {
+        "@id": "https://conductosergui.es/#climatizacion"
+      },
+      "areaServed": [
+        {
+          "@id": "https://conductosergui.es/#el-vendrell"
+        },
+        {
+          "@id": "https://conductosergui.es/#baix-penedes"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://conductosergui.es/#servicio-pladur",
+      "name": "Pladur, tabiquería y aislamiento",
+      "serviceType": "Construcción en seco y aislamiento",
+      "provider": {
+        "@id": "https://conductosergui.es/#pladur"
+      },
+      "areaServed": [
+        {
+          "@id": "https://conductosergui.es/#el-vendrell"
+        },
+        {
+          "@id": "https://conductosergui.es/#baix-penedes"
+        }
+      ]
+    },
+    {
+      "@type": "City",
+      "@id": "https://conductosergui.es/#el-vendrell",
+      "name": "El Vendrell",
+      "sameAs": "https://es.wikipedia.org/wiki/El_Vendrell",
+      "containedInPlace": {
+        "@id": "https://conductosergui.es/#baix-penedes"
+      }
+    },
+    {
+      "@type": "AdministrativeArea",
+      "@id": "https://conductosergui.es/#baix-penedes",
+      "name": "Baix Penedès",
+      "sameAs": "https://es.wikipedia.org/wiki/Bajo_Panad%C3%A9s",
+      "containedInPlace": {
+        "@type": "AdministrativeArea",
+        "name": "Provincia de Tarragona"
+      }
+    }
+  ]
 }

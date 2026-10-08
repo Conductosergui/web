@@ -94,7 +94,7 @@ export default function FAQPage() {
             <p className="font-bold">¿No figura la respuesta?</p>
             <p className="mt-1 text-sm text-white/55">Puede enviarse una consulta y se ofrecerá orientación.</p>
           </div>
-          <Link href="/presupuestador" className="flex items-center gap-5 rounded-full bg-accent px-5 py-3 text-sm font-bold text-ink">
+          <Link href="/presupuestador" className="flex items-center gap-5 rounded-full bg-lime px-5 py-3 text-sm font-bold text-ink">
             Enviar consulta <ArrowRight size={17} />
           </Link>
         </div>

@@ -21,7 +21,7 @@ export default function CompromisoPage() {
     <>
       <section className="bg-ink py-24 text-white md:py-32">
         <div className="shell">
-          <p className="eyebrow text-accent">Compromiso</p>
+          <p className="eyebrow text-lime">Compromiso</p>
           <h1 className="display mt-7 max-w-5xl">
             La confianza no se promete.
             <br />
@@ -67,7 +67,7 @@ export default function CompromisoPage() {
 
       <section className="shell py-24">
         <div className="rounded-[28px] bg-blue p-8 text-white md:p-14">
-          <p className="eyebrow text-accent">Un proyecto, una conversación técnica</p>
+          <p className="eyebrow text-lime">Un proyecto, una conversación técnica</p>
           <div className="mt-5 flex flex-col justify-between gap-8 md:flex-row md:items-end">
             <h2 className="max-w-2xl text-4xl font-medium tracking-[-0.05em] md:text-6xl">
               Cada proyecto comienza con una conversación técnica clara.

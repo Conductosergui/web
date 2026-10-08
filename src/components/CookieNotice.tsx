@@ -1,15 +1,40 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { X } from "lucide-react";
 
+const STORAGE_KEY = "ct-cookie-choice";
+const CHANGE_EVENT = "ct-cookie-choice-change";
+
+// El aviso se sincroniza con localStorage como store externo: sin setState dentro de efectos
+// y sin desajuste de hidratación (en servidor el aviso no se renderiza).
+function subscribe(onChange: () => void) {
+  window.addEventListener("storage", onChange);
+  window.addEventListener(CHANGE_EVENT, onChange);
+  return () => {
+    window.removeEventListener("storage", onChange);
+    window.removeEventListener(CHANGE_EVENT, onChange);
+  };
+}
+
+function pendingChoice() {
+  try {
+    return localStorage.getItem(STORAGE_KEY) === null;
+  } catch {
+    return false;
+  }
+}
+
 export function CookieNotice() {
-  const [visible, setVisible] = useState(false);
-  useEffect(() => setVisible(localStorage.getItem("ct-cookie-choice") === null), []);
+  const visible = useSyncExternalStore(subscribe, pendingChoice, () => false);
   const choose = (value: string) => {
-    localStorage.setItem("ct-cookie-choice", value);
-    setVisible(false);
+    try {
+      localStorage.setItem(STORAGE_KEY, value);
+    } catch {
+      // Almacenamiento bloqueado: el aviso se cierra igualmente durante la sesión.
+    }
+    window.dispatchEvent(new Event(CHANGE_EVENT));
   };
   if (!visible) return null;
   return (
