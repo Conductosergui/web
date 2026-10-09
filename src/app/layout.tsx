@@ -63,6 +63,8 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 },
   },
   formatDetection: { telephone: false, email: false, address: false },
+  // Verificación de propiedad en Google Search Console (metaetiqueta google-site-verification).
+  verification: { google: "wZbT1oygEf-vfQFv_u5GmTAcnhjuLKBk2eQvrqAGgCc" },
   other: {
     "geo.region": "ES-T",
     "geo.placename": `${BASE_LOCALITY}, ${BASE_COMARCA}, ${BASE_PROVINCE}`,
