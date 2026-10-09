@@ -1,13 +1,15 @@
 import type { MetadataRoute } from "next";
 import { CLUSTERS, GUIAS, clusterSlug, temaIndexable } from "@/data/guias";
 import { SERVICIOS, SERVICIOS_PATH, servicioPath } from "@/data/servicios";
-import { AUTHOR_PATH, absoluteUrl } from "@/lib/entidad";
+import { AUTHOR_PATH, ZONA_COMARCA_PATH, ZONA_SEDE_PATH, absoluteUrl } from "@/lib/entidad";
 
 // Solo rutas indexables que existen y devuelven 200. No incluye anclas (#), rutas técnicas
 // (opengraph-image, icon) ni páginas inexistentes como /temas.
 const ESTATICAS = [
   "/",
   SERVICIOS_PATH,
+  ZONA_COMARCA_PATH,
+  ZONA_SEDE_PATH,
   "/guias",
   "/glosario",
   "/faq",

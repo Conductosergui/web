@@ -29,6 +29,8 @@ import {
   SITE_DESCRIPTION,
   SITE_TITLE,
   WHATSAPP_URL,
+  ZONA_COMARCA_PATH,
+  ZONA_SEDE_PATH,
 } from "@/lib/entidad";
 import { pageNode, ref } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
@@ -412,6 +414,14 @@ export default function HomePage() {
                     {a}
                   </span>
                 ))}
+              </div>
+              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+                <Link href={ZONA_COMARCA_PATH} className="ce-link inline-flex items-center gap-2 text-sm font-bold text-[#c7f35b]">
+                  Zona de servicio en el {BASE_COMARCA} <ArrowRight size={15} />
+                </Link>
+                <Link href={ZONA_SEDE_PATH} className="ce-link inline-flex items-center gap-2 text-sm font-bold text-white/80 hover:text-white">
+                  Sede en {BASE_LOCALITY} y Coma-ruga <ArrowRight size={15} />
+                </Link>
               </div>
               <div className="mt-10 flex items-center gap-6 border-t border-white/10 pt-7">
                 <div>

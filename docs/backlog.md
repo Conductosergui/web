@@ -47,6 +47,15 @@ Notas:
 | `/llms.txt` | Generado en el build desde las mismas fuentes que el sitio |
 | Borradores fuera del área | Archivados en `docs/archivo/` (Sitges y Vilanova i la Geltrú) |
 
+## Fase 4 — Autoridad local (opción A, aprobada por el titular)
+
+| Elemento | Estado |
+|---|---|
+| `/baix-penedes` y `/el-vendrell` (con sección Coma-ruga) | Publicadas, en sitemap y `llms.txt`, enlazadas desde home y footer |
+| `/coma-ruga` | Redirección 308 a `/el-vendrell#coma-ruga` (`next.config.ts`) |
+| Páginas por municipio (Calafell, Cunit, L'Arboç, Santa Oliva…) | **Retenidas** hasta disponer de contenido real propio (trabajos documentados). Evita páginas puerta |
+| Dirección postal y Google Business Profile | Pendientes (B3, B5) |
+
 ## Puntos de restauración
 
 | Rama | Commit | Contenido |

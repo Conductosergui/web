@@ -13,6 +13,8 @@ import {
   PHONE,
   PHONE_FORMATTED,
   WHATSAPP_URL,
+  ZONA_COMARCA_PATH,
+  ZONA_SEDE_PATH,
 } from "@/lib/entidad";
 
 export function Footer() {
@@ -32,6 +34,7 @@ export function Footer() {
             <p className="mb-5 text-xs font-bold uppercase tracking-[.14em] text-white/50">Secciones</p>
             <div className="grid gap-3 text-sm">
               <Link href="/servicios">Servicios</Link>
+              <Link href={ZONA_COMARCA_PATH}>Zona de servicio</Link>
               <Link href="/#metodo">Método de trabajo</Link>
               <Link href="/guias">Guías</Link>
               <Link href="/glosario">Glosario técnico</Link>
@@ -63,13 +66,17 @@ export function Footer() {
               <div>
                 <dt className="text-[11px] font-bold uppercase tracking-[.12em] text-white/50">Base</dt>
                 <dd className="mt-1">
-                  {BASE_LOCALITY} ({BASE_PROVINCE})
+                  <Link href={ZONA_SEDE_PATH}>
+                    {BASE_LOCALITY} ({BASE_PROVINCE})
+                  </Link>
                 </dd>
               </div>
               <div>
                 <dt className="text-[11px] font-bold uppercase tracking-[.12em] text-white/50">Área de servicio</dt>
                 <dd className="mt-1">
-                  Comarca del {BASE_COMARCA} · {MUNICIPIOS_BAIX_PENEDES.length} municipios
+                  <Link href={ZONA_COMARCA_PATH}>
+                    Comarca del {BASE_COMARCA} · {MUNICIPIOS_BAIX_PENEDES.length} municipios
+                  </Link>
                 </dd>
               </div>
               <div>

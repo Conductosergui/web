@@ -49,6 +49,10 @@ export const MUNICIPIOS_BAIX_PENEDES: readonly (readonly [string, number])[] = [
   ["El Montmell", 12.5],
 ];
 
+// Páginas de zona de servicio (fase 4). Las páginas por municipio solo se crean con contenido real propio.
+export const ZONA_COMARCA_PATH = "/baix-penedes";
+export const ZONA_SEDE_PATH = "/el-vendrell";
+
 export const SITE_TITLE = "Conductos Ergui | Climatización, Conductos y Pladur en El Vendrell";
 export const SITE_DESCRIPTION =
   "Instalación y mantenimiento de climatización por conductos, tabiquería de pladur y aislamiento térmico y acústico en El Vendrell y la comarca del Baix Penedès (Tarragona).";
@@ -96,6 +100,8 @@ export const ID = {
   comarca: `${SITE_URL}/#baix-penedes`,
   provincia: `${SITE_URL}/#provincia-de-tarragona`,
   cataluna: `${SITE_URL}/#cataluna`,
+  // Núcleo costero del municipio de El Vendrell (sección propia en /el-vendrell)
+  comaRuga: `${SITE_URL}/el-vendrell#coma-ruga`,
   logo: `${SITE_URL}/#logo`,
 } as const;
 
