@@ -6,7 +6,7 @@ import { ArrowUpRight, Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const links: [string, string][] = [
-  ["Servicios", "/#servicios"],
+  ["Servicios", "/servicios"],
   ["Método", "/#metodo"],
   ["Cobertura", "/#cobertura"],
   ["Garantías", "/#garantias"],
@@ -14,7 +14,7 @@ const links: [string, string][] = [
   ["FAQ", "/faq"],
 ];
 
-const SECTION_IDS = ["servicios", "metodo", "cobertura", "garantias"];
+const SECTION_IDS = ["metodo", "cobertura", "garantias"];
 const WHATSAPP_HREF = `https://wa.me/34652551861?text=${encodeURIComponent("Solicitud de atención urgente en El Vendrell.")}`;
 
 export function Header() {
@@ -51,6 +51,7 @@ export function Header() {
     if (!pathname) return false;
     if (href === "/faq") return pathname === "/faq";
     if (href === "/guias") return pathname.startsWith("/guias");
+    if (href === "/servicios") return pathname.startsWith("/servicios");
     return false;
   };
 

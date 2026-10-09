@@ -1,8 +1,20 @@
 // Constructores del grafo JSON-LD.
-// Regla: la empresa, el sitio y el autor se declaran una sola vez con @id estable;
+// Regla: la empresa, el sitio, el fundador, los servicios y los conceptos se declaran una sola vez con @id estable;
 // el resto de nodos los referencian con { "@id": ... }. Así buscadores e IA ven una única entidad.
 
+import { CONCEPTOS, type Concepto } from "@/data/conceptos";
 import {
+  SERVICIOS,
+  SERVICIOS_PATH,
+  getRelacionados,
+  servicioPath,
+  serviciosDe,
+  type Departamento,
+  type Servicio,
+} from "@/data/servicios";
+import {
+  AUTHOR_DESCRIPTION,
+  AUTHOR_JOB_TITLE,
   AUTHOR_NAME,
   AUTHOR_PATH,
   BASE_COMARCA,
@@ -17,7 +29,9 @@ import {
   TELEPHONE,
   absoluteUrl,
   breadcrumbId,
+  conceptoId,
   pageId,
+  servicioId,
 } from "@/lib/entidad";
 
 type Node = Record<string, unknown>;
@@ -34,9 +48,59 @@ const address = {
 const geo = { "@type": "GeoCoordinates", latitude: GEO.latitude, longitude: GEO.longitude };
 const areaServed = [ref(ID.vendrell), ref(ID.comarca)];
 
-/** Nodos comunes a todo el sitio. Se inyectan una vez en el <head> desde el layout raíz. */
+const DEPARTAMENTO_ID = { climatizacion: ID.climatizacion, pladur: ID.pladur } as const;
+const CATALOGO_ID = { climatizacion: ID.catalogoClimatizacion, pladur: ID.catalogoPladur } as const;
+
+/** Nodo DefinedTerm de un concepto: definición visible en /glosario#{id}. */
+function conceptoNode(c: Concepto): Node {
+  return {
+    "@type": "DefinedTerm",
+    "@id": conceptoId(c.id),
+    name: c.nombre,
+    ...(c.alternateName ? { alternateName: c.alternateName } : {}),
+    description: c.definicion,
+    url: absoluteUrl(`/glosario#${c.id}`),
+    inDefinedTermSet: ref(ID.glosario),
+    ...(c.sameAs.length ? { sameAs: c.sameAs } : {}),
+  };
+}
+
+/** Nodo Service con URL propia, enlazado a su departamento, conceptos y servicios relacionados. */
+function servicioNode(s: Servicio): Node {
+  const path = servicioPath(s.slug);
+  return {
+    "@type": "Service",
+    "@id": servicioId(s.slug),
+    name: s.nombre,
+    url: absoluteUrl(path),
+    description: s.resumen,
+    serviceType: s.serviceType,
+    category: s.conceptos.map((c) => ref(conceptoId(c))),
+    provider: ref(DEPARTAMENTO_ID[s.departamento]),
+    brand: ref(ID.negocio),
+    areaServed,
+    isRelatedTo: getRelacionados(s.slug).map((r) => ref(servicioId(r.servicio.slug))),
+    // mainEntityOfPage se declara en la propia página del servicio, donde existe su nodo WebPage.
+  };
+}
+
+function catalogoNode(dep: Departamento, name: string): Node {
+  return {
+    "@type": "OfferCatalog",
+    "@id": CATALOGO_ID[dep],
+    name,
+    itemListElement: serviciosDe(dep).map((s) => ({ "@type": "Offer", itemOffered: ref(servicioId(s.slug)) })),
+  };
+}
+
+/**
+ * Nodos comunes a todo el sitio, inyectados en el <head> desde el layout raíz.
+ * Capas: identidad (empresa, sitio, fundador), servicios, conceptos y territorio.
+ * Todo nodo referenciado por la entidad raíz se define aquí para que cada página sea autosuficiente.
+ */
 export function siteGraph(): Node[] {
   return [
+    // ── Identidad ──────────────────────────────────────────────
     {
       "@type": "WebSite",
       "@id": ID.website,
@@ -44,6 +108,7 @@ export function siteGraph(): Node[] {
       name: BRAND,
       inLanguage: "es-ES",
       publisher: ref(ID.negocio),
+      about: ref(ID.negocio),
     },
     {
       // Entidad raíz. HomeAndConstructionBusiness hereda de LocalBusiness y Organization;
@@ -60,21 +125,10 @@ export function siteGraph(): Node[] {
       address,
       geo,
       areaServed,
-      knowsAbout: [
-        "Climatización por conductos",
-        "Conductos de fibra de vidrio",
-        "Conductos de acero galvanizado",
-        "Ventilación y extracción",
-        "Placa de yeso laminado",
-        "Tabiquería seca",
-        "Aislamiento térmico",
-        "Aislamiento acústico",
-      ],
+      founder: ref(ID.persona),
+      knowsAbout: CONCEPTOS.map((c) => ref(conceptoId(c.id))),
       department: [ref(ID.climatizacion), ref(ID.pladur)],
-      makesOffer: [
-        { "@type": "Offer", itemOffered: ref(ID.servicioClimatizacion) },
-        { "@type": "Offer", itemOffered: ref(ID.servicioPladur) },
-      ],
+      hasOfferCatalog: ref(ID.catalogo),
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer service",
@@ -83,7 +137,10 @@ export function siteGraph(): Node[] {
         areaServed,
         availableLanguage: "es",
       },
+      // Pendiente de datos reales (docs/backlog.md): sameAs, legalName, taxID, vatID,
+      // dirección postal completa, horario y credenciales.
     },
+    personNode(),
     {
       "@type": "HVACBusiness",
       "@id": ID.climatizacion,
@@ -95,16 +152,10 @@ export function siteGraph(): Node[] {
       address,
       geo,
       areaServed,
-      hasOfferCatalog: {
-        "@type": "OfferCatalog",
-        name: "Climatización, instalación y mantenimiento de conductos",
-        itemListElement: [
-          "Instalación de conductos de climatización",
-          "Mantenimiento y reparación de sistemas de aire acondicionado",
-          "Diseño e instalación de redes de ventilación",
-          "Limpieza de conductos",
-        ].map((name) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name } })),
-      },
+      knowsAbout: ["climatizacion", "conducto-de-aire", "ventilacion", "extraccion-de-humos", "mantenimiento-de-instalaciones-termicas"].map(
+        (c) => ref(conceptoId(c)),
+      ),
+      hasOfferCatalog: ref(ID.catalogoClimatizacion),
     },
     {
       // schema.org no define un tipo para pladur: GeneralContractor + additionalType.
@@ -119,32 +170,34 @@ export function siteGraph(): Node[] {
       address,
       geo,
       areaServed,
-      hasOfferCatalog: {
-        "@type": "OfferCatalog",
-        name: "Pladur, tabiquería y aislamiento",
-        itemListElement: [
-          "Tabiquería y trasdosados de pladur",
-          "Falsos techos continuos y registrables",
-          "Aislamiento térmico y acústico con lana de roca",
-        ].map((name) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name } })),
-      },
+      knowsAbout: ["placa-de-yeso-laminado", "aislamiento-termico", "aislamiento-acustico"].map((c) => ref(conceptoId(c))),
+      hasOfferCatalog: ref(ID.catalogoPladur),
     },
+
+    // ── Servicios ──────────────────────────────────────────────
     {
-      "@type": "Service",
-      "@id": ID.servicioClimatizacion,
-      name: "Climatización, instalación y mantenimiento de conductos",
-      serviceType: "Climatización por conductos",
-      provider: ref(ID.climatizacion),
-      areaServed,
+      "@type": "OfferCatalog",
+      "@id": ID.catalogo,
+      name: `Servicios de ${BRAND}`,
+      url: absoluteUrl(SERVICIOS_PATH),
+      itemListElement: [ref(ID.catalogoClimatizacion), ref(ID.catalogoPladur)],
     },
+    catalogoNode("climatizacion", "Climatización, conductos y ventilación"),
+    catalogoNode("pladur", "Pladur y aislamiento"),
+    ...SERVICIOS.map(servicioNode),
+
+    // ── Conceptos ──────────────────────────────────────────────
     {
-      "@type": "Service",
-      "@id": ID.servicioPladur,
-      name: "Pladur, tabiquería y aislamiento",
-      serviceType: "Construcción en seco y aislamiento",
-      provider: ref(ID.pladur),
-      areaServed,
+      "@type": "DefinedTermSet",
+      "@id": ID.glosario,
+      name: `Glosario técnico de ${BRAND}`,
+      url: absoluteUrl("/glosario"),
+      inLanguage: "es-ES",
+      publisher: ref(ID.negocio),
     },
+    ...CONCEPTOS.map(conceptoNode),
+
+    // ── Territorio ─────────────────────────────────────────────
     {
       "@type": "City",
       "@id": ID.vendrell,
@@ -157,19 +210,25 @@ export function siteGraph(): Node[] {
       "@id": ID.comarca,
       name: BASE_COMARCA,
       sameAs: "https://es.wikipedia.org/wiki/Bajo_Panad%C3%A9s",
-      containedInPlace: { "@type": "AdministrativeArea", name: `Provincia de ${BASE_PROVINCE}` },
+      containedInPlace: ref(ID.provincia),
     },
+    { "@type": "AdministrativeArea", "@id": ID.provincia, name: `Provincia de ${BASE_PROVINCE}`, containedInPlace: ref(ID.cataluna) },
+    { "@type": "AdministrativeArea", "@id": ID.cataluna, name: "Cataluña", containedInPlace: { "@type": "Country", name: "España" } },
   ];
 }
 
-/** Nodo Person del autor, con @id estable y vínculo a la empresa. */
+/** Nodo Person del fundador y autor de las guías, con @id estable y vínculo a la empresa. */
 export function personNode(extra: Node = {}): Node {
   return {
     "@type": "Person",
     "@id": ID.persona,
     name: AUTHOR_NAME,
+    jobTitle: AUTHOR_JOB_TITLE,
+    description: AUTHOR_DESCRIPTION,
     url: absoluteUrl(AUTHOR_PATH),
     worksFor: ref(ID.negocio),
+    knowsAbout: CONCEPTOS.map((c) => ref(conceptoId(c.id))),
+    // Pendiente (docs/backlog.md): sameAs (Instagram y otros perfiles) y credenciales.
     ...extra,
   };
 }

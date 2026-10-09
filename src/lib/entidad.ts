@@ -39,9 +39,13 @@ export const SITE_TITLE = "Conductos Ergui | Climatización, Conductos y Pladur 
 export const SITE_DESCRIPTION =
   "Instalación y mantenimiento de climatización por conductos, tabiquería de pladur y aislamiento térmico y acústico en El Vendrell y la comarca del Baix Penedès (Tarragona).";
 
-// Autor de las guías (dato del proyecto base, src/data/guias.ts).
-export const AUTHOR_NAME = "Aitor Ergui";
-export const AUTHOR_PATH = "/autor/aitor-ergui";
+// Fundador y persona física titular del negocio (dato facilitado por el titular).
+// Sustituye al autor del proyecto base ("Aitor Ergui"); /autor/aitor-ergui redirige aquí (next.config.ts).
+export const AUTHOR_NAME = "Bryan Ergui";
+export const AUTHOR_PATH = "/autor/bryan-ergui";
+export const AUTHOR_JOB_TITLE = "Fundador";
+export const AUTHOR_YEARS_EXPERIENCE = 10;
+export const AUTHOR_DESCRIPTION = `Fundador y titular de Conductos Ergui, con ${AUTHOR_YEARS_EXPERIENCE} años de experiencia profesional.`;
 
 /** URL absoluta canónica de una ruta interna ("/" → dominio sin barra final, igual que la canónica de Next). */
 export function absoluteUrl(path: string): string {
@@ -64,11 +68,25 @@ export const ID = {
   webpage: pageId("/"),
   negocio: `${SITE_URL}/#negocio`,
   persona: `${SITE_URL}${AUTHOR_PATH}#persona`,
+  // Departamentos (silos de la home)
   climatizacion: `${SITE_URL}/#climatizacion`,
   pladur: `${SITE_URL}/#pladur`,
-  servicioClimatizacion: `${SITE_URL}/#servicio-climatizacion`,
-  servicioPladur: `${SITE_URL}/#servicio-pladur`,
+  // Catálogos de servicios: raíz → departamentos → Service
+  catalogo: `${SITE_URL}/servicios#catalogo`,
+  catalogoClimatizacion: `${SITE_URL}/servicios#catalogo-climatizacion`,
+  catalogoPladur: `${SITE_URL}/servicios#catalogo-pladur`,
+  // Capa de conceptos
+  glosario: `${SITE_URL}/glosario#terminos`,
+  // Territorio
   vendrell: `${SITE_URL}/#el-vendrell`,
   comarca: `${SITE_URL}/#baix-penedes`,
+  provincia: `${SITE_URL}/#provincia-de-tarragona`,
+  cataluna: `${SITE_URL}/#cataluna`,
   logo: `${SITE_URL}/#logo`,
 } as const;
+
+/** @id de un concepto del glosario (DefinedTerm). */
+export const conceptoId = (id: string) => `${SITE_URL}/glosario#${id}`;
+
+/** @id de un servicio (Service) en su página propia. */
+export const servicioId = (slug: string) => `${SITE_URL}/servicios/${slug}#servicio`;

@@ -1,12 +1,12 @@
-import { AUTHOR_NAME, BRAND, SITE_URL } from "@/lib/entidad";
+import type { ConceptoId } from "@/data/conceptos";
+import { AUTHOR_NAME, AUTHOR_PATH, BRAND, SITE_URL } from "@/lib/entidad";
 
 export type Cluster = "Conductos" | "Pladur" | "HVAC" | "Mantenimiento" | "Aislamiento";
 
 export const CLUSTERS: Cluster[] = ["Conductos", "Pladur", "HVAC", "Mantenimiento", "Aislamiento"];
 
 export const AUTHOR = AUTHOR_NAME;
-export const AUTHOR_ROLE = "Especialista en climatización y construcción en seco";
-export const AUTHOR_SLUG = "aitor-ergui";
+export const AUTHOR_SLUG = AUTHOR_PATH.split("/").pop() as string;
 export const PUBLISHER = BRAND;
 export const BASE_URL = SITE_URL;
 
@@ -35,6 +35,10 @@ export type Guia = {
   faq: FAQ[];
   related: string[];
   service: { label: string; href: string };
+  /** Conceptos principales (about). */
+  conceptos: ConceptoId[];
+  /** Conceptos tratados de forma secundaria (mentions). */
+  menciona: ConceptoId[];
 };
 
 export const GUIAS: Guia[] = [
@@ -72,7 +76,9 @@ export const GUIAS: Guia[] = [
       { q: "¿Conducto circular o rectangular?", a: "El circular ofrece mejor comportamiento aerodinámico; el rectangular se usa cuando el espacio disponible lo impone, manteniendo una sección equivalente y una relación de lados razonable." },
     ],
     related: ["limpieza-de-conductos-y-calidad-del-aire", "aislamiento-termico-y-acustico-con-pladur", "frecuencia-de-revision-de-conductos"],
-    service: { label: "Ver servicio de conductos de aire", href: "/#climatizacion" },
+    service: { label: "Ver servicio de conductos", href: "/servicios/conductos" },
+    conceptos: ["conducto-de-aire"],
+    menciona: ["ventilacion", "eficiencia-energetica"],
   },
   {
     slug: "limpieza-de-conductos-y-calidad-del-aire",
@@ -108,6 +114,8 @@ export const GUIAS: Guia[] = [
     ],
     related: ["dimensionado-de-conductos", "frecuencia-de-revision-de-conductos", "eficiencia-en-climatizacion-residencial"],
     service: { label: "Solicitar limpieza de conductos", href: "/presupuestador" },
+    conceptos: ["conducto-de-aire", "mantenimiento-de-instalaciones-termicas"],
+    menciona: ["ventilacion", "eficiencia-energetica", "climatizacion"],
   },
   {
     slug: "pladur-en-zonas-humedas",
@@ -140,7 +148,9 @@ export const GUIAS: Guia[] = [
       { q: "¿Qué papel juega la ventilación?", a: "Evacuar el vapor reduce la carga de humedad sobre el sistema y prolonga su vida útil." },
     ],
     related: ["aislamiento-termico-y-acustico-con-pladur", "dimensionado-de-conductos"],
-    service: { label: "Ver soluciones de pladur", href: "/#pladur" },
+    service: { label: "Ver servicio de pladur", href: "/servicios/pladur" },
+    conceptos: ["placa-de-yeso-laminado"],
+    menciona: ["ventilacion"],
   },
   {
     slug: "eficiencia-en-climatizacion-residencial",
@@ -175,6 +185,8 @@ export const GUIAS: Guia[] = [
     ],
     related: ["dimensionado-de-conductos", "frecuencia-de-revision-de-conductos", "aislamiento-termico-y-acustico-con-pladur"],
     service: { label: "Solicitar valoración de eficiencia", href: "/presupuestador" },
+    conceptos: ["climatizacion", "eficiencia-energetica"],
+    menciona: ["mantenimiento-de-instalaciones-termicas", "conducto-de-aire"],
   },
   {
     slug: "frecuencia-de-revision-de-conductos",
@@ -210,6 +222,8 @@ export const GUIAS: Guia[] = [
     ],
     related: ["limpieza-de-conductos-y-calidad-del-aire", "dimensionado-de-conductos", "eficiencia-en-climatizacion-residencial"],
     service: { label: "Solicitar plan de mantenimiento", href: "/presupuestador" },
+    conceptos: ["mantenimiento-de-instalaciones-termicas", "conducto-de-aire"],
+    menciona: ["climatizacion", "ventilacion", "eficiencia-energetica"],
   },
   {
     slug: "aislamiento-termico-y-acustico-con-pladur",
@@ -243,7 +257,9 @@ export const GUIAS: Guia[] = [
       { q: "¿Aumenta el espesor del tabique?", a: "No necesariamente: lanas de mayor densidad mejoran el comportamiento acústico manteniendo el espesor del sistema." },
     ],
     related: ["pladur-en-zonas-humedas", "dimensionado-de-conductos"],
-    service: { label: "Ver soluciones de pladur y aislamiento", href: "/#pladur" },
+    service: { label: "Ver servicios de aislamiento", href: "/servicios/aislamiento-termico" },
+    conceptos: ["aislamiento-termico", "aislamiento-acustico", "placa-de-yeso-laminado"],
+    menciona: [],
   },
 ];
 
@@ -299,8 +315,8 @@ export const CLUSTER_PILLAR: Record<Cluster, ClusterPillar> = {
       "Difusión y regulación seleccionadas por caudal y nivel sonoro.",
       "Limpieza y revisión que mantienen la sección útil y la calidad del aire.",
     ],
-    serviceHref: "/#climatizacion",
-    serviceLabel: "Ver servicio de conductos de aire",
+    serviceHref: "/servicios/conductos",
+    serviceLabel: "Ver servicio de conductos",
   },
   Pladur: {
     accent: "superficies que ordenan el espacio.",
@@ -312,8 +328,8 @@ export const CLUSTER_PILLAR: Record<Cluster, ClusterPillar> = {
       "Integración de instalaciones y registros accesibles.",
       "Acabado listo para pintura o revestimiento.",
     ],
-    serviceHref: "/#pladur",
-    serviceLabel: "Ver soluciones de pladur",
+    serviceHref: "/servicios/pladur",
+    serviceLabel: "Ver servicio de pladur",
   },
   HVAC: {
     accent: "confort medido, no improvisado.",
@@ -351,8 +367,8 @@ export const CLUSTER_PILLAR: Record<Cluster, ClusterPillar> = {
       "Tratamiento de cajas de instalación y pasos.",
       "Barrera de vapor bien ubicada frente a condensaciones.",
     ],
-    serviceHref: "/#pladur",
-    serviceLabel: "Ver soluciones de pladur y aislamiento",
+    serviceHref: "/servicios/aislamiento-termico",
+    serviceLabel: "Ver servicios de aislamiento",
   },
 };
 
@@ -365,7 +381,6 @@ export const GLOSARIO: GlosarioEntry[] = [
   { term: "Plenum", def: "Cámara o cajón que distribuye el aire entre el equipo y los conductos o rejillas.", cluster: "Conductos" },
   { term: "Difusor / rejilla", def: "Elemento terminal que impulsa o extrae el aire del local controlando dirección y velocidad.", cluster: "Conductos" },
   { term: "Compuerta", def: "Dispositivo que regula o cierra el paso de aire en un tramo de la red.", cluster: "Conductos" },
-  { term: "Placa de yeso laminado (PYL)", def: "Placa de núcleo de yeso revestida con láminas de cartón, base de los sistemas de tabiquería y techos en seco.", cluster: "Pladur" },
   { term: "Trasdosado", def: "Revestimiento de placa de yeso aplicado sobre un muro existente para mejorar aislamiento o planeidad.", guia: "aislamiento-termico-y-acustico-con-pladur" },
   { term: "Tabique autoportante", def: "Tabique de placa de yeso sobre estructura metálica, independiente del forjado, con aislamiento en su interior.", cluster: "Pladur" },
   { term: "Lana mineral", def: "Material aislante de origen mineral que aporta comportamiento térmico y acústico en cámaras y trasdosados.", guia: "aislamiento-termico-y-acustico-con-pladur" },

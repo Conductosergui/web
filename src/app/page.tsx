@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { ContactoMailto } from "@/components/ContactoMailto";
 import { GuiasExplorer } from "@/components/GuiasExplorer";
+import { SERVICIOS, servicioPath } from "@/data/servicios";
 import { JsonLd } from "@/components/JsonLd";
 import { BASE_COMARCA, BASE_LOCALITY, EMAIL, ID, MUNICIPIOS_BAIX_PENEDES, SITE_DESCRIPTION, SITE_TITLE } from "@/lib/entidad";
 import { pageNode, ref } from "@/lib/schema";
@@ -313,7 +314,19 @@ export default function HomePage() {
               </article>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <nav aria-label="Servicios" className="mt-8 flex flex-wrap gap-3">
+              {SERVICIOS.map((sv) => (
+                <Link
+                  key={sv.slug}
+                  href={servicioPath(sv.slug)}
+                  className="ce-link inline-flex items-center gap-2 rounded-full border border-[#c7f35b]/35 px-4 py-2.5 text-[12.5px] font-bold uppercase tracking-[0.1em] text-[#c7f35b] transition hover:border-[#c7f35b] hover:bg-[#c7f35b]/10"
+                >
+                  {sv.nombre} <ArrowRight size={14} />
+                </Link>
+              ))}
+            </nav>
+
+            <div className="mt-3 flex flex-wrap gap-3">
               <Link href="/temas/conductos" className="ce-link inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2.5 text-[12.5px] font-bold uppercase tracking-[0.1em] text-white/70 transition hover:border-[#c7f35b]/50 hover:text-[#c7f35b]">
                 Notas sobre conductos <ArrowRight size={14} />
               </Link>

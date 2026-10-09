@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { JsonLd } from "@/components/JsonLd";
-import { AUTHOR, AUTHOR_ROLE, PUBLISHER, formatDate, GUIAS } from "@/data/guias";
-import { AUTHOR_PATH, ID, pageId } from "@/lib/entidad";
+import { AUTHOR, PUBLISHER, formatDate, GUIAS } from "@/data/guias";
+import { AUTHOR_DESCRIPTION, AUTHOR_JOB_TITLE, AUTHOR_PATH, AUTHOR_YEARS_EXPERIENCE, ID, pageId } from "@/lib/entidad";
 import { breadcrumbNode, pageNode, personNode, ref } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
-const DESCRIPTION = `Notas técnicas sobre climatización y construcción en seco escritas por ${AUTHOR}, ${AUTHOR_ROLE.toLowerCase()} en ${PUBLISHER}.`;
+const DESCRIPTION = `${AUTHOR}, ${AUTHOR_JOB_TITLE.toLowerCase()} y titular de ${PUBLISHER}, con ${AUTHOR_YEARS_EXPERIENCE} años de experiencia. Notas técnicas sobre climatización y construcción en seco.`;
 
 export const metadata: Metadata = buildMetadata({
   title: `${AUTHOR} | Autor`,
@@ -19,7 +19,7 @@ export const metadata: Metadata = buildMetadata({
 // ProfilePage cuyo sujeto es el nodo Person único del autor, vinculado a la empresa por @id.
 const graph = [
   pageNode({ path: AUTHOR_PATH, name: `${AUTHOR} — Autor`, description: DESCRIPTION, type: "ProfilePage", mainEntity: ref(ID.persona) }),
-  personNode({ jobTitle: AUTHOR_ROLE, mainEntityOfPage: ref(pageId(AUTHOR_PATH)) }),
+  personNode({ mainEntityOfPage: ref(pageId(AUTHOR_PATH)) }),
   breadcrumbNode(AUTHOR_PATH, [
     { name: "Guías", path: "/guias" },
     { name: AUTHOR, path: AUTHOR_PATH },
@@ -53,10 +53,10 @@ export default function AutorPage() {
               {AUTHOR.split(" ").map((p) => p[0]).join("")}
             </div>
             <div>
-              <p className="eyebrow text-[#c7f35b]">Autor</p>
+              <p className="eyebrow text-[#c7f35b]">{AUTHOR_JOB_TITLE} · Autor</p>
               <h1 className="display mt-4 text-white">{AUTHOR}</h1>
               <p className="mt-4 max-w-2xl text-[16px] leading-[1.8] text-white/60">
-                {AUTHOR_ROLE} en {PUBLISHER}. Se encarga de la selección técnica, el replanteo en obra y la documentación de las instalaciones de conductos de aire acondicionado y de las soluciones de pladur y aislamiento. Las notas publicadas aquí recogen criterios aplicados en el día a día del oficio, con fuentes de fabricantes y del marco normativo vigente.
+                {AUTHOR_DESCRIPTION} Las notas publicadas aquí recogen criterios aplicados en el día a día del oficio, con fuentes de fabricantes y del marco normativo vigente.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link href="/guias" className="ce-link inline-flex items-center gap-2 text-sm font-bold text-[#c7f35b]">

@@ -28,16 +28,20 @@ El Vendrell (base), Calafell, Santa Oliva, Bellvei, Albinyana, Llorenç del Pene
 Next.js 16 (App Router), React 19 y Tailwind CSS 4. Sitio 100 % estático: sin base de datos, sin API y sin Server Actions.
 
 - `src/lib/entidad.ts` — Fuente única de los datos de la entidad (NAP, coordenadas, municipios, IDs del grafo).
+- `src/data/servicios.ts` — Service Graph: 6 servicios con URL propia (`/servicios/*`), alcance y relaciones.
+- `src/data/conceptos.ts` — Capa de conceptos: 9 conceptos con definición visible en `/glosario#{concepto}`.
 - `src/app/layout.tsx` — Metadatos globales y nodos comunes del grafo JSON-LD inyectados en el `<head>`.
 - `src/lib/schema.ts` — Constructores del grafo: entidad raíz, autor, páginas y breadcrumbs, enlazados por `@id`.
 - `src/lib/seo.ts` — `buildMetadata()`: canónica, Open Graph y Twitter homogéneos por ruta.
 - `src/app/opengraph-image.tsx`, `src/app/twitter-image.tsx` — Imagen social generada con `next/og` (fuentes en `src/assets/og`).
 - `src/app/page.tsx` — Home con los dos silos (`#climatizacion`, `#pladur`), cobertura y contacto.
 - `src/components/ContactoMailto.tsx` — Formulario que compone un enlace `mailto:` según la selección del usuario.
-- `src/app/guias/`, `src/app/temas/`, `src/app/glosario/` — Contenido técnico enlazado a cada silo.
+- `src/app/servicios/` — Índice y páginas de servicio.
+- `src/app/guias/`, `src/app/temas/`, `src/app/glosario/` — Contenido técnico enlazado a servicios y conceptos.
 - `src/app/robots.ts`, `src/app/sitemap.ts` — Rastreo e indexación.
 - `/arquitectura/` — Documentación de la arquitectura de información (silos, jerarquía de URLs).
 - `/schema/` — Copia de referencia del grafo JSON-LD publicado.
+- `/docs/` — Knowledge Graph documentado (`knowledge-graph.md`) y backlog técnico con bloqueadores (`backlog.md`).
 - `/contenido/` — Borradores de contenido por servicio.
 
 ### Desarrollo

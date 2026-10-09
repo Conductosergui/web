@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { GuiaCard } from "@/components/GuiaCard";
 import { JsonLd } from "@/components/JsonLd";
+import { CONCEPTOS_POR_TEMA } from "@/data/conceptos";
+import { conceptoId } from "@/lib/entidad";
 import { breadcrumbNode, pageNode, ref } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 import {
@@ -50,7 +52,7 @@ export default async function TemaPage({ params }: { params: Promise<{ cluster: 
       name: `${cluster} — Conductos Ergui`,
       description: pillar.intro,
       type: "CollectionPage",
-      about: { "@type": "Thing", name: cluster },
+      about: CONCEPTOS_POR_TEMA[cluster].map((c) => ref(conceptoId(c))),
       mainEntity: ref(listId),
     }),
     {

@@ -15,6 +15,13 @@ Definir la estructura jerárquica ("silo") de contenidos y URLs del sitio web de
 
 ```
 / (Home)
+├── /servicios                Índice de servicios (CollectionPage)
+│   ├── /servicios/climatizacion        Silo 1
+│   ├── /servicios/conductos            Silo 1
+│   ├── /servicios/ventilacion          Silo 1 (profundidad editorial limitada)
+│   ├── /servicios/pladur               Silo 2
+│   ├── /servicios/aislamiento-termico  Silo 2
+│   └── /servicios/aislamiento-acustico Silo 2
 ├── #climatizacion            Silo 1
 ├── #pladur                   Silo 2
 ├── #cobertura                El Vendrell y Baix Penedès
@@ -31,7 +38,7 @@ Definir la estructura jerárquica ("silo") de contenidos y URLs del sitio web de
 ├── /faq/
 ├── /presupuestador/
 ├── /compromiso/
-├── /autor/aitor-ergui/
+├── /autor/bryan-ergui/       (/autor/aitor-ergui redirige aquí)
 └── /legal/ (terminos, privacidad, cookies)
 ```
 
@@ -65,7 +72,7 @@ graph TD
 - **areaServed**: limita el área de servicio a El Vendrell y la comarca del Baix Penedès.
 - **containedInPlace**: El Vendrell forma parte del Baix Penedès, que forma parte de la provincia de Tarragona.
 
-El grafo se genera en `src/lib/schema.ts` a partir de `src/lib/entidad.ts`. Los nodos comunes (sitio, entidad raíz, departamentos, servicios y lugares) se inyectan en el `<head>` desde el layout; cada página añade su nodo de página (`{url}#webpage`), su breadcrumb (`{url}#breadcrumb`) y sus nodos propios, y referencia la empresa (`/#negocio`), el sitio (`/#website`) y el autor (`/autor/aitor-ergui#persona`) solo por `@id`. La copia de referencia de la home está en `/schema/home.jsonld`.
+El grafo se genera en `src/lib/schema.ts` a partir de `src/lib/entidad.ts`. Los nodos comunes (sitio, entidad raíz, departamentos, servicios y lugares) se inyectan en el `<head>` desde el layout; cada página añade su nodo de página (`{url}#webpage`), su breadcrumb (`{url}#breadcrumb`) y sus nodos propios, y referencia la empresa (`/#negocio`), el sitio (`/#website`) y el fundador (`/autor/bryan-ergui#persona`) solo por `@id`. La copia de referencia de la home está en `/schema/home.jsonld` y el mapa completo en `/docs/knowledge-graph.md`.
 
 ## Próxima expansión (landings geográficas)
 

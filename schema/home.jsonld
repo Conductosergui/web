@@ -9,6 +9,9 @@
       "inLanguage": "es-ES",
       "publisher": {
         "@id": "https://conductosergui.es/#negocio"
+      },
+      "about": {
+        "@id": "https://conductosergui.es/#negocio"
       }
     },
     {
@@ -51,15 +54,37 @@
           "@id": "https://conductosergui.es/#baix-penedes"
         }
       ],
+      "founder": {
+        "@id": "https://conductosergui.es/autor/bryan-ergui#persona"
+      },
       "knowsAbout": [
-        "Climatización por conductos",
-        "Conductos de fibra de vidrio",
-        "Conductos de acero galvanizado",
-        "Ventilación y extracción",
-        "Placa de yeso laminado",
-        "Tabiquería seca",
-        "Aislamiento térmico",
-        "Aislamiento acústico"
+        {
+          "@id": "https://conductosergui.es/glosario#climatizacion"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#conducto-de-aire"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#ventilacion"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#extraccion-de-humos"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#placa-de-yeso-laminado"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#aislamiento-termico"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#aislamiento-acustico"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#eficiencia-energetica"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#mantenimiento-de-instalaciones-termicas"
+        }
       ],
       "department": [
         {
@@ -69,20 +94,9 @@
           "@id": "https://conductosergui.es/#pladur"
         }
       ],
-      "makesOffer": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@id": "https://conductosergui.es/#servicio-climatizacion"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@id": "https://conductosergui.es/#servicio-pladur"
-          }
-        }
-      ],
+      "hasOfferCatalog": {
+        "@id": "https://conductosergui.es/servicios#catalogo"
+      },
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer service",
@@ -98,6 +112,46 @@
         ],
         "availableLanguage": "es"
       }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://conductosergui.es/autor/bryan-ergui#persona",
+      "name": "Bryan Ergui",
+      "jobTitle": "Fundador",
+      "description": "Fundador y titular de Conductos Ergui, con 10 años de experiencia profesional.",
+      "url": "https://conductosergui.es/autor/bryan-ergui",
+      "worksFor": {
+        "@id": "https://conductosergui.es/#negocio"
+      },
+      "knowsAbout": [
+        {
+          "@id": "https://conductosergui.es/glosario#climatizacion"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#conducto-de-aire"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#ventilacion"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#extraccion-de-humos"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#placa-de-yeso-laminado"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#aislamiento-termico"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#aislamiento-acustico"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#eficiencia-energetica"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#mantenimiento-de-instalaciones-termicas"
+        }
+      ]
     },
     {
       "@type": "HVACBusiness",
@@ -128,39 +182,25 @@
           "@id": "https://conductosergui.es/#baix-penedes"
         }
       ],
+      "knowsAbout": [
+        {
+          "@id": "https://conductosergui.es/glosario#climatizacion"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#conducto-de-aire"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#ventilacion"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#extraccion-de-humos"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#mantenimiento-de-instalaciones-termicas"
+        }
+      ],
       "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Climatización, instalación y mantenimiento de conductos",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Instalación de conductos de climatización"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Mantenimiento y reparación de sistemas de aire acondicionado"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Diseño e instalación de redes de ventilación"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Limpieza de conductos"
-            }
-          }
-        ]
+        "@id": "https://conductosergui.es/servicios#catalogo-climatizacion"
       }
     },
     {
@@ -193,58 +233,108 @@
           "@id": "https://conductosergui.es/#baix-penedes"
         }
       ],
+      "knowsAbout": [
+        {
+          "@id": "https://conductosergui.es/glosario#placa-de-yeso-laminado"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#aislamiento-termico"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#aislamiento-acustico"
+        }
+      ],
       "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Pladur, tabiquería y aislamiento",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Tabiquería y trasdosados de pladur"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Falsos techos continuos y registrables"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Aislamiento térmico y acústico con lana de roca"
-            }
-          }
-        ]
+        "@id": "https://conductosergui.es/servicios#catalogo-pladur"
       }
     },
     {
-      "@type": "Service",
-      "@id": "https://conductosergui.es/#servicio-climatizacion",
-      "name": "Climatización, instalación y mantenimiento de conductos",
-      "serviceType": "Climatización por conductos",
-      "provider": {
-        "@id": "https://conductosergui.es/#climatizacion"
-      },
-      "areaServed": [
+      "@type": "OfferCatalog",
+      "@id": "https://conductosergui.es/servicios#catalogo",
+      "name": "Servicios de Conductos Ergui",
+      "url": "https://conductosergui.es/servicios",
+      "itemListElement": [
         {
-          "@id": "https://conductosergui.es/#el-vendrell"
+          "@id": "https://conductosergui.es/servicios#catalogo-climatizacion"
         },
         {
-          "@id": "https://conductosergui.es/#baix-penedes"
+          "@id": "https://conductosergui.es/servicios#catalogo-pladur"
+        }
+      ]
+    },
+    {
+      "@type": "OfferCatalog",
+      "@id": "https://conductosergui.es/servicios#catalogo-climatizacion",
+      "name": "Climatización, conductos y ventilación",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@id": "https://conductosergui.es/servicios/climatizacion#servicio"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@id": "https://conductosergui.es/servicios/conductos#servicio"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@id": "https://conductosergui.es/servicios/ventilacion#servicio"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "OfferCatalog",
+      "@id": "https://conductosergui.es/servicios#catalogo-pladur",
+      "name": "Pladur y aislamiento",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@id": "https://conductosergui.es/servicios/pladur#servicio"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@id": "https://conductosergui.es/servicios/aislamiento-termico#servicio"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@id": "https://conductosergui.es/servicios/aislamiento-acustico#servicio"
+          }
         }
       ]
     },
     {
       "@type": "Service",
-      "@id": "https://conductosergui.es/#servicio-pladur",
-      "name": "Pladur, tabiquería y aislamiento",
-      "serviceType": "Construcción en seco y aislamiento",
+      "@id": "https://conductosergui.es/servicios/climatizacion#servicio",
+      "name": "Climatización",
+      "url": "https://conductosergui.es/servicios/climatizacion",
+      "description": "Climatización por conductos en El Vendrell y el Baix Penedès: distribución del aire tratado, mantenimiento y reparación de sistemas de aire acondicionado y mejoras de eficiencia en instalaciones existentes.",
+      "serviceType": "Climatización por conductos",
+      "category": [
+        {
+          "@id": "https://conductosergui.es/glosario#climatizacion"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#eficiencia-energetica"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#mantenimiento-de-instalaciones-termicas"
+        }
+      ],
       "provider": {
-        "@id": "https://conductosergui.es/#pladur"
+        "@id": "https://conductosergui.es/#climatizacion"
+      },
+      "brand": {
+        "@id": "https://conductosergui.es/#negocio"
       },
       "areaServed": [
         {
@@ -253,7 +343,321 @@
         {
           "@id": "https://conductosergui.es/#baix-penedes"
         }
+      ],
+      "isRelatedTo": [
+        {
+          "@id": "https://conductosergui.es/servicios/conductos#servicio"
+        },
+        {
+          "@id": "https://conductosergui.es/servicios/aislamiento-termico#servicio"
+        }
       ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://conductosergui.es/servicios/conductos#servicio",
+      "name": "Conductos de aire",
+      "url": "https://conductosergui.es/servicios/conductos",
+      "description": "Diseño, montaje, reparación y limpieza de redes de conductos de aire acondicionado y ventilación en El Vendrell y el Baix Penedès, en panel de fibra de vidrio preaislado y en acero galvanizado.",
+      "serviceType": "Instalación y mantenimiento de conductos de aire",
+      "category": [
+        {
+          "@id": "https://conductosergui.es/glosario#conducto-de-aire"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#mantenimiento-de-instalaciones-termicas"
+        }
+      ],
+      "provider": {
+        "@id": "https://conductosergui.es/#climatizacion"
+      },
+      "brand": {
+        "@id": "https://conductosergui.es/#negocio"
+      },
+      "areaServed": [
+        {
+          "@id": "https://conductosergui.es/#el-vendrell"
+        },
+        {
+          "@id": "https://conductosergui.es/#baix-penedes"
+        }
+      ],
+      "isRelatedTo": [
+        {
+          "@id": "https://conductosergui.es/servicios/climatizacion#servicio"
+        },
+        {
+          "@id": "https://conductosergui.es/servicios/ventilacion#servicio"
+        },
+        {
+          "@id": "https://conductosergui.es/servicios/pladur#servicio"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://conductosergui.es/servicios/ventilacion#servicio",
+      "name": "Ventilación",
+      "url": "https://conductosergui.es/servicios/ventilacion",
+      "description": "Diseño e instalación de redes de ventilación, renovación de aire y extracción en El Vendrell y el Baix Penedès, para viviendas, locales, cocinas industriales y naves.",
+      "serviceType": "Instalación de redes de ventilación y extracción",
+      "category": [
+        {
+          "@id": "https://conductosergui.es/glosario#ventilacion"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#extraccion-de-humos"
+        }
+      ],
+      "provider": {
+        "@id": "https://conductosergui.es/#climatizacion"
+      },
+      "brand": {
+        "@id": "https://conductosergui.es/#negocio"
+      },
+      "areaServed": [
+        {
+          "@id": "https://conductosergui.es/#el-vendrell"
+        },
+        {
+          "@id": "https://conductosergui.es/#baix-penedes"
+        }
+      ],
+      "isRelatedTo": [
+        {
+          "@id": "https://conductosergui.es/servicios/conductos#servicio"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://conductosergui.es/servicios/pladur#servicio",
+      "name": "Pladur",
+      "url": "https://conductosergui.es/servicios/pladur",
+      "description": "Tabiquería, trasdosados y falsos techos de placa de yeso laminado en El Vendrell y el Baix Penedès, diseñados para integrar las instalaciones de climatización.",
+      "serviceType": "Tabiquería y falsos techos de placa de yeso laminado",
+      "category": [
+        {
+          "@id": "https://conductosergui.es/glosario#placa-de-yeso-laminado"
+        }
+      ],
+      "provider": {
+        "@id": "https://conductosergui.es/#pladur"
+      },
+      "brand": {
+        "@id": "https://conductosergui.es/#negocio"
+      },
+      "areaServed": [
+        {
+          "@id": "https://conductosergui.es/#el-vendrell"
+        },
+        {
+          "@id": "https://conductosergui.es/#baix-penedes"
+        }
+      ],
+      "isRelatedTo": [
+        {
+          "@id": "https://conductosergui.es/servicios/conductos#servicio"
+        },
+        {
+          "@id": "https://conductosergui.es/servicios/aislamiento-termico#servicio"
+        },
+        {
+          "@id": "https://conductosergui.es/servicios/aislamiento-acustico#servicio"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://conductosergui.es/servicios/aislamiento-termico#servicio",
+      "name": "Aislamiento térmico",
+      "url": "https://conductosergui.es/servicios/aislamiento-termico",
+      "description": "Aislamiento térmico con lana mineral en trasdosados y falsos techos de pladur en El Vendrell y el Baix Penedès, para reducir la demanda energética y mejorar el rendimiento de la climatización.",
+      "serviceType": "Aislamiento térmico en construcción en seco",
+      "category": [
+        {
+          "@id": "https://conductosergui.es/glosario#aislamiento-termico"
+        },
+        {
+          "@id": "https://conductosergui.es/glosario#eficiencia-energetica"
+        }
+      ],
+      "provider": {
+        "@id": "https://conductosergui.es/#pladur"
+      },
+      "brand": {
+        "@id": "https://conductosergui.es/#negocio"
+      },
+      "areaServed": [
+        {
+          "@id": "https://conductosergui.es/#el-vendrell"
+        },
+        {
+          "@id": "https://conductosergui.es/#baix-penedes"
+        }
+      ],
+      "isRelatedTo": [
+        {
+          "@id": "https://conductosergui.es/servicios/pladur#servicio"
+        },
+        {
+          "@id": "https://conductosergui.es/servicios/climatizacion#servicio"
+        },
+        {
+          "@id": "https://conductosergui.es/servicios/aislamiento-acustico#servicio"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://conductosergui.es/servicios/aislamiento-acustico#servicio",
+      "name": "Aislamiento acústico",
+      "url": "https://conductosergui.es/servicios/aislamiento-acustico",
+      "description": "Aislamiento acústico con sistemas multicapa de placa de yeso laminado y lana mineral en El Vendrell y el Baix Penedès, para reducir la transmisión de ruido entre estancias.",
+      "serviceType": "Aislamiento acústico en construcción en seco",
+      "category": [
+        {
+          "@id": "https://conductosergui.es/glosario#aislamiento-acustico"
+        }
+      ],
+      "provider": {
+        "@id": "https://conductosergui.es/#pladur"
+      },
+      "brand": {
+        "@id": "https://conductosergui.es/#negocio"
+      },
+      "areaServed": [
+        {
+          "@id": "https://conductosergui.es/#el-vendrell"
+        },
+        {
+          "@id": "https://conductosergui.es/#baix-penedes"
+        }
+      ],
+      "isRelatedTo": [
+        {
+          "@id": "https://conductosergui.es/servicios/pladur#servicio"
+        },
+        {
+          "@id": "https://conductosergui.es/servicios/aislamiento-termico#servicio"
+        }
+      ]
+    },
+    {
+      "@type": "DefinedTermSet",
+      "@id": "https://conductosergui.es/glosario#terminos",
+      "name": "Glosario técnico de Conductos Ergui",
+      "url": "https://conductosergui.es/glosario",
+      "inLanguage": "es-ES",
+      "publisher": {
+        "@id": "https://conductosergui.es/#negocio"
+      }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://conductosergui.es/glosario#climatizacion",
+      "name": "Climatización",
+      "alternateName": [
+        "HVAC",
+        "Aire acondicionado"
+      ],
+      "description": "Conjunto de técnicas e instalaciones que controlan la temperatura, la humedad y la calidad del aire de un espacio para mantener condiciones de confort.",
+      "url": "https://conductosergui.es/glosario#climatizacion",
+      "inDefinedTermSet": {
+        "@id": "https://conductosergui.es/glosario#terminos"
+      }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://conductosergui.es/glosario#conducto-de-aire",
+      "name": "Conducto de aire",
+      "alternateName": [
+        "Conductos de climatización",
+        "Red de conductos"
+      ],
+      "description": "Canalización que transporta el aire tratado desde el equipo hasta las rejillas y difusores, y lo devuelve por el retorno. Se fabrica habitualmente en panel de lana de vidrio o en chapa de acero galvanizado.",
+      "url": "https://conductosergui.es/glosario#conducto-de-aire",
+      "inDefinedTermSet": {
+        "@id": "https://conductosergui.es/glosario#terminos"
+      }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://conductosergui.es/glosario#ventilacion",
+      "name": "Ventilación",
+      "alternateName": [
+        "Renovación de aire",
+        "Ventilación forzada"
+      ],
+      "description": "Renovación del aire interior de un espacio mediante su intercambio con aire exterior, de forma natural o mecánica, para mantener la calidad del aire.",
+      "url": "https://conductosergui.es/glosario#ventilacion",
+      "inDefinedTermSet": {
+        "@id": "https://conductosergui.es/glosario#terminos"
+      }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://conductosergui.es/glosario#extraccion-de-humos",
+      "name": "Extracción de humos",
+      "description": "Evacuación mecánica al exterior de los humos, vapores y grasas generados en cocinas u otros procesos, mediante campana, conducto y ventilador.",
+      "url": "https://conductosergui.es/glosario#extraccion-de-humos",
+      "inDefinedTermSet": {
+        "@id": "https://conductosergui.es/glosario#terminos"
+      }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://conductosergui.es/glosario#placa-de-yeso-laminado",
+      "name": "Placa de yeso laminado",
+      "alternateName": [
+        "PYL",
+        "Pladur"
+      ],
+      "description": "Placa de núcleo de yeso revestida con láminas de cartón, base de los sistemas de tabiquería, trasdosados y techos en seco. «Pladur» es el nombre comercial con el que se conoce de forma habitual.",
+      "url": "https://conductosergui.es/glosario#placa-de-yeso-laminado",
+      "inDefinedTermSet": {
+        "@id": "https://conductosergui.es/glosario#terminos"
+      }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://conductosergui.es/glosario#aislamiento-termico",
+      "name": "Aislamiento térmico",
+      "description": "Capacidad de un material o sistema constructivo para reducir la transmisión de calor entre dos ambientes; en la edificación limita las pérdidas en invierno y las ganancias en verano.",
+      "url": "https://conductosergui.es/glosario#aislamiento-termico",
+      "inDefinedTermSet": {
+        "@id": "https://conductosergui.es/glosario#terminos"
+      }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://conductosergui.es/glosario#aislamiento-acustico",
+      "name": "Aislamiento acústico",
+      "description": "Conjunto de soluciones que reducen la transmisión del sonido entre recintos o desde el exterior; en construcción en seco combina placas, cámaras de aire y material absorbente.",
+      "url": "https://conductosergui.es/glosario#aislamiento-acustico",
+      "inDefinedTermSet": {
+        "@id": "https://conductosergui.es/glosario#terminos"
+      }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://conductosergui.es/glosario#eficiencia-energetica",
+      "name": "Eficiencia energética",
+      "description": "Relación entre el servicio obtenido, como el confort térmico, y la energía consumida para obtenerlo; mejora al reducir la demanda del edificio y al emplear equipos de mayor rendimiento.",
+      "url": "https://conductosergui.es/glosario#eficiencia-energetica",
+      "inDefinedTermSet": {
+        "@id": "https://conductosergui.es/glosario#terminos"
+      }
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://conductosergui.es/glosario#mantenimiento-de-instalaciones-termicas",
+      "name": "Mantenimiento de instalaciones térmicas",
+      "description": "Operaciones periódicas de revisión, limpieza y comprobación que exige el RITE para conservar la seguridad, el rendimiento y la salubridad de las instalaciones de climatización y ventilación.",
+      "url": "https://conductosergui.es/glosario#mantenimiento-de-instalaciones-termicas",
+      "inDefinedTermSet": {
+        "@id": "https://conductosergui.es/glosario#terminos"
+      }
     },
     {
       "@type": "City",
@@ -270,8 +674,24 @@
       "name": "Baix Penedès",
       "sameAs": "https://es.wikipedia.org/wiki/Bajo_Panad%C3%A9s",
       "containedInPlace": {
-        "@type": "AdministrativeArea",
-        "name": "Provincia de Tarragona"
+        "@id": "https://conductosergui.es/#provincia-de-tarragona"
+      }
+    },
+    {
+      "@type": "AdministrativeArea",
+      "@id": "https://conductosergui.es/#provincia-de-tarragona",
+      "name": "Provincia de Tarragona",
+      "containedInPlace": {
+        "@id": "https://conductosergui.es/#cataluna"
+      }
+    },
+    {
+      "@type": "AdministrativeArea",
+      "@id": "https://conductosergui.es/#cataluna",
+      "name": "Cataluña",
+      "containedInPlace": {
+        "@type": "Country",
+        "name": "España"
       }
     },
     {

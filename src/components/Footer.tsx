@@ -18,7 +18,7 @@ export function Footer() {
           <div>
             <p className="mb-5 text-xs font-bold uppercase tracking-[.14em] text-white/50">Secciones</p>
             <div className="grid gap-3 text-sm">
-              <Link href="/#servicios">Servicios</Link>
+              <Link href="/servicios">Servicios</Link>
               <Link href="/#metodo">Método de trabajo</Link>
               <Link href="/guias">Guías</Link>
               <Link href="/glosario">Glosario técnico</Link>
@@ -48,7 +48,11 @@ export function Footer() {
           </div>
         </div>
         <div className="flex flex-col gap-6 pt-8 text-[11px] text-white/50 md:flex-row md:items-center md:justify-between">
-          <p>© {new Date().getFullYear()} Conductos Ergui. Todos los derechos reservados.</p>
+          <div className="flex flex-col gap-1">
+            <p>© {new Date().getFullYear()} Conductos Ergui. Todos los derechos reservados.</p>
+            {/* Backlog: convertir en enlace a la web oficial de Aurora Market Labs cuando se facilite la URL. */}
+            <p>Web creada por Aurora Market Labs</p>
+          </div>
           <div className="flex flex-wrap gap-5">
             <Link href="/legal/terminos">Términos y condiciones</Link>
             <Link href="/legal/privacidad">Privacidad</Link>

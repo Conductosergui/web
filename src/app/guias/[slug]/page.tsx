@@ -4,9 +4,9 @@ import { notFound } from "next/navigation";
 import { ArrowRight, Calendar, ChevronRight, Clock, ExternalLink, HelpCircle, Scale, Tag, User } from "lucide-react";
 import { ArticleBody, type RenderBlock } from "@/components/ArticleBody";
 import { JsonLd } from "@/components/JsonLd";
-import { AUTHOR, AUTHOR_ROLE, AUTHOR_SLUG, BASE_URL, formatDate, getGuia, getRelacionadas, GUIAS } from "@/data/guias";
-import { ID, pageId } from "@/lib/entidad";
-import { breadcrumbNode, pageNode, personNode, ref } from "@/lib/schema";
+import { AUTHOR, AUTHOR_SLUG, BASE_URL, formatDate, getGuia, getRelacionadas, GUIAS } from "@/data/guias";
+import { ID, conceptoId, pageId } from "@/lib/entidad";
+import { breadcrumbNode, pageNode, ref } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -55,7 +55,7 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
       name: guia.title,
       description: guia.excerpt,
       type: hasFaq ? ["WebPage", "FAQPage"] : "WebPage",
-      about: { "@type": "Thing", name: guia.cluster },
+      about: guia.conceptos.map((c) => ref(conceptoId(c))),
       ...(hasFaq
         ? {
             mainEntity: guia.faq.map((f) => ({
@@ -79,13 +79,15 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
       publisher: ref(ID.negocio),
       isPartOf: ref(ID.website),
       mainEntityOfPage: ref(pageId(path)),
-      about: { "@type": "Thing", name: guia.cluster },
+      about: guia.conceptos.map((c) => ref(conceptoId(c))),
       mentions: [
+        ...guia.menciona.map((c) => ref(conceptoId(c))),
         ...guia.fabricantes.map((f) => ({ "@type": "Brand", name: f.name, url: f.url })),
-        ...guia.normativa.map((n) => ({ "@type": "Organization", name: n.name, url: n.url })),
       ],
+      // Normativa citada: CreativeWork (las normas no son organizaciones). El subtipo Legislation
+      // queda pendiente de verificar en schema.org (bloqueador B6).
+      citation: guia.normativa.map((n) => ({ "@type": "CreativeWork", name: n.name, url: n.url })),
     },
-    personNode({ jobTitle: AUTHOR_ROLE }),
     breadcrumbNode(path, [
       { name: "Guías", path: "/guias" },
       { name: guia.title, path },
