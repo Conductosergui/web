@@ -1,12 +1,11 @@
 import { MessageCircle } from "lucide-react";
-import { whatsappUrl } from "@/lib/entidad";
+import { WHATSAPP_URGENCIA_URL } from "@/lib/entidad";
 
 export function WhatsAppButton() {
-  const href = whatsappUrl("Solicitud de atención urgente en El Vendrell.");
 
   return (
     <a
-      href={href}
+      href={WHATSAPP_URGENCIA_URL}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contacto de urgencias por WhatsApp"

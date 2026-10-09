@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { whatsappUrl } from "@/lib/entidad";
+import { WHATSAPP_URGENCIA_URL } from "@/lib/entidad";
 
 const links: [string, string][] = [
   ["Servicios", "/servicios"],
@@ -16,7 +16,6 @@ const links: [string, string][] = [
 ];
 
 const SECTION_IDS = ["metodo", "cobertura", "garantias"];
-const WHATSAPP_HREF = whatsappUrl("Solicitud de atención urgente en El Vendrell.");
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -116,7 +115,7 @@ export function Header() {
 
         <div className="flex items-center gap-2.5 lg:hidden">
           <a
-            href={WHATSAPP_HREF}
+            href={WHATSAPP_URGENCIA_URL}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Urgencias por WhatsApp"

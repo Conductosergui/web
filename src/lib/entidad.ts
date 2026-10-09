@@ -10,11 +10,18 @@ export const EMAIL = "conductosergui@gmail.com";
 export const PHONE = "+34622368999";
 export const PHONE_FORMATTED = "+34 622 36 89 99";
 
+// Mensajes prerrellenados de WhatsApp.
+export const WHATSAPP_MSG_PRESUPUESTO =
+  "Hola, me gustaría solicitar información o un presupuesto para un proyecto en el Baix Penedès.";
+export const WHATSAPP_MSG_URGENCIA =
+  "Hola, necesito asistencia técnica o consulta urgente sobre una instalación en la zona del Baix Penedès.";
+
 /** Enlace directo a WhatsApp con un mensaje prerrellenado. */
-export function whatsappUrl(text = "Hola, me gustaría solicitar un presupuesto"): string {
+export function whatsappUrl(text: string = WHATSAPP_MSG_PRESUPUESTO): string {
   return `https://wa.me/${PHONE.replace(/\D/g, "")}?text=${encodeURIComponent(text)}`;
 }
-export const WHATSAPP_URL = whatsappUrl();
+export const WHATSAPP_URL = whatsappUrl(WHATSAPP_MSG_PRESUPUESTO);
+export const WHATSAPP_URGENCIA_URL = whatsappUrl(WHATSAPP_MSG_URGENCIA);
 
 export const BASE_LOCALITY = "El Vendrell";
 export const BASE_COMARCA = "Baix Penedès";
