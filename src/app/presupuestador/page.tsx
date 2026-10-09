@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { ArrowRight, Check, Copy, Mail, MapPin, MessageCircle, ShieldCheck } from "lucide-react";
+import { PHONE, PHONE_FORMATTED, WHATSAPP_URL } from "@/lib/entidad";
 
-const WHATSAPP_NUMBER = "34652551861";
+const WHATSAPP_NUMBER = PHONE.replace(/\D/g, "");
 const CONTACT_EMAIL = "conductosergui@gmail.com";
 const EMAIL_SUBJECT = "Nueva solicitud · Conductos Ergui";
 const SERVICE_LABELS: Record<string, string> = {
@@ -256,12 +257,12 @@ export default function PresupuestadorPage() {
                 {CONTACT_EMAIL}
               </a>
               <a
-                href={`https://wa.me/${WHATSAPP_NUMBER}`}
+                href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-1 flex items-center gap-2 text-sm font-bold text-lime"
               >
-                <MessageCircle size={14} /> +34 652 55 18 61
+                <MessageCircle size={14} /> {PHONE_FORMATTED}
               </a>
             </div>
           </aside>

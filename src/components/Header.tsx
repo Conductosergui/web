@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { whatsappUrl } from "@/lib/entidad";
 
 const links: [string, string][] = [
   ["Servicios", "/servicios"],
@@ -15,7 +16,7 @@ const links: [string, string][] = [
 ];
 
 const SECTION_IDS = ["metodo", "cobertura", "garantias"];
-const WHATSAPP_HREF = `https://wa.me/34652551861?text=${encodeURIComponent("Solicitud de atención urgente en El Vendrell.")}`;
+const WHATSAPP_HREF = whatsappUrl("Solicitud de atención urgente en El Vendrell.");
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -128,7 +129,7 @@ export function Header() {
             onClick={() => setOpen(!open)}
             aria-label={open ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={open}
-            className="grid h-10 w-10 place-items-center rounded-full border border-white/20 transition hover:bg-white/10"
+            className="grid h-10 w-10 place-items-center rounded-full border border-[#c7f35b]/40 text-[#c7f35b] transition hover:bg-[#c7f35b]/10"
           >
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>

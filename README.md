@@ -6,7 +6,7 @@
 **Ubicación:** El Vendrell, Tarragona (Cataluña, España)
 **Área de servicio:** comarca del Baix Penedès
 **Dominio canónico:** https://conductosergui.es
-**Contacto:** conductosergui@gmail.com
+**Contacto:** conductosergui@gmail.com · +34 622 36 89 99 (teléfono y WhatsApp)
 
 ### Municipios atendidos (Baix Penedès)
 

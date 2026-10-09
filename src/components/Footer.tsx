@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Mail } from "lucide-react";
+import { ArrowUpRight, Mail, MessageCircle, Phone } from "lucide-react";
 import { CLUSTERS, clusterSlug } from "@/data/guias";
 import {
   AUTHOR_NAME,
@@ -10,6 +10,9 @@ import {
   BASE_PROVINCE,
   EMAIL,
   MUNICIPIOS_BAIX_PENEDES,
+  PHONE,
+  PHONE_FORMATTED,
+  WHATSAPP_URL,
 } from "@/lib/entidad";
 
 export function Footer() {
@@ -71,7 +74,13 @@ export function Footer() {
               </div>
               <div>
                 <dt className="text-[11px] font-bold uppercase tracking-[.12em] text-white/50">Contacto</dt>
-                <dd className="mt-1 min-w-0 break-words">
+                <dd className="mt-1 grid min-w-0 gap-2 break-words">
+                  <a href={`tel:${PHONE}`} className="inline-flex items-center gap-2">
+                    <Phone size={16} aria-hidden="true" /> {PHONE_FORMATTED}
+                  </a>
+                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2">
+                    <MessageCircle size={16} aria-hidden="true" /> WhatsApp
+                  </a>
                   <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2">
                     <Mail size={16} aria-hidden="true" /> {EMAIL}
                   </a>

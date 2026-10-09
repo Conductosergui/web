@@ -9,6 +9,7 @@ import {
   Fan,
   Mail,
   MapPin,
+  MessageCircle,
   Ruler,
   ShieldCheck,
   Sparkles,
@@ -24,8 +25,10 @@ import {
   EMAIL,
   ID,
   MUNICIPIOS_BAIX_PENEDES,
+  PHONE_FORMATTED,
   SITE_DESCRIPTION,
   SITE_TITLE,
+  WHATSAPP_URL,
 } from "@/lib/entidad";
 import { pageNode, ref } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
@@ -544,14 +547,22 @@ export default function HomePage() {
                   <p className="mt-7 max-w-lg text-[15px] font-medium leading-[1.75] text-white/60">
                     Una conversación técnica clara es el punto de partida. Se recibe una propuesta con alcance definido, plazos y condiciones económicas antes de cualquier intervención.
                   </p>
-                  <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                  <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6">
                     <a
                       href={`mailto:${EMAIL}`}
                       className="ce-link inline-flex items-center gap-3 py-2 text-sm font-bold text-white/80 hover:text-white"
                     >
                       <Mail size={16} /> {EMAIL}
                     </a>
-                    <Link href="/presupuestador" className="ce-link inline-flex items-center gap-2 py-2 text-sm font-bold text-[#c7f35b] sm:ml-6">
+                    <a
+                      href={WHATSAPP_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ce-link inline-flex items-center gap-3 py-2 text-sm font-bold text-white/80 hover:text-white"
+                    >
+                      <MessageCircle size={16} /> WhatsApp · {PHONE_FORMATTED}
+                    </a>
+                    <Link href="/presupuestador" className="ce-link inline-flex items-center gap-2 py-2 text-sm font-bold text-[#c7f35b]">
                       Presupuestador detallado <ArrowRight size={16} />
                     </Link>
                   </div>

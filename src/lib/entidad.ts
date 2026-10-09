@@ -6,8 +6,15 @@
 export const SITE_URL = "https://conductosergui.es";
 export const BRAND = "Conductos Ergui";
 export const EMAIL = "conductosergui@gmail.com";
-// Teléfono tomado del enlace de WhatsApp del proyecto base (Header.tsx).
-export const TELEPHONE = "+34652551861";
+// Teléfono corporativo (facilitado por el titular). Fuente única para JSON-LD, enlaces tel: y WhatsApp.
+export const PHONE = "+34622368999";
+export const PHONE_FORMATTED = "+34 622 36 89 99";
+
+/** Enlace directo a WhatsApp con un mensaje prerrellenado. */
+export function whatsappUrl(text = "Hola, me gustaría solicitar un presupuesto"): string {
+  return `https://wa.me/${PHONE.replace(/\D/g, "")}?text=${encodeURIComponent(text)}`;
+}
+export const WHATSAPP_URL = whatsappUrl();
 
 export const BASE_LOCALITY = "El Vendrell";
 export const BASE_COMARCA = "Baix Penedès";

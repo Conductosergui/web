@@ -1,11 +1,8 @@
 import { MessageCircle } from "lucide-react";
+import { whatsappUrl } from "@/lib/entidad";
 
 export function WhatsAppButton() {
-  const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
-  const waText = encodeURIComponent("Solicitud de atención urgente en El Vendrell.");
-  const href = phone
-    ? `https://wa.me/${phone.replace(/\D/g, "")}?text=${waText}`
-    : "mailto:conductosergui@gmail.com?subject=Solicitud%20urgente";
+  const href = whatsappUrl("Solicitud de atención urgente en El Vendrell.");
 
   return (
     <a

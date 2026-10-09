@@ -25,7 +25,7 @@
       "url": "https://conductosergui.es",
       "description": "Instalación y mantenimiento de climatización por conductos, tabiquería de pladur y aislamiento térmico y acústico en El Vendrell y la comarca del Baix Penedès (Tarragona).",
       "email": "conductosergui@gmail.com",
-      "telephone": "+34652551861",
+      "telephone": "+34622368999",
       "logo": {
         "@type": "ImageObject",
         "@id": "https://conductosergui.es/#logo",
@@ -101,7 +101,7 @@
         "@type": "ContactPoint",
         "contactType": "customer service",
         "email": "conductosergui@gmail.com",
-        "telephone": "+34652551861",
+        "telephone": "+34622368999",
         "areaServed": [
           {
             "@id": "https://conductosergui.es/#el-vendrell"
@@ -162,7 +162,7 @@
         "@id": "https://conductosergui.es/#negocio"
       },
       "email": "conductosergui@gmail.com",
-      "telephone": "+34652551861",
+      "telephone": "+34622368999",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "El Vendrell",
@@ -213,7 +213,7 @@
         "@id": "https://conductosergui.es/#negocio"
       },
       "email": "conductosergui@gmail.com",
-      "telephone": "+34652551861",
+      "telephone": "+34622368999",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "El Vendrell",

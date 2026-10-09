@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, ChevronRight, Mail, Plus } from "lucide-react";
+import { ArrowRight, ChevronRight, Mail, MessageCircle, Plus } from "lucide-react";
 import { GuiaCard } from "@/components/GuiaCard";
 import { JsonLd } from "@/components/JsonLd";
 import { RespuestaRapida } from "@/components/RespuestaRapida";
@@ -9,7 +9,7 @@ import { faqsDeServicio } from "@/data/faqs";
 import { getConcepto } from "@/data/conceptos";
 import { clusterSlug, GUIAS } from "@/data/guias";
 import { SERVICIOS, SERVICIOS_PATH, getRelacionados, getServicio, servicioPath } from "@/data/servicios";
-import { BASE_COMARCA, BASE_LOCALITY, EMAIL, absoluteUrl, conceptoId, pageId, servicioId } from "@/lib/entidad";
+import { BASE_COMARCA, BASE_LOCALITY, EMAIL, PHONE_FORMATTED, WHATSAPP_URL, absoluteUrl, conceptoId, pageId, servicioId } from "@/lib/entidad";
 import { breadcrumbNode, faqQuestions, pageNode, ref } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
@@ -260,6 +260,14 @@ export default async function ServicioPage({ params }: { params: Promise<{ slug:
               <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
                 <a href={`mailto:${EMAIL}`} className="ce-link inline-flex items-center gap-2 text-sm font-bold text-white/80 hover:text-white">
                   <Mail size={16} /> {EMAIL}
+                </a>
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ce-link inline-flex items-center gap-2 text-sm font-bold text-white/80 hover:text-white"
+                >
+                  <MessageCircle size={16} /> WhatsApp · {PHONE_FORMATTED}
                 </a>
                 <Link href="/compromiso" className="ce-link inline-flex items-center gap-2 text-sm font-bold text-white/80 hover:text-white">
                   Compromiso de trabajo <ArrowRight size={14} />
