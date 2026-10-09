@@ -3,38 +3,52 @@
 import Link from "next/link";
 import { useSyncExternalStore } from "react";
 import { X } from "lucide-react";
-
-const STORAGE_KEY = "ct-cookie-choice";
-const CHANGE_EVENT = "ct-cookie-choice-change";
+import { readConsent, storageAvailable, subscribeConsent, writeConsent, type CookieChoice } from "@/lib/consent";
 
 // El aviso se sincroniza con localStorage como store externo: sin setState dentro de efectos
 // y sin desajuste de hidratación (en servidor el aviso no se renderiza).
-function subscribe(onChange: () => void) {
-  window.addEventListener("storage", onChange);
-  window.addEventListener(CHANGE_EVENT, onChange);
-  return () => {
-    window.removeEventListener("storage", onChange);
-    window.removeEventListener(CHANGE_EVENT, onChange);
-  };
+function pendingChoice() {
+  return storageAvailable() && readConsent() === null;
 }
 
-function pendingChoice() {
-  try {
-    return localStorage.getItem(STORAGE_KEY) === null;
-  } catch {
-    return false;
-  }
+/** true si en esta carga de página se aceptó la analítica (y, por tanto, el script ya está cargado). */
+function useAnalyticsLoaded() {
+  return useSyncExternalStore(
+    subscribeConsent,
+    () => readConsent() === "all" || document.querySelector('script[src*="googletagmanager.com/gtag"]') !== null,
+    () => false,
+  );
+}
+
+/** Borra las cookies de Google Analytics (_ga, _ga_<ID>) del dominio actual y de su dominio padre. */
+function clearAnalyticsCookies() {
+  const host = window.location.hostname;
+  const domains = ["", host, `.${host}`, `.${host.split(".").slice(-2).join(".")}`];
+  document.cookie
+    .split(";")
+    .map((c) => c.split("=")[0].trim())
+    .filter((name) => name === "_ga" || name.startsWith("_ga_"))
+    .forEach((name) =>
+      domains.forEach((d) => {
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${d ? `; domain=${d}` : ""}`;
+      }),
+    );
 }
 
 export function CookieNotice() {
-  const visible = useSyncExternalStore(subscribe, pendingChoice, () => false);
-  const choose = (value: string) => {
-    try {
-      localStorage.setItem(STORAGE_KEY, value);
-    } catch {
-      // Almacenamiento bloqueado: el aviso se cierra igualmente durante la sesión.
+  const visible = useSyncExternalStore(subscribeConsent, pendingChoice, () => false);
+  // Elección vigente en la carga actual: "Configurar cookies" la borra para reabrir el aviso,
+  // así que se recuerda si la analítica llegó a aceptarse en esta página.
+  const analyticsAccepted = useAnalyticsLoaded();
+  const choose = (value: CookieChoice) => {
+    const anterior = analyticsAccepted;
+    writeConsent(value);
+    // Si se rechaza la analítica tras haberla aceptado, se borran sus cookies y se recarga
+    // para descargar el script de Google Analytics ya cargado en la página.
+    if (value === "necessary" && anterior) {
+      clearAnalyticsCookies();
+      window.location.reload();
     }
-    window.dispatchEvent(new Event(CHANGE_EVENT));
   };
   if (!visible) return null;
   return (

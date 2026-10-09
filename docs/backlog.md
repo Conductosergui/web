@@ -34,6 +34,7 @@ Notas:
 | Crédito del pie de página | Implementado sin enlace: «Web creada por Aurora Market Labs» (`src/components/Footer.tsx`). **Pendiente:** convertirlo en enlace a la web oficial de Aurora Market Labs cuando se facilite la URL |
 | Imágenes de Pexels | Se cargan en remoto desde `images.pexels.com`; alojarlas en el proyecto u optimizarlas con `next/image` |
 | `.github/copilot-instructions.md` | Recomienda tipos inexistentes (`HVACContractor`, `DrywallContractor`), un radio de 50 km y Garraf; alinearlo con la arquitectura actual |
+| Google Analytics 4 | Integrado con `@next/third-parties` y **condicionado al consentimiento** (`src/components/Analytics.tsx`): solo se carga con «Aceptar todas». **Verificar el ID de medición `G-HMX7K95LQ`** en GA4 (Administrar → Flujos de datos): tiene 9 caracteres tras `G-` y los habituales tienen 10 |
 | Página índice `/temas` | No existe; las migas de `/temas/[cluster]` usan Inicio › Guías › Tema. Preparado para insertarla en una línea |
 
 ## Fase 3 — GEO, AEO y cobertura temática

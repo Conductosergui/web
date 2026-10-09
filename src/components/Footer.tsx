@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, Mail, MessageCircle, Phone } from "lucide-react";
+import { CookieSettingsButton } from "@/components/CookieSettingsButton";
 import { CLUSTERS, clusterSlug } from "@/data/guias";
 import {
   ADDRESS_TEXT,
@@ -112,6 +113,7 @@ export function Footer() {
             <Link href="/legal/terminos">Términos y condiciones</Link>
             <Link href="/legal/privacidad">Privacidad</Link>
             <Link href="/legal/cookies">Cookies</Link>
+            <CookieSettingsButton className="text-left hover:text-white" />
           </div>
         </div>
       </div>

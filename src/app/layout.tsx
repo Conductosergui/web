@@ -6,6 +6,7 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CookieNotice } from "@/components/CookieNotice";
+import { Analytics } from "@/components/Analytics";
 import {
   BASE_COMARCA,
   BASE_LOCALITY,
@@ -99,6 +100,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Footer />
         <WhatsAppButton />
         <CookieNotice />
+        {/* Google Analytics 4: solo se carga tras aceptar las cookies de análisis. */}
+        <Analytics />
       </body>
     </html>
   );
