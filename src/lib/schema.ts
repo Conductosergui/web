@@ -13,6 +13,7 @@ import {
   type Servicio,
 } from "@/data/servicios";
 import {
+  ADDRESS,
   AUTHOR_DESCRIPTION,
   AUTHOR_JOB_TITLE,
   AUTHOR_NAME,
@@ -22,11 +23,13 @@ import {
   BASE_PROVINCE,
   BRAND,
   EMAIL,
+  GBP_URL,
   GEO,
   ID,
   SITE_DESCRIPTION,
   SITE_URL,
   PHONE,
+  SAME_AS,
   absoluteUrl,
   breadcrumbId,
   conceptoId,
@@ -38,12 +41,7 @@ type Node = Record<string, unknown>;
 
 export const ref = (id: string) => ({ "@id": id });
 
-const address = {
-  "@type": "PostalAddress",
-  addressLocality: BASE_LOCALITY,
-  addressRegion: BASE_PROVINCE,
-  addressCountry: "ES",
-};
+const address = { "@type": "PostalAddress", ...ADDRESS };
 
 const geo = { "@type": "GeoCoordinates", latitude: GEO.latitude, longitude: GEO.longitude };
 const areaServed = [ref(ID.vendrell), ref(ID.comarca)];
@@ -124,6 +122,8 @@ export function siteGraph(): Node[] {
       image: ref(ID.logo),
       address,
       geo,
+      hasMap: GBP_URL,
+      sameAs: SAME_AS,
       areaServed,
       founder: ref(ID.persona),
       knowsAbout: CONCEPTOS.map((c) => ref(conceptoId(c.id))),
@@ -137,8 +137,8 @@ export function siteGraph(): Node[] {
         areaServed,
         availableLanguage: "es",
       },
-      // Pendiente de datos reales (docs/backlog.md): sameAs, legalName, taxID, vatID,
-      // dirección postal completa, horario y credenciales.
+      // Pendiente de datos reales (docs/backlog.md): otros perfiles sameAs (Instagram…), legalName,
+      // taxID, vatID, coordenadas exactas del local, horario y credenciales.
     },
     personNode(),
     {

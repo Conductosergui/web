@@ -3,7 +3,8 @@
 ## Ficha técnica de la entidad
 
 **Nombre:** Conductos Ergui
-**Ubicación:** El Vendrell, Tarragona (Cataluña, España)
+**Dirección:** Carrer Romaní 11, 43700 El Vendrell, Tarragona (Cataluña, España)
+**Google Business Profile:** https://share.google/vw7GEPfgwZeaARWBb
 **Área de servicio:** comarca del Baix Penedès
 **Dominio canónico:** https://conductosergui.es
 **Contacto:** conductosergui@gmail.com · +34 622 36 89 99 (teléfono y WhatsApp)
@@ -59,7 +60,7 @@ npm run build      # build de producción
 
 ### Datos pendientes
 
-- Dirección postal y código postal del local: no constan. Las coordenadas actuales corresponden al centroide del municipio de El Vendrell (41,22043; 1,53501).
+- Coordenadas exactas del local: no constan. Las actuales corresponden al centroide del municipio de El Vendrell (41,22043; 1,53501).
 - Horario de atención: no consta.
 
 ---

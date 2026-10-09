@@ -6,6 +6,7 @@ import { RespuestaRapida } from "@/components/RespuestaRapida";
 import { ZonaContacto, ZonaHero, ZonaServicios } from "@/components/Zona";
 import { SERVICIOS, servicioPath } from "@/data/servicios";
 import {
+  ADDRESS_TEXT,
   AUTHOR_NAME,
   AUTHOR_PATH,
   AUTHOR_YEARS_EXPERIENCE,
@@ -14,6 +15,7 @@ import {
   BASE_PROVINCE,
   BRAND,
   EMAIL,
+  GBP_URL,
   ID,
   MUNICIPIOS_BAIX_PENEDES,
   PHONE_FORMATTED,
@@ -56,7 +58,7 @@ const FICHA: [string, string, string?][] = [
   ["Empresa", BRAND],
   ["Fundador y titular", AUTHOR_NAME, AUTHOR_PATH],
   ["Experiencia", `${AUTHOR_YEARS_EXPERIENCE} años`],
-  ["Sede", `${BASE_LOCALITY} (${BASE_PROVINCE})`],
+  ["Dirección", ADDRESS_TEXT, GBP_URL],
   ["Área de servicio", `Comarca del ${BASE_COMARCA}`, ZONA_COMARCA_PATH],
   ["Teléfono y WhatsApp", PHONE_FORMATTED],
   ["Correo", EMAIL],
@@ -92,7 +94,11 @@ export default function ElVendrellPage() {
                 <div key={k} className="grid grid-cols-1 gap-1 border-b border-white/10 pb-3 last:border-0 last:pb-0 sm:grid-cols-[180px_1fr] sm:gap-4">
                   <dt className="font-bold text-white/55">{k}</dt>
                   <dd className="min-w-0 break-words text-white">
-                    {href ? (
+                    {href?.startsWith("http") ? (
+                      <a href={href} target="_blank" rel="noopener noreferrer" className="ce-link">
+                        {v}
+                      </a>
+                    ) : href ? (
                       <Link href={href} className="ce-link">
                         {v}
                       </Link>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight, Mail, MessageCircle, Phone } from "lucide-react";
 import { CLUSTERS, clusterSlug } from "@/data/guias";
 import {
+  ADDRESS_TEXT,
   AUTHOR_NAME,
   AUTHOR_PATH,
   AUTHOR_YEARS_EXPERIENCE,
@@ -9,6 +10,7 @@ import {
   BASE_LOCALITY,
   BASE_PROVINCE,
   EMAIL,
+  GBP_URL,
   MUNICIPIOS_BAIX_PENEDES,
   PHONE,
   PHONE_FORMATTED,
@@ -65,10 +67,11 @@ export function Footer() {
               </div>
               <div>
                 <dt className="text-[11px] font-bold uppercase tracking-[.12em] text-white/50">Base</dt>
-                <dd className="mt-1">
-                  <Link href={ZONA_SEDE_PATH}>
-                    {BASE_LOCALITY} ({BASE_PROVINCE})
-                  </Link>
+                <dd className="mt-1 grid gap-1">
+                  <Link href={ZONA_SEDE_PATH}>{ADDRESS_TEXT}</Link>
+                  <a href={GBP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-white/60">
+                    Ver en Google Maps <ArrowUpRight size={14} aria-hidden="true" />
+                  </a>
                 </dd>
               </div>
               <div>

@@ -27,8 +27,23 @@ export const BASE_LOCALITY = "El Vendrell";
 export const BASE_COMARCA = "Baix Penedès";
 export const BASE_PROVINCE = "Tarragona";
 
-// Centroide del municipio de El Vendrell, no la dirección del negocio (no consta).
-// Sustituir por las coordenadas reales del local cuando se disponga de la dirección.
+// Dirección física del negocio (facilitada por el titular; coincide con la ficha de Google Business Profile).
+export const ADDRESS = {
+  streetAddress: "Carrer Romaní 11",
+  addressLocality: BASE_LOCALITY,
+  postalCode: "43700",
+  addressRegion: BASE_PROVINCE,
+  addressCountry: "ES",
+} as const;
+export const ADDRESS_TEXT = `${ADDRESS.streetAddress}, ${ADDRESS.postalCode} ${ADDRESS.addressLocality} (${ADDRESS.addressRegion})`;
+
+// Ficha de Google Business Profile (enlace compartido de Google Maps facilitado por el titular).
+export const GBP_URL = "https://share.google/vw7GEPfgwZeaARWBb";
+// Perfiles oficiales de la entidad (sameAs). Añadir aquí Instagram y otros cuando consten.
+export const SAME_AS: readonly string[] = [GBP_URL];
+
+// Centroide del municipio de El Vendrell, no la ubicación exacta del local.
+// Sustituir por las coordenadas de la ficha de Google Business Profile cuando se faciliten.
 export const GEO = { latitude: 41.22043, longitude: 1.53501 } as const;
 
 // Municipios del Baix Penedès. Distancia en línea recta entre centroides desde El Vendrell.

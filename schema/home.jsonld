@@ -37,7 +37,9 @@
       },
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "Carrer Romaní 11",
         "addressLocality": "El Vendrell",
+        "postalCode": "43700",
         "addressRegion": "Tarragona",
         "addressCountry": "ES"
       },
@@ -46,6 +48,10 @@
         "latitude": 41.22043,
         "longitude": 1.53501
       },
+      "hasMap": "https://share.google/vw7GEPfgwZeaARWBb",
+      "sameAs": [
+        "https://share.google/vw7GEPfgwZeaARWBb"
+      ],
       "areaServed": [
         {
           "@id": "https://conductosergui.es/#el-vendrell"
@@ -165,7 +171,9 @@
       "telephone": "+34622368999",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "Carrer Romaní 11",
         "addressLocality": "El Vendrell",
+        "postalCode": "43700",
         "addressRegion": "Tarragona",
         "addressCountry": "ES"
       },
@@ -216,7 +224,9 @@
       "telephone": "+34622368999",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "Carrer Romaní 11",
         "addressLocality": "El Vendrell",
+        "postalCode": "43700",
         "addressRegion": "Tarragona",
         "addressCountry": "ES"
       },

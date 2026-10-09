@@ -3,6 +3,7 @@ import { FAQS_PUBLICADAS } from "@/data/faqs";
 import { GUIAS } from "@/data/guias";
 import { SERVICIOS, SERVICIOS_PATH, servicioPath } from "@/data/servicios";
 import {
+  ADDRESS_TEXT,
   AUTHOR_NAME,
   AUTHOR_PATH,
   AUTHOR_YEARS_EXPERIENCE,
@@ -10,6 +11,7 @@ import {
   BASE_LOCALITY,
   BRAND,
   EMAIL,
+  GBP_URL,
   MUNICIPIOS_BAIX_PENEDES,
   PHONE_FORMATTED,
   SITE_DESCRIPTION,
@@ -32,7 +34,8 @@ export function GET() {
     "",
     `- Nombre: ${BRAND}`,
     `- Fundador y titular: ${AUTHOR_NAME} (${absoluteUrl(AUTHOR_PATH)}), ${AUTHOR_YEARS_EXPERIENCE} años de experiencia`,
-    `- Base: ${BASE_LOCALITY} (Tarragona, Cataluña, España)`,
+    `- Dirección: ${ADDRESS_TEXT}, Cataluña, España`,
+    `- Google Business Profile: ${GBP_URL}`,
     `- Área de servicio: comarca del ${BASE_COMARCA} (${MUNICIPIOS_BAIX_PENEDES.map(([m]) => m).join(", ")})`,
     `- Contacto: ${EMAIL} · ${PHONE_FORMATTED} (teléfono y WhatsApp)`,
     "",
