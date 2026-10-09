@@ -4,18 +4,21 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { WHATSAPP_URGENCIA_URL } from "@/lib/entidad";
+import { WHATSAPP_URGENCIA_URL, ZONA_COMARCA_PATH, ZONA_SEDE_PATH } from "@/lib/entidad";
 
 const links: [string, string][] = [
+  ["Inicio", "/"],
   ["Servicios", "/servicios"],
   ["Método", "/#metodo"],
-  ["Cobertura", "/#cobertura"],
-  ["Garantías", "/#garantias"],
+  ["Cobertura", ZONA_COMARCA_PATH],
+  ["Garantías", "/compromiso"],
   ["Guías", "/guias"],
   ["FAQ", "/faq"],
 ];
 
-const SECTION_IDS = ["metodo", "cobertura", "garantias"];
+// Secciones de la home que se resaltan al hacer scroll. Solo "metodo" tiene entrada propia en el menú;
+// el resto se observa para que "Inicio" deje de marcarse mientras se lee Método.
+const SECTION_IDS = ["servicios", "metodo", "cobertura", "garantias", "contacto"];
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -24,7 +27,11 @@ export function Header() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+      // En la cabecera de la home no hay sección observada: vuelve a marcarse "Inicio".
+      if (window.scrollY < 200) setActiveId(null);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -52,10 +59,13 @@ export function Header() {
     if (href === "/faq") return pathname === "/faq";
     if (href === "/guias") return pathname.startsWith("/guias");
     if (href === "/servicios") return pathname.startsWith("/servicios");
+    if (href === ZONA_COMARCA_PATH) return pathname === ZONA_COMARCA_PATH || pathname === ZONA_SEDE_PATH;
+    if (href === "/compromiso") return pathname === "/compromiso";
     return false;
   };
 
   const isActive = (href: string) => {
+    if (href === "/") return pathname === "/" && activeId !== "metodo";
     if (href.startsWith("/#")) return pathname === "/" && activeId === href.replace("/#", "");
     return pageMatch(href);
   };
