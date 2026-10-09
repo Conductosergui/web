@@ -73,7 +73,7 @@ export const SERVICIOS: Servicio[] = [
       { texto: "Mantenimiento y reparación de sistemas de aire acondicionado.", fuente: "readme" },
       { texto: "Mejoras de eficiencia en sistemas existentes y equilibrado de caudales.", fuente: "homeBase" },
       { texto: "Integración de rejillas de impulsión y retorno y difusores lineales en techos técnicos.", fuente: "conductosMd" },
-      { texto: "Trabajo conforme al Reglamento de Instalaciones Térmicas en los Edificios (RITE).", fuente: "conductosMd" },
+      // Retirado por B7 (09/10/2026): «Trabajo conforme al RITE» no se publica sin documentación de habilitación (V17).
     ],
     materiales: ["Rejillas de impulsión y retorno", "Difusores lineales", "Compuertas de regulación"],
     temas: ["HVAC", "Mantenimiento"],

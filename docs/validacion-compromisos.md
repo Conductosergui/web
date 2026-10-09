@@ -26,7 +26,7 @@ cada una necesita una decisión: **Confirmar** (se mantiene/publica), **Corregir
 | V14 | Principios de `/compromiso`: claridad desde el inicio, soluciones con criterio, respeto por el espacio, trato directo «sin cadenas de intermediarios ni respuestas automáticas» | `/compromiso` | **Publicado** | ☐ Confirmar ☐ Corregir ☐ Retirar |
 | V15 | Expectativas de `/compromiso`: valoración comprensible, comunicación ante cambios, comprobación visual y recogida final, «atención posterior ante dudas sobre la intervención» | `/compromiso` | **Publicado** | ☐ Confirmar ☐ Corregir ☐ Retirar |
 | V16 | «Si es necesario, se coordina una visita a la ubicación.» / «Se recibe una propuesta clara, con alcance y plazos.» | `/presupuestador` | **Publicado** | ☐ Confirmar ☐ Corregir ☐ Retirar |
-| V17 | «Trabajo conforme al Reglamento de Instalaciones Térmicas en los Edificios (RITE).» | `/servicios/climatizacion` (alcance) | **Publicado** (fuente: `contenido/conductos-aire.md`) | ☐ Confirmar ☐ Corregir ☐ Retirar |
+| V17 | «Trabajo conforme al Reglamento de Instalaciones Térmicas en los Edificios (RITE).» | `/servicios/climatizacion` (alcance) | **Retirado del sitio (09/10/2026)** por decisión B7; retenido hasta documentación de habilitación | ☐ Confirmar ☐ Corregir ☐ Retirar |
 | V19 | «…con una valoración técnica clara y sin compromiso.» (mismo compromiso que V01) | Llamada final de las 6 guías y de los 5 temas | **Publicado** | ☐ Confirmar ☐ Corregir ☐ Retirar |
 | V18 | Fecha de las páginas legales: «Actualizado el 20 de junio de 2025» | `/legal/*` (`src/components/LegalPage.tsx`) | **Publicado** | ☐ Confirmar ☐ Corregir ☐ Retirar |
 

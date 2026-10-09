@@ -26,16 +26,17 @@ Definir la estructura jerárquica ("silo") de contenidos y URLs del sitio web de
 ├── #pladur                   Silo 2
 ├── #cobertura                El Vendrell y Baix Penedès
 ├── #contacto                 Formulario mailto
-├── /temas/
-│   ├── /temas/conductos/          → Silo 1
-│   ├── /temas/hvac/               → Silo 1
-│   ├── /temas/mantenimiento/      → Silo 1
-│   ├── /temas/pladur/             → Silo 2
-│   └── /temas/aislamiento/        → Silo 2
+├── /temas/                    (indexables solo con ≥ 2 guías; el resto noindex, follow)
+│   ├── /temas/conductos/          → Silo 1 · indexable
+│   ├── /temas/hvac/               → Silo 1 · noindex
+│   ├── /temas/mantenimiento/      → Silo 1 · noindex
+│   ├── /temas/pladur/             → Silo 2 · noindex
+│   └── /temas/aislamiento/        → Silo 2 · noindex
 ├── /guias/
 │   └── /guias/[slug]/             Cada guía enlaza a su silo
 ├── /glosario/
-├── /faq/
+├── /faq/                      FAQPage (solo preguntas verificadas)
+├── /llms.txt                  Resumen para motores de IA
 ├── /presupuestador/
 ├── /compromiso/
 ├── /autor/bryan-ergui/       (/autor/aitor-ergui redirige aquí)

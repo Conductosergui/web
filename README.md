@@ -41,8 +41,11 @@ Next.js 16 (App Router), React 19 y Tailwind CSS 4. Sitio 100 % estático: sin b
 - `src/app/robots.ts`, `src/app/sitemap.ts` — Rastreo e indexación.
 - `/arquitectura/` — Documentación de la arquitectura de información (silos, jerarquía de URLs).
 - `/schema/` — Copia de referencia del grafo JSON-LD publicado.
-- `/docs/` — Knowledge Graph documentado (`knowledge-graph.md`) y backlog técnico con bloqueadores (`backlog.md`).
-- `/contenido/` — Borradores de contenido por servicio.
+- `src/data/faqs.ts` — Preguntas frecuentes con fuente y estado (solo se publican las verificadas).
+- `src/components/RespuestaRapida.tsx` — Bloque de respuesta directa (AEO).
+- `src/app/llms.txt/route.ts` — `/llms.txt` generado desde los mismos datos que el sitio.
+- `/docs/` — Knowledge Graph (`knowledge-graph.md`), backlog y bloqueadores (`backlog.md`), compromisos pendientes de validación (`validacion-compromisos.md`), borradores de guías sin publicar (`borradores/`) y archivo (`archivo/`).
+- `/contenido/` — Textos fuente del proyecto base (El Vendrell, conductos, pladur), citados como fuente en `src/data/servicios.ts`.
 
 ### Desarrollo
 
