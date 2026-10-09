@@ -45,8 +45,8 @@
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 41.22043,
-        "longitude": 1.53501
+        "latitude": 41.220202,
+        "longitude": 1.534805
       },
       "hasMap": "https://share.google/vw7GEPfgwZeaARWBb",
       "sameAs": [
@@ -179,8 +179,8 @@
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 41.22043,
-        "longitude": 1.53501
+        "latitude": 41.220202,
+        "longitude": 1.534805
       },
       "areaServed": [
         {
@@ -232,8 +232,8 @@
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 41.22043,
-        "longitude": 1.53501
+        "latitude": 41.220202,
+        "longitude": 1.534805
       },
       "areaServed": [
         {

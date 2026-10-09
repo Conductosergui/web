@@ -42,9 +42,8 @@ export const GBP_URL = "https://share.google/vw7GEPfgwZeaARWBb";
 // Perfiles oficiales de la entidad (sameAs). Añadir aquí Instagram y otros cuando consten.
 export const SAME_AS: readonly string[] = [GBP_URL];
 
-// Centroide del municipio de El Vendrell, no la ubicación exacta del local.
-// Sustituir por las coordenadas de la ficha de Google Business Profile cuando se faciliten.
-export const GEO = { latitude: 41.22043, longitude: 1.53501 } as const;
+// Coordenadas exactas del local (Carrer Romaní 11), facilitadas por el titular.
+export const GEO = { latitude: 41.220202, longitude: 1.534805 } as const;
 
 // Municipios del Baix Penedès. Distancia en línea recta entre centroides desde El Vendrell.
 export const MUNICIPIOS_BAIX_PENEDES: readonly (readonly [string, number])[] = [

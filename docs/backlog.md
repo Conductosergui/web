@@ -9,7 +9,7 @@ Regla del proyecto: ningún dato de negocio se inventa; lo que no consta queda f
 |---|---|---|---|---|
 | B1 | `sameAs` de la empresa y del fundador | **Google Business Profile añadido (09/10/2026):** `https://share.google/vw7GEPfgwZeaARWBb` (`sameAs` y `hasMap`). Conviene sustituirlo por la URL canónica de Maps con `cid` cuando se facilite. Pendientes: Instagram (URL exacta), LinkedIn y perfil del fundador | Reconciliación de la entidad en buscadores e IA | `src/lib/schema.ts` → nodo `/#negocio` y `personNode()` |
 | B2 | Validación del autor | **Confirmado por el titular (09/10/2026):** Bryan Ergui, fundador y persona física titular, 10 años de experiencia. Pendiente: credenciales y perfil externo | Person, autoría de guías, E-E-A-T | `src/lib/entidad.ts` (`AUTHOR_*`) |
-| B3 | Datos legales obligatorios | **Dirección resuelta (09/10/2026):** Carrer Romaní 11, 43700 El Vendrell (`ADDRESS` en `entidad.ts`; visible en footer, `/el-vendrell` y `llms.txt`). Pendientes: NIF, información registral si aplica y coordenadas exactas del local (`GEO` sigue siendo el centroide municipal) | Aviso legal y privacidad (LSSI, RGPD); `legalName`, `taxID`, `vatID`, `address` | `src/app/legal/*`, `src/lib/entidad.ts`, `src/lib/schema.ts` |
+| B3 | Datos legales obligatorios | **Dirección resuelta (09/10/2026):** Carrer Romaní 11, 43700 El Vendrell (`ADDRESS` en `entidad.ts`; visible en footer, `/el-vendrell` y `llms.txt`). Pendientes: NIF, información registral si aplica | Aviso legal y privacidad (LSSI, RGPD); `legalName`, `taxID`, `vatID`, `address` | `src/app/legal/*`, `src/lib/entidad.ts`, `src/lib/schema.ts` |
 | B4 | Fechas de las guías | **Resuelto. Fechas editoriales oficiales y definitivas** (titular, 09/10/2026): publicado 03/07/2026, actualizado 09/10/2026. Actualizar `FECHA_ACTUALIZACION` solo cuando cambie el contenido | `datePublished`/`dateModified`, Open Graph `article:*`, `lastmod` del sitemap | `src/data/guias.ts` |
 | B5 | Activos locales reales | Pendientes: reseñas, casos reales, fotos propias de obra, ficha de Google Business Profile | Páginas locales (fase 5), casos de éxito y reseñas (fase 6) | — |
 | B7 | Habilitación como empresa instaladora | **Bloqueado** hasta disponer de documentación real (decisión del titular, 09/10/2026). **No publicar** afirmaciones sobre RITE (cumplimiento), RASIC, habilitaciones ni gases fluorados. La mención informativa de la normativa (qué exige el RITE) se mantiene en guías, glosario y FAQ porque no afirma ninguna habilitación del negocio | Credibilidad del servicio de climatización; pregunta `habilitacion-instaladora`; afirmación V17 | `src/lib/schema.ts` (`hasCredential`), `src/data/faqs.ts` |
@@ -54,7 +54,7 @@ Notas:
 | `/baix-penedes` y `/el-vendrell` (con sección Coma-ruga) | Publicadas, en sitemap y `llms.txt`, enlazadas desde home y footer |
 | `/coma-ruga` | Redirección 308 a `/el-vendrell#coma-ruga` (`next.config.ts`) |
 | Páginas por municipio (Calafell, Cunit, L'Arboç, Santa Oliva…) | **Retenidas** hasta disponer de contenido real propio (trabajos documentados). Evita páginas puerta |
-| Dirección postal y Google Business Profile | **Incorporados (09/10/2026).** Pendientes: coordenadas exactas y URL canónica de Maps |
+| Dirección postal y Google Business Profile | **Incorporados (09/10/2026)**, con coordenadas exactas del local (41,220202; 1,534805). Pendiente: URL canónica de Maps con `cid` (el entorno de desarrollo no puede resolver `share.google`) |
 
 ## Puntos de restauración
 

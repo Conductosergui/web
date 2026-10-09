@@ -60,7 +60,6 @@ npm run build      # build de producción
 
 ### Datos pendientes
 
-- Coordenadas exactas del local: no constan. Las actuales corresponden al centroide del municipio de El Vendrell (41,22043; 1,53501).
 - Horario de atención: no consta.
 
 ---
