@@ -283,3 +283,13 @@ export function pageNode({
 export function serializeGraph(nodes: Node[]): string {
   return JSON.stringify({ "@context": "https://schema.org", "@graph": nodes }).replace(/</g, "\\u003c");
 }
+
+/** Nodos Question/Answer para FAQPage. Solo recibe preguntas publicadas (src/data/faqs.ts). */
+export function faqQuestions(faqs: { id: string; pregunta: string; respuesta: string; ampliada?: string }[], idBase?: string): Node[] {
+  return faqs.map((f) => ({
+    "@type": "Question",
+    ...(idBase ? { "@id": `${idBase}#${f.id}` } : {}),
+    name: f.pregunta,
+    acceptedAnswer: { "@type": "Answer", text: f.ampliada ? `${f.respuesta} ${f.ampliada}` : f.respuesta },
+  }));
+}

@@ -16,6 +16,7 @@ import {
   clusterSlug,
   getClusterBySlug,
   getGuiasPorCluster,
+  temaIndexable,
   type Cluster,
 } from "@/data/guias";
 
@@ -28,7 +29,12 @@ export async function generateMetadata({ params }: { params: Promise<{ cluster: 
   const cluster = getClusterBySlug(slug);
   if (!cluster) return { title: "Tema no encontrado" };
   const pillar = CLUSTER_PILLAR[cluster];
-  return buildMetadata({ title: `${cluster} | Temas`, description: pillar.intro, path: `/temas/${slug}` });
+  return buildMetadata({
+    title: `${cluster} | Temas`,
+    description: pillar.intro,
+    path: `/temas/${slug}`,
+    ...(temaIndexable(cluster) ? {} : { robots: { index: false, follow: true } }),
+  });
 }
 
 export default async function TemaPage({ params }: { params: Promise<{ cluster: string }> }) {

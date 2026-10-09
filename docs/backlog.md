@@ -8,10 +8,11 @@ Regla del proyecto: ningún dato de negocio se inventa; lo que no consta queda f
 | ID | Bloqueador | Estado | Afecta a | Dónde se aplica |
 |---|---|---|---|---|
 | B1 | `sameAs` de la empresa y del fundador | Pendiente. Instagram: falta la URL exacta. Resto de perfiles (Google Business Profile, LinkedIn…) pendientes | Reconciliación de la entidad en buscadores e IA | `src/lib/schema.ts` → nodo `/#negocio` y `personNode()` |
-| B2 | Validación del autor | **Resuelto parcialmente.** Autor real: Bryan Ergui, fundador y persona física titular, 10 años de experiencia. Pendiente: credenciales (p. ej. carné RITE) y perfil externo | Person, autoría de guías, E-E-A-T | `src/lib/entidad.ts` (`AUTHOR_*`) |
+| B2 | Validación del autor | **Confirmado por el titular (09/10/2026):** Bryan Ergui, fundador y persona física titular, 10 años de experiencia. Pendiente: credenciales y perfil externo | Person, autoría de guías, E-E-A-T | `src/lib/entidad.ts` (`AUTHOR_*`) |
 | B3 | Datos legales obligatorios | Pendiente: NIF, dirección completa definitiva, información registral si aplica | Aviso legal y privacidad (LSSI, RGPD); `legalName`, `taxID`, `vatID`, `address` | `src/app/legal/*`, `src/lib/entidad.ts`, `src/lib/schema.ts` |
-| B4 | Fechas reales de las guías | Pendiente de validación. Las guías muestran fechas de 2025 heredadas del proyecto base | `datePublished`/`dateModified`, Open Graph `article:*` | `src/data/guias.ts` |
+| B4 | Fechas de las guías | **Resuelto con fechas editoriales** fijadas por el titular (09/10/2026): publicación 03/07/2026, actualización 09/10/2026. Actualizar `FECHA_ACTUALIZACION` solo cuando cambie el contenido | `datePublished`/`dateModified`, Open Graph `article:*`, `lastmod` del sitemap | `src/data/guias.ts` |
 | B5 | Activos locales reales | Pendientes: reseñas, casos reales, fotos propias de obra, ficha de Google Business Profile | Páginas locales (fase 5), casos de éxito y reseñas (fase 6) | — |
+| B7 | Habilitación como empresa instaladora | **Bloqueado** hasta disponer de documentación real: registro de empresa instaladora/mantenedora de instalaciones térmicas (RASIC/RITE) y, si aplica, certificación de gases fluorados | Credibilidad del servicio de climatización; pregunta `habilitacion-instaladora`; afirmación V17 | `src/lib/schema.ts` (`hasCredential`), `src/data/faqs.ts` |
 | B6 | Verificación de identificadores externos | Wikidata y schema.org no accesibles desde el entorno de desarrollo | `sameAs` de conceptos y lugares; subtipo `Legislation` para la normativa | `src/data/conceptos.ts` (`sameAs`), `src/app/guias/[slug]/page.tsx` (`citation`) |
 
 Notas:
@@ -24,7 +25,7 @@ Notas:
 |---|---|---|
 | **Servicio Ventilación** (`/servicios/ventilacion`) | Publicada con menor profundidad de contenido que el resto (`profundidad: "limitada"` en `src/data/servicios.ts`): sin guía ni tema propios. La página no muestra guías relacionadas; cuatro guías mencionan la ventilación de forma secundaria y solo constan como `mentions` en el grafo | Redactar al menos una guía propia (ventilación y renovación de aire o extracción de humos en cocinas) cuando exista contenido real del titular |
 | Servicio Aislamiento acústico | Comparte la única guía de apoyo con Aislamiento térmico | Guía específica de aislamiento acústico en construcción en seco |
-| Servicio Climatización | El alcance no confirma si se instalan equipos (máquinas) además de la red de distribución | Confirmar con el titular antes de ampliar el contenido |
+| Servicio Climatización | **Resuelto (09/10/2026):** el titular confirma la instalación de sistemas de climatización por conductos. No asumir otros sistemas (split, cassette, aerotermia) | Borrador `docs/borradores/fases-instalacion-climatizacion-por-conductos.md` pendiente de revisión |
 
 ## Tareas técnicas pendientes
 
@@ -34,3 +35,14 @@ Notas:
 | Imágenes de Pexels | Se cargan en remoto desde `images.pexels.com`; alojarlas en el proyecto u optimizarlas con `next/image` |
 | `.github/copilot-instructions.md` | Recomienda tipos inexistentes (`HVACContractor`, `DrywallContractor`), un radio de 50 km y Garraf; alinearlo con la arquitectura actual |
 | Página índice `/temas` | No existe; las migas de `/temas/[cluster]` usan Inicio › Guías › Tema. Preparado para insertarla en una línea |
+
+## Fase 3 — GEO, AEO y cobertura temática
+
+| Elemento | Estado |
+|---|---|
+| Temas con menos de 2 guías | `noindex, follow` y fuera del sitemap (regla `MIN_GUIAS_TEMA_INDEXABLE` en `src/data/guias.ts`); se reindexan solos al publicar más guías |
+| Preguntas frecuentes | `src/data/faqs.ts`: solo se publican las de estado `publicada` (con fuente). Las `pendiente` esperan validación |
+| Compromisos del negocio | Listado para validación manual: `docs/validacion-compromisos.md` (V01–V19) |
+| Guías nuevas | 4 borradores en `docs/borradores/` pendientes de revisión de Bryan Ergui |
+| `/llms.txt` | Generado en el build desde las mismas fuentes que el sitio |
+| Borradores fuera del área | Archivados en `docs/archivo/` (Sitges y Vilanova i la Geltrú) |

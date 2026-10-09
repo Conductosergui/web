@@ -317,8 +317,8 @@
       "@id": "https://conductosergui.es/servicios/climatizacion#servicio",
       "name": "Climatización",
       "url": "https://conductosergui.es/servicios/climatizacion",
-      "description": "Climatización por conductos en El Vendrell y el Baix Penedès: distribución del aire tratado, mantenimiento y reparación de sistemas de aire acondicionado y mejoras de eficiencia en instalaciones existentes.",
-      "serviceType": "Climatización por conductos",
+      "description": "Instalación y mantenimiento de sistemas de climatización por conductos en El Vendrell y el Baix Penedès, con mejoras de eficiencia y equilibrado de caudales en instalaciones existentes.",
+      "serviceType": "Instalación y mantenimiento de climatización por conductos",
       "category": [
         {
           "@id": "https://conductosergui.es/glosario#climatizacion"

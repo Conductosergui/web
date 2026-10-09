@@ -15,10 +15,23 @@ import {
   Wind,
 } from "lucide-react";
 import { ContactoMailto } from "@/components/ContactoMailto";
+import { RespuestaRapida } from "@/components/RespuestaRapida";
 import { GuiasExplorer } from "@/components/GuiasExplorer";
 import { SERVICIOS, servicioPath } from "@/data/servicios";
 import { JsonLd } from "@/components/JsonLd";
-import { BASE_COMARCA, BASE_LOCALITY, EMAIL, ID, MUNICIPIOS_BAIX_PENEDES, SITE_DESCRIPTION, SITE_TITLE } from "@/lib/entidad";
+import {
+  AUTHOR_NAME,
+  AUTHOR_PATH,
+  AUTHOR_YEARS_EXPERIENCE,
+  BASE_COMARCA,
+  BASE_LOCALITY,
+  BRAND,
+  EMAIL,
+  ID,
+  MUNICIPIOS_BAIX_PENEDES,
+  SITE_DESCRIPTION,
+  SITE_TITLE,
+} from "@/lib/entidad";
 import { pageNode, ref } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
@@ -336,6 +349,64 @@ export default function HomePage() {
               <Link href="/glosario" className="ce-link inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2.5 text-[12.5px] font-bold uppercase tracking-[0.1em] text-white/70 transition hover:border-[#c7f35b]/50 hover:text-[#c7f35b]">
                 Glosario técnico <ArrowRight size={14} />
               </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ============ RESPUESTA RÁPIDA + FICHA DE ENTIDAD (AEO/GEO) ============ */}
+        <section aria-labelledby="ficha-titulo" className="relative bg-[#05111f] pb-24 md:pb-32">
+          <div className="relative mx-auto grid w-[min(1240px,calc(100%-40px))] grid-cols-1 items-start gap-6 lg:grid-cols-[1.2fr_1fr]">
+            <RespuestaRapida
+              className="min-w-0"
+              pregunta="¿Qué hace Conductos Ergui?"
+              respuesta={`Conductos Ergui, con base en ${BASE_LOCALITY} (Tarragona), instala y mantiene climatización por conductos, redes de conductos y de ventilación, y ejecuta tabiquería de pladur con aislamiento térmico y acústico en la comarca del ${BASE_COMARCA}. Su titular es su fundador, ${AUTHOR_NAME}, con ${AUTHOR_YEARS_EXPERIENCE} años de experiencia.`}
+            />
+            <div className="min-w-0 rounded-[24px] border border-white/10 bg-[#07182d] p-6 md:p-8">
+              <h2 id="ficha-titulo" className="ce-eyebrow text-[#c7f35b]">
+                Ficha de la empresa
+              </h2>
+              <dl className="mt-5 grid gap-4 text-[14.5px]">
+                {[
+                  ["Nombre", BRAND],
+                  ["Fundador y titular", AUTHOR_NAME],
+                  ["Experiencia", `${AUTHOR_YEARS_EXPERIENCE} años`],
+                  ["Base", `${BASE_LOCALITY} (Tarragona)`],
+                  ["Área de servicio", `Comarca del ${BASE_COMARCA} · ${MUNICIPIOS_BAIX_PENEDES.length} municipios`],
+                  ["Contacto", EMAIL],
+                ].map(([k, v]) => (
+                  <div key={k} className="grid grid-cols-1 gap-1 border-b border-white/10 pb-3 sm:grid-cols-[150px_1fr] sm:gap-4">
+                    <dt className="font-bold text-white/55">{k}</dt>
+                    <dd className="min-w-0 break-words text-white">
+                      {k === "Fundador y titular" ? (
+                        <Link href={AUTHOR_PATH} className="ce-link">
+                          {v}
+                        </Link>
+                      ) : (
+                        v
+                      )}
+                    </dd>
+                  </div>
+                ))}
+                <div className="grid grid-cols-1 gap-1 sm:grid-cols-[150px_1fr] sm:gap-4">
+                  <dt className="font-bold text-white/55">Servicios</dt>
+                  <dd className="flex flex-wrap gap-x-4 gap-y-1">
+                    {SERVICIOS.map((sv) => (
+                      <Link key={sv.slug} href={servicioPath(sv.slug)} className="ce-link text-white">
+                        {sv.nombre}
+                      </Link>
+                    ))}
+                  </dd>
+                </div>
+              </dl>
+              <p className="mt-5 text-[13px] text-white/60">
+                <Link href="/faq" className="ce-link font-bold text-[#c7f35b]">
+                  Preguntas frecuentes
+                </Link>{" "}
+                ·{" "}
+                <Link href="/compromiso" className="ce-link font-bold text-[#c7f35b]">
+                  Compromiso de trabajo
+                </Link>
+              </p>
             </div>
           </div>
         </section>

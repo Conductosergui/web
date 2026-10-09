@@ -2,65 +2,27 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Plus } from "lucide-react";
 import { JsonLd } from "@/components/JsonLd";
-import { pageNode } from "@/lib/schema";
+import { CATEGORIAS, FAQS_PUBLICADAS, faqsDeCategoria } from "@/data/faqs";
+import { servicioPath } from "@/data/servicios";
+import { absoluteUrl } from "@/lib/entidad";
+import { faqQuestions, pageNode } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
-const DESCRIPTION = "Respuestas sobre conductos de aire acondicionado y pladur en El Vendrell y el Baix Penedès.";
+const DESCRIPTION =
+  "Respuestas sobre conductos, climatización, ventilación, pladur y aislamiento en El Vendrell y el Baix Penedès, basadas en las guías técnicas del sitio.";
 
 export const metadata: Metadata = buildMetadata({ title: "Preguntas frecuentes", description: DESCRIPTION, path: "/faq" });
 
-// El esquema FAQPage se incorpora en la Fase 4 con src/data/faqs.ts; aquí solo se enlaza la página al grafo.
-const graph = [pageNode({ path: "/faq", name: "Preguntas frecuentes", description: DESCRIPTION, withBreadcrumb: false })];
-
-const faqs: [string, string][] = [
-  [
-    "¿En qué localidades se presta el servicio?",
-    "La base se encuentra en El Vendrell y se atienden proyectos en la comarca del Baix Penedès: Calafell, Cunit, Santa Oliva, Bellvei, Albinyana, L'Arboç, Banyeres del Penedès, La Bisbal del Penedès, Llorenç del Penedès, Bonastre, Sant Jaume dels Domenys, Masllorenç y El Montmell. La cobertura se confirma al recibir cada solicitud.",
-  ],
-  [
-    "¿La valoración tiene coste?",
-    "La primera revisión de la solicitud y la orientación inicial se ofrecen sin compromiso. Si el proyecto requiere una visita técnica específica o pruebas, se informa previamente de cualquier coste.",
-  ],
-  [
-    "¿Se atiende a particulares y a empresas?",
-    "Sí. Se atienden viviendas, locales comerciales, oficinas y comunidades. La planificación se adapta para reducir molestias y coordinar horarios cuando el espacio se encuentra en uso.",
-  ],
-  [
-    "¿Qué trabajos se realizan en conductos de aire acondicionado?",
-    "Instalación y adaptación de redes, reparación de tramos, mantenimiento, revisión de rejillas y mejoras de distribución para un aire acondicionado más eficiente. El alcance definitivo depende del sistema existente y del acceso disponible.",
-  ],
-  [
-    "¿Qué soluciones de pladur se ofrecen?",
-    "Tabiques, trasdosados, falsos techos, cajones técnicos, aislamiento y soluciones a medida. Se valoran la humedad, el soporte, el uso del espacio y las necesidades acústicas antes de recomendar el sistema.",
-  ],
-  [
-    "¿Cuánto tarda una intervención?",
-    "Depende del acceso, las dimensiones y los acabados. Una intervención reducida puede resolverse en una jornada; los proyectos con varias fases requieren planificación. El plazo estimado queda reflejado en la propuesta.",
-  ],
-  [
-    "¿Se retiran los residuos al terminar?",
-    "Se retiran los residuos generados directamente por el trabajo y se deja la zona recogida, salvo que la propuesta indique condiciones diferentes por volumen o por gestión especial.",
-  ],
-  [
-    "¿Se pueden enviar fotografías o planos?",
-    "Sí. Tras recibir el formulario se indica el modo de envío. Las fotografías generales y de detalle, las medidas aproximadas y los planos ayudan a preparar una valoración más precisa.",
-  ],
-  [
-    "¿Qué diferencia existe entre mantenimiento y reparación de conductos?",
-    "El mantenimiento es preventivo y periódico: limpieza y revisión para evitar fallos. La reparación es correctiva: se actúa cuando algún elemento deja de funcionar correctamente.",
-  ],
-  [
-    "¿Con qué frecuencia conviene revisar los conductos de aire?",
-    "Depende del uso y del tipo de instalación. Como referencia, una revisión anual suele ser suficiente en viviendas; en locales con alto tránsito, cada seis meses.",
-  ],
-  [
-    "¿El pladur utilizado es resistente a la humedad?",
-    "Sí. Se trabaja con placas de yeso laminado y masas de fibra de yeso especializadas para zonas húmedas, siempre que el soporte lo permita.",
-  ],
-  [
-    "¿Se puede coordinar con la comunidad de vecinos?",
-    "Sí. Se trabaja con administraciones y comunidades; se presenta la documentación requerida y se coordinan los horarios con antelación.",
-  ],
+// Solo preguntas publicadas (src/data/faqs.ts); las pendientes de validación no se muestran ni entran en el grafo.
+const graph = [
+  pageNode({
+    path: "/faq",
+    name: "Preguntas frecuentes",
+    description: DESCRIPTION,
+    type: "FAQPage",
+    withBreadcrumb: false,
+    mainEntity: faqQuestions(FAQS_PUBLICADAS, absoluteUrl("/faq")),
+  }),
 ];
 
 export default function FAQPage() {
@@ -76,23 +38,45 @@ export default function FAQPage() {
             Respuestas también.
           </h1>
           <p className="mt-7 max-w-xl text-lg leading-8 text-lead">
-            Lo esencial sobre cobertura, plazos, presupuestos y el método de trabajo.
+            {FAQS_PUBLICADAS.length} respuestas sobre conductos, climatización, ventilación, pladur y aislamiento, basadas en las guías técnicas del sitio.
           </p>
         </div>
       </section>
       <section className="shell py-20">
         <div className="mx-auto max-w-4xl">
-          {faqs.map(([q, a], i) => (
-            <details key={q} className="group border-b border-line">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-7 text-lg font-bold tracking-[-0.02em] md:text-xl">
-                <span>
-                  <small className="mr-5 text-xs text-blue">{String(i + 1).padStart(2, "0")}</small>
-                  {q}
-                </span>
-                <Plus className="shrink-0 transition group-open:rotate-45" />
-              </summary>
-              <p className="max-w-3xl pb-8 pl-0 leading-7 text-lead md:pl-11">{a}</p>
-            </details>
+          <nav aria-label="Categorías" className="mb-12 flex flex-wrap gap-2">
+            {CATEGORIAS.map((c) => (
+              <a key={c.id} href={`#${c.id}`} className="rounded-full border border-line px-4 py-2 text-sm font-bold text-ink transition hover:border-blue hover:text-blue">
+                {c.nombre} <span className="text-lead">({faqsDeCategoria(c.id).length})</span>
+              </a>
+            ))}
+          </nav>
+          {CATEGORIAS.map((c) => (
+            <section key={c.id} id={c.id} aria-labelledby={`cat-${c.id}`} className="scroll-mt-28 pb-12">
+              <h2 id={`cat-${c.id}`} className="eyebrow text-blue">
+                {c.nombre}
+              </h2>
+              {faqsDeCategoria(c.id).map((f, i) => (
+                <details key={f.id} id={f.id} className="group scroll-mt-28 border-b border-line">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-lg font-bold tracking-[-0.02em] md:text-xl">
+                    <span>
+                      <small className="mr-5 text-xs text-blue">{String(i + 1).padStart(2, "0")}</small>
+                      {f.pregunta}
+                    </span>
+                    <Plus className="shrink-0 transition group-open:rotate-45" aria-hidden="true" />
+                  </summary>
+                  <div className="max-w-3xl pb-8 pl-0 leading-7 text-lead md:pl-11">
+                    <p className="text-ink">{f.respuesta}</p>
+                    {f.ampliada && <p className="mt-2">{f.ampliada}</p>}
+                    {f.servicio && (
+                      <Link href={servicioPath(f.servicio)} className="mt-3 inline-flex items-center gap-2 text-sm font-bold text-blue underline-offset-4 hover:underline">
+                        Ver el servicio <ArrowRight size={14} />
+                      </Link>
+                    )}
+                  </div>
+                </details>
+              ))}
+            </section>
           ))}
         </div>
         <div className="mx-auto mt-16 flex max-w-4xl flex-col justify-between gap-6 rounded-2xl bg-ink p-7 text-white md:flex-row md:items-center">

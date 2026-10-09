@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, ChevronRight, Mail } from "lucide-react";
+import { ArrowRight, ChevronRight, Mail, Plus } from "lucide-react";
 import { GuiaCard } from "@/components/GuiaCard";
 import { JsonLd } from "@/components/JsonLd";
+import { RespuestaRapida } from "@/components/RespuestaRapida";
+import { faqsDeServicio } from "@/data/faqs";
 import { getConcepto } from "@/data/conceptos";
 import { clusterSlug, GUIAS } from "@/data/guias";
 import { SERVICIOS, SERVICIOS_PATH, getRelacionados, getServicio, servicioPath } from "@/data/servicios";
 import { BASE_COMARCA, BASE_LOCALITY, EMAIL, absoluteUrl, conceptoId, pageId, servicioId } from "@/lib/entidad";
-import { breadcrumbNode, pageNode, ref } from "@/lib/schema";
+import { breadcrumbNode, faqQuestions, pageNode, ref } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
 export const dynamicParams = false;
@@ -45,6 +47,8 @@ export default async function ServicioPage({ params }: { params: Promise<{ slug:
   // quedan en el grafo (mentions) pero no se presentan como contenido de apoyo del servicio.
   const guias = GUIAS.filter((g) => g.conceptos.some((c) => servicio.conceptos.includes(c)));
   const departamento = DEPARTAMENTO[servicio.departamento];
+  const faqs = faqsDeServicio(servicio.slug);
+  const faqId = `${absoluteUrl(path)}#faq`;
 
   // El nodo Service se declara en el grafo común; esta página es su mainEntityOfPage.
   const graph = [
@@ -55,7 +59,12 @@ export default async function ServicioPage({ params }: { params: Promise<{ slug:
       mainEntity: ref(servicioId(servicio.slug)),
       about: servicio.conceptos.map((c) => ref(conceptoId(c))),
       ...(guias.length ? { relatedLink: guias.map((g) => absoluteUrl(`/guias/${g.slug}`)) } : {}),
+      ...(faqs.length ? { hasPart: ref(faqId) } : {}),
     }),
+    // Preguntas frecuentes del servicio: FAQPage como parte de la página (el Service sigue siendo mainEntity).
+    ...(faqs.length
+      ? [{ "@type": "FAQPage", "@id": faqId, isPartOf: ref(pageId(path)), mainEntity: faqQuestions(faqs) }]
+      : []),
     { "@id": servicioId(servicio.slug), mainEntityOfPage: ref(pageId(path)) },
     breadcrumbNode(path, [
       { name: "Servicios", path: SERVICIOS_PATH },
@@ -94,6 +103,7 @@ export default async function ServicioPage({ params }: { params: Promise<{ slug:
             </h1>
             <p className="mt-7 text-[17px] leading-[1.8] text-white/65">{servicio.resumen}</p>
           </div>
+          <RespuestaRapida className="mt-10 max-w-4xl" pregunta={servicio.pregunta} respuesta={servicio.respuestaRapida} />
         </div>
       </section>
 
@@ -101,20 +111,20 @@ export default async function ServicioPage({ params }: { params: Promise<{ slug:
         <div className="shell grid gap-10 lg:grid-cols-[1.4fr_1fr]">
           <div>
             <h2 id="alcance-titulo" className="mb-6 text-[13px] font-bold uppercase tracking-[0.2em] text-white/50">
-              Qué incluye
+              ¿Qué incluye el servicio de {servicio.nombre.toLowerCase()}?
             </h2>
             <ul className="grid gap-3">
               {servicio.alcance.map((a) => (
-                <li key={a} className="flex gap-3 rounded-2xl border border-white/10 bg-[#07182d] p-5">
+                <li key={a.texto} className="flex gap-3 rounded-2xl border border-white/10 bg-[#07182d] p-5">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#c7f35b]" />
-                  <p className="text-[14.5px] leading-[1.7] text-white/70">{a}</p>
+                  <p className="text-[14.5px] leading-[1.7] text-white/70">{a.texto}</p>
                 </li>
               ))}
             </ul>
           </div>
           {servicio.materiales.length > 0 && (
             <div>
-              <h2 className="mb-6 text-[13px] font-bold uppercase tracking-[0.2em] text-white/50">Materiales y sistemas</h2>
+              <h2 className="mb-6 text-[13px] font-bold uppercase tracking-[0.2em] text-white/50">¿Con qué materiales se trabaja?</h2>
               <ul className="flex flex-wrap gap-2">
                 {servicio.materiales.map((m) => (
                   <li
@@ -133,7 +143,7 @@ export default async function ServicioPage({ params }: { params: Promise<{ slug:
       <section aria-labelledby="conceptos-titulo" className="bg-[#05111f] pb-12">
         <div className="shell">
           <h2 id="conceptos-titulo" className="mb-6 text-[13px] font-bold uppercase tracking-[0.2em] text-white/50">
-            Conceptos clave
+            ¿Qué conceptos conviene conocer?
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
             {conceptos.map((c) => (
@@ -156,7 +166,7 @@ export default async function ServicioPage({ params }: { params: Promise<{ slug:
         <section aria-labelledby="relacionados-titulo" className="bg-[#05111f] pb-12">
           <div className="shell">
             <h2 id="relacionados-titulo" className="mb-6 text-[13px] font-bold uppercase tracking-[0.2em] text-white/50">
-              Servicios relacionados
+              ¿Con qué otros servicios se combina?
             </h2>
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {relacionados.map(({ servicio: r, motivo }) => (
@@ -208,6 +218,35 @@ export default async function ServicioPage({ params }: { params: Promise<{ slug:
         </section>
       )}
 
+      {faqs.length > 0 && (
+        <section aria-labelledby="faq-titulo" className="bg-[#05111f] pb-12">
+          <div className="shell">
+            <div className="mb-4 flex items-end justify-between gap-6 border-b border-white/10 pb-6">
+              <h2 id="faq-titulo" className="text-[13px] font-bold uppercase tracking-[0.2em] text-white/50">
+                Preguntas frecuentes sobre {servicio.nombre.toLowerCase()}
+              </h2>
+              <Link href="/faq" className="ce-link shrink-0 text-[12px] font-bold uppercase tracking-[0.14em] text-[#c7f35b]">
+                Todas las preguntas
+              </Link>
+            </div>
+            <div className="max-w-4xl">
+              {faqs.map((f) => (
+                <details key={f.id} className="group border-b border-white/10">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-[16px] font-bold tracking-[-0.01em] text-white">
+                    {f.pregunta}
+                    <Plus size={18} className="shrink-0 text-[#c7f35b] transition group-open:rotate-45" aria-hidden="true" />
+                  </summary>
+                  <div className="pb-6 text-[14.5px] leading-[1.75] text-white/70">
+                    <p>{f.respuesta}</p>
+                    {f.ampliada && <p className="mt-2 text-white/60">{f.ampliada}</p>}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="bg-[#05111f] pb-24 md:pb-32">
         <div className="shell">
           <div className="flex flex-col items-start justify-between gap-6 rounded-[24px] border border-[#c7f35b]/25 bg-gradient-to-br from-[#0b2748] to-[#07182d] p-7 md:flex-row md:items-center md:p-9">
@@ -218,9 +257,14 @@ export default async function ServicioPage({ params }: { params: Promise<{ slug:
               <p className="mt-3 max-w-md text-[15px] leading-[1.7] text-white/65">
                 Se describe el espacio y se recibe una propuesta con alcance, materiales y plazos antes de cualquier intervención.
               </p>
-              <a href={`mailto:${EMAIL}`} className="ce-link mt-4 inline-flex items-center gap-2 text-sm font-bold text-white/80 hover:text-white">
-                <Mail size={16} /> {EMAIL}
-              </a>
+              <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+                <a href={`mailto:${EMAIL}`} className="ce-link inline-flex items-center gap-2 text-sm font-bold text-white/80 hover:text-white">
+                  <Mail size={16} /> {EMAIL}
+                </a>
+                <Link href="/compromiso" className="ce-link inline-flex items-center gap-2 text-sm font-bold text-white/80 hover:text-white">
+                  Compromiso de trabajo <ArrowRight size={14} />
+                </Link>
+              </div>
             </div>
             <Link
               href="/presupuestador"

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowRight, Calendar, ChevronRight, Clock, ExternalLink, HelpCircle, Scale, Tag, User } from "lucide-react";
 import { ArticleBody, type RenderBlock } from "@/components/ArticleBody";
 import { JsonLd } from "@/components/JsonLd";
+import { RespuestaRapida } from "@/components/RespuestaRapida";
 import { AUTHOR, AUTHOR_SLUG, BASE_URL, formatDate, getGuia, getRelacionadas, GUIAS } from "@/data/guias";
 import { ID, conceptoId, pageId } from "@/lib/entidad";
 import { breadcrumbNode, pageNode, ref } from "@/lib/schema";
@@ -137,6 +138,7 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
         </div>
 
         <div className="shell relative py-12 md:py-16">
+          <RespuestaRapida className="mx-auto mb-12 max-w-3xl" pregunta={guia.title} respuesta={guia.respuestaRapida} />
           <ArticleBody blocks={body} />
 
           <section className="mx-auto mt-14 max-w-3xl rounded-[24px] border border-white/10 bg-[#07182d] p-7 md:p-9">

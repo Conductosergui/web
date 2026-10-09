@@ -5,6 +5,11 @@ export type Cluster = "Conductos" | "Pladur" | "HVAC" | "Mantenimiento" | "Aisla
 
 export const CLUSTERS: Cluster[] = ["Conductos", "Pladur", "HVAC", "Mantenimiento", "Aislamiento"];
 
+// Fechas editoriales fijadas por el titular (09/10/2026): publicación 03/07/2026 y actualización
+// en la fecha de la última revisión editorial. Actualizar FECHA_ACTUALIZACION solo cuando cambie el contenido.
+export const FECHA_PUBLICACION = "2026-07-03";
+export const FECHA_ACTUALIZACION = "2026-10-09";
+
 export const AUTHOR = AUTHOR_NAME;
 export const AUTHOR_SLUG = AUTHOR_PATH.split("/").pop() as string;
 export const PUBLISHER = BRAND;
@@ -35,6 +40,8 @@ export type Guia = {
   faq: FAQ[];
   related: string[];
   service: { label: string; href: string };
+  /** Respuesta directa (AEO), redactada solo con el contenido de la propia guía. */
+  respuestaRapida: string;
   /** Conceptos principales (about). */
   conceptos: ConceptoId[];
   /** Conceptos tratados de forma secundaria (mentions). */
@@ -48,8 +55,8 @@ export const GUIAS: Guia[] = [
     cluster: "Conductos",
     excerpt: "Cómo se decide la sección de un conducto para equilibrar caudal, pérdida de carga y confort acústico.",
     heroAccent: "para que el aire no se pele con el espacio.",
-    datePublished: "2025-02-12",
-    dateModified: "2025-09-03",
+    datePublished: FECHA_PUBLICACION,
+    dateModified: FECHA_ACTUALIZACION,
     readingMinutes: 6,
     articleSection: "Conductos",
     blocks: [
@@ -77,6 +84,8 @@ export const GUIAS: Guia[] = [
     ],
     related: ["limpieza-de-conductos-y-calidad-del-aire", "aislamiento-termico-y-acustico-con-pladur", "frecuencia-de-revision-de-conductos"],
     service: { label: "Ver servicio de conductos", href: "/servicios/conductos" },
+    respuestaRapida:
+      "La sección de un conducto se elige equilibrando el caudal necesario, la velocidad del aire y la pérdida de carga admisible. Como referencia, en viviendas se trabaja con 2–3 m/s en ramales y hasta 4 m/s en troncales, con velocidades bajas cerca de las rejillas para limitar el ruido.",
     conceptos: ["conducto-de-aire"],
     menciona: ["ventilacion", "eficiencia-energetica"],
   },
@@ -86,8 +95,8 @@ export const GUIAS: Guia[] = [
     cluster: "Conductos",
     excerpt: "Cuándo conviene limpiar la red de conductos y cómo repercute en la calidad del aire y en el rendimiento del equipo.",
     heroAccent: "porque el aire que no se ve también se cuida.",
-    datePublished: "2025-03-20",
-    dateModified: "2025-09-03",
+    datePublished: FECHA_PUBLICACION,
+    dateModified: FECHA_ACTUALIZACION,
     readingMinutes: 5,
     articleSection: "Conductos",
     blocks: [
@@ -114,6 +123,8 @@ export const GUIAS: Guia[] = [
     ],
     related: ["dimensionado-de-conductos", "frecuencia-de-revision-de-conductos", "eficiencia-en-climatizacion-residencial"],
     service: { label: "Solicitar limpieza de conductos", href: "/presupuestador" },
+    respuestaRapida:
+      "Conviene limpiar la red de conductos cuando aparecen señales como más ruido o consumo sin cambio de uso, olores al arrancar, polvo en las rejillas o una obra reciente. La limpieza mecánica con cepillado y aspiración recupera la sección útil, mejora el aire impulsado y reduce el esfuerzo del ventilador.",
     conceptos: ["conducto-de-aire", "mantenimiento-de-instalaciones-termicas"],
     menciona: ["ventilacion", "eficiencia-energetica", "climatizacion"],
   },
@@ -123,8 +134,8 @@ export const GUIAS: Guia[] = [
     cluster: "Pladur",
     excerpt: "Qué placas y tratamientos se emplean cuando el tabique o el techo van a convivir con vapor y salpicaduras.",
     heroAccent: "donde el vapor manda, el sistema responde.",
-    datePublished: "2025-04-08",
-    dateModified: "2025-09-03",
+    datePublished: FECHA_PUBLICACION,
+    dateModified: FECHA_ACTUALIZACION,
     readingMinutes: 5,
     articleSection: "Pladur",
     blocks: [
@@ -149,6 +160,8 @@ export const GUIAS: Guia[] = [
     ],
     related: ["aislamiento-termico-y-acustico-con-pladur", "dimensionado-de-conductos"],
     service: { label: "Ver servicio de pladur", href: "/servicios/pladur" },
+    respuestaRapida:
+      "En baños y cocinas se emplea placa de yeso laminado hidrófuga, identificada habitualmente por su color verde. No es impermeable por sí sola: funciona como sistema junto con un acabado continuo, el sellado de juntas y encuentros y una ventilación suficiente para evacuar el vapor.",
     conceptos: ["placa-de-yeso-laminado"],
     menciona: ["ventilacion"],
   },
@@ -158,8 +171,8 @@ export const GUIAS: Guia[] = [
     cluster: "HVAC",
     excerpt: "Claves para que una instalación de aire acondicionado consuma menos y dure más: tamaño correcto, control y mantenimiento.",
     heroAccent: "menos vatios, más confort.",
-    datePublished: "2025-05-15",
-    dateModified: "2025-09-03",
+    datePublished: FECHA_PUBLICACION,
+    dateModified: FECHA_ACTUALIZACION,
     readingMinutes: 6,
     articleSection: "HVAC",
     blocks: [
@@ -185,6 +198,8 @@ export const GUIAS: Guia[] = [
     ],
     related: ["dimensionado-de-conductos", "frecuencia-de-revision-de-conductos", "aislamiento-termico-y-acustico-con-pladur"],
     service: { label: "Solicitar valoración de eficiencia", href: "/presupuestador" },
+    respuestaRapida:
+      "Una instalación de aire acondicionado consume menos cuando la potencia se ajusta a la carga térmica calculada, el control por zonas sirve solo lo necesario y el compresor inverter adapta la energía a la demanda. Los índices SEER y SCOP permiten comparar el rendimiento estacional de los equipos.",
     conceptos: ["climatizacion", "eficiencia-energetica"],
     menciona: ["mantenimiento-de-instalaciones-termicas", "conducto-de-aire"],
   },
@@ -194,8 +209,8 @@ export const GUIAS: Guia[] = [
     cluster: "Mantenimiento",
     excerpt: "Una pauta sensata de revisión y mantenimiento preventivo para viviendas y locales, y qué se comprueba en cada visita.",
     heroAccent: "lo que se revisa, no se rompe sin avisar.",
-    datePublished: "2025-06-22",
-    dateModified: "2025-09-03",
+    datePublished: FECHA_PUBLICACION,
+    dateModified: FECHA_ACTUALIZACION,
     readingMinutes: 4,
     articleSection: "Mantenimiento",
     blocks: [
@@ -222,6 +237,8 @@ export const GUIAS: Guia[] = [
     ],
     related: ["limpieza-de-conductos-y-calidad-del-aire", "dimensionado-de-conductos", "eficiencia-en-climatizacion-residencial"],
     service: { label: "Solicitar plan de mantenimiento", href: "/presupuestador" },
+    respuestaRapida:
+      "Como pauta orientativa: inspección de filtros cada 2–3 meses, revisión visual anual de la red de conductos con limpieza cuando los indicadores lo aconsejen, y limpieza y comprobación anual de las unidades. El RITE fija las operaciones de mantenimiento según el tipo y la potencia de la instalación.",
     conceptos: ["mantenimiento-de-instalaciones-termicas", "conducto-de-aire"],
     menciona: ["climatizacion", "ventilacion", "eficiencia-energetica"],
   },
@@ -231,8 +248,8 @@ export const GUIAS: Guia[] = [
     cluster: "Aislamiento",
     excerpt: "Cómo un trasdosado o tabique de placa de yeso con lana mineral mejora el confort térmico y reduce el ruido entre estancias.",
     heroAccent: "el silencio también se construye por capas.",
-    datePublished: "2025-07-30",
-    dateModified: "2025-09-03",
+    datePublished: FECHA_PUBLICACION,
+    dateModified: FECHA_ACTUALIZACION,
     readingMinutes: 6,
     articleSection: "Aislamiento",
     blocks: [
@@ -258,6 +275,8 @@ export const GUIAS: Guia[] = [
     ],
     related: ["pladur-en-zonas-humedas", "dimensionado-de-conductos"],
     service: { label: "Ver servicios de aislamiento", href: "/servicios/aislamiento-termico" },
+    respuestaRapida:
+      "Un trasdosado o tabique de placa de yeso con lana mineral reduce el ruido gracias a la masa de las placas, el efecto muelle de la lana y la estanqueidad de juntas y cajas. Sobre un muro frío, la misma solución reduce la transmitancia y el riesgo de condensaciones superficiales.",
     conceptos: ["aislamiento-termico", "aislamiento-acustico", "placa-de-yeso-laminado"],
     menciona: [],
   },
@@ -282,6 +301,17 @@ export function clusterSlug(c: Cluster): string {
 
 export function getClusterBySlug(slug: string): Cluster | undefined {
   return CLUSTERS.find((c) => clusterSlug(c) === slug);
+}
+
+/**
+ * Un tema se indexa cuando reúne al menos este número de guías. Por debajo queda como
+ * noindex, follow y fuera del sitemap (decisión del titular, 09/10/2026), para evitar que
+ * compita con su única guía. Se reindexa solo al publicar más contenido.
+ */
+export const MIN_GUIAS_TEMA_INDEXABLE = 2;
+
+export function temaIndexable(c: Cluster): boolean {
+  return getGuiasPorCluster(c).length >= MIN_GUIAS_TEMA_INDEXABLE;
 }
 
 export function getGuiasPorCluster(c: Cluster): Guia[] {

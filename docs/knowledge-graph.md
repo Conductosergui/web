@@ -1,14 +1,14 @@
 # Knowledge Graph — Conductos Ergui
 
-Documento generado a partir del build de producción (fase 2). Fuente del grafo: `src/lib/schema.ts`,
+Documento generado a partir del build de producción (fase 2; cifras actualizadas en la fase 3). Fuente del grafo: `src/lib/schema.ts`,
 con datos de `src/lib/entidad.ts`, `src/data/conceptos.ts`, `src/data/servicios.ts` y `src/data/guias.ts`.
 
 ## Cifras (28 rutas verificadas)
 
-- Nodos con `@id` únicos en todo el sitio: **91**
-- Aristas únicas entre nodos con `@id`: **304**
+- Nodos con `@id` únicos en todo el sitio: **143** (fase 2: 91; la fase 3 añade 46 Question y 7 FAQPage)
+- Aristas únicas entre nodos con `@id`: **362** (fase 2: 304)
 - Referencias sin resolver: **0**
-- Nodos por página: entre 30 y 32 (el grafo común se repite en cada página para que sea autosuficiente)
+- Nodos por página: entre 30 y 76 (el grafo común se repite en cada página para que sea autosuficiente; /faq es la más extensa)
 
 ## Capas
 
@@ -19,6 +19,7 @@ con datos de `src/lib/entidad.ts`, `src/data/conceptos.ts`, `src/data/servicios.
 | Conceptos | 9 DefinedTerm en 1 DefinedTermSet | `/glosario#{concepto}`, `/glosario#terminos` |
 | Territorio | El Vendrell (City), Baix Penedès, Provincia de Tarragona, Cataluña | `/#el-vendrell`, `/#baix-penedes`, `/#provincia-de-tarragona`, `/#cataluna` |
 | Contenido | 6 BlogPosting, 28 nodos de página, 21 BreadcrumbList, 7 ItemList | `{url}#articulo`, `{url}#webpage`, `{url}#breadcrumb` |
+| Respuestas (AEO) | 46 Question publicadas en /faq (FAQPage) y FAQPage por servicio (`hasPart`) | `/faq#{id}`, `/servicios/{slug}#faq` |
 | Evidencia | — (bloqueada por falta de datos reales; ver `docs/backlog.md`) | — |
 
 ## Reglas de modelado
