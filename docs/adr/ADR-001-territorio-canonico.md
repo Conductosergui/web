@@ -1,6 +1,6 @@
 # ADR-001 — Territorio canónico
 
-- **Estado:** Propuesto. Pendiente de aprobación y de las decisiones abiertas D1–D4.
+- **Estado:** Aprobado como documento base (10/10/2026). D1, D2 y D4 cerradas; D3 reabierta (ver `ADR-001-propuesta-implementacion.md`).
 - **Fecha:** 10/10/2026
 - **Ámbito:** datos de entidad (`src/lib/entidad.ts`), grafo JSON-LD (`src/lib/schema.ts`), páginas, rutas generadas y documentación.
 
@@ -77,12 +77,12 @@ Un registro por territorio en una única fuente (`src/lib/territorio.ts` o una s
 
 Las constantes actuales (`BASE_LOCALITY`, `BASE_COMARCA`, `MUNICIPIOS_BAIX_PENEDES`, `ID.vendrell`, `ID.comarca`, `ID.comaRuga`…) pasan a derivarse de este registro, para no romper a los consumidores existentes durante la migración.
 
-## 3. Decisiones abiertas
+## 3. Decisiones
 
-- **D1. Criterio de prioridad:** ¿"prioritario" significa "con página propia" (criterio de contenido) o "prioridad comercial" del titular? Si es contenido, ¿cuál es el umbral exacto?
-- **D2. Lista de prioritarios:** además de El Vendrell y Baix Penedès, ¿algún municipio es prioritario hoy? No consta.
-- **D3. Alcance de AREA_SERVIDA:** ¿comarca del Baix Penedès (14, vigente) o radio de 50 km (200, skill)? Si se amplía, cambian `areaServed`, los textos y el posicionamiento de todo el sitio.
-- **D4. Núcleos:** ¿Coma-ruga se mantiene como núcleo de la sede (vigente) o como territorio propio? ¿Hay más núcleos del municipio de la sede que deban constar? No consta.
+- **D1. Criterio de prioridad — CERRADA (10/10/2026):** prioritario = territorio con página indexable y estrategia de autoridad.
+- **D2. Lista de prioritarios — CERRADA (10/10/2026):** Baix Penedès y El Vendrell. Coma-ruga pertenece a El Vendrell.
+- **D3. Alcance de AREA_SERVIDA — REABIERTA (10/10/2026):** el titular confirma servicio habitual fuera del Baix Penedès. Dirección indicada: sede en El Vendrell, área servida = radio operativo de 50 km, territorio prioritario de autoridad = Baix Penedès. Propuesta de implementación en `docs/adr/ADR-001-propuesta-implementacion.md`. Mientras no se apruebe, rige el valor vigente (comarca, 14 municipios) y los invariantes 3 y 7 se revisarán con esa propuesta.
+- **D4. Núcleos — CERRADA (10/10/2026):** Coma-ruga se modela como núcleo dependiente de El Vendrell (`Place`, `containedInPlace` → El Vendrell; sección de `/el-vendrell`, sin página propia).
 
 ## 4. Consecuencias
 
