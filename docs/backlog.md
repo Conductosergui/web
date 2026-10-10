@@ -33,7 +33,9 @@ Notas:
 |---|---|
 | Crédito del pie de página | Implementado sin enlace: «Web creada por Aurora Market Labs» (`src/components/Footer.tsx`). **Pendiente:** convertirlo en enlace a la web oficial de Aurora Market Labs cuando se facilite la URL |
 | Imágenes de Pexels | Se cargan en remoto desde `images.pexels.com`; alojarlas en el proyecto u optimizarlas con `next/image` |
-| `.github/copilot-instructions.md` | Recomienda tipos inexistentes (`HVACContractor`, `DrywallContractor`), un radio de 50 km y Garraf; alinearlo con la arquitectura actual |
+| `.github/copilot-instructions.md` | **Alineado (10/10/2026)** con ADR-001 y los tipos reales del grafo |
+| Redacción de «radio operativo de 50 km» | Observación del titular (no bloqueante, 10/10/2026): revisar si las menciones repetidas pueden redactarse de forma más natural |
+| Versión de Node en el despliegue | `npm run build` ejecuta `scripts/validar-grafo.mjs`, que requiere Node 22.6 o superior. **Verificar** la versión configurada en Vercel antes de fusionar a `main` |
 | Google Analytics 4 | Integrado con `@next/third-parties` y **condicionado al consentimiento** (`src/components/Analytics.tsx`): solo se carga con «Aceptar todas». ID de medición corregido por el titular: `G-HMX7KK95LQ` |
 | Página índice `/temas` | No existe; las migas de `/temas/[cluster]` usan Inicio › Guías › Tema. Preparado para insertarla en una línea |
 
@@ -46,7 +48,7 @@ Notas:
 | Compromisos del negocio | Listado para validación manual: `docs/validacion-compromisos.md` (V01–V19). **Decisión del titular (09/10/2026): todos siguen pendientes; ninguno se presenta como verificado.** V17 (cumplimiento del RITE) retirado del sitio por B7 |
 | Guías nuevas | 4 borradores en `docs/borradores/` pendientes de revisión de Bryan Ergui |
 | `/llms.txt` | Generado en el build desde las mismas fuentes que el sitio |
-| Borradores fuera del área | Archivados en `docs/archivo/` (Sitges y Vilanova i la Geltrú) |
+| Borradores fuera de la zona principal | Archivados en `docs/archivo/` (Sitges y Vilanova i la Geltrú). Con ADR-001 quedan dentro del radio operativo, pero no se publican ni se listan (D6) |
 
 ## Fase 4 — Autoridad local (opción A, aprobada por el titular)
 
@@ -56,6 +58,19 @@ Notas:
 | `/coma-ruga` | Redirección 308 a `/el-vendrell#coma-ruga` (`next.config.ts`) |
 | Páginas por municipio (Calafell, Cunit, L'Arboç, Santa Oliva…) | **Retenidas** hasta disponer de contenido real propio (trabajos documentados). Evita páginas puerta |
 | Dirección postal y Google Business Profile | **Incorporados (09/10/2026)**, con coordenadas exactas del local (41,220202; 1,534805). Pendiente: URL canónica de Maps con `cid` (el entorno de desarrollo no puede resolver `share.google`) |
+
+## ADR-001 — Territorio canónico (10/10/2026)
+
+| Elemento | Estado |
+|---|---|
+| Decisiones D1–D8 | Cerradas (`docs/adr/ADR-001-territorio-canonico.md`) |
+| F1 · Registro canónico (`src/lib/territorio.ts`) | Hecho en la rama de trabajo |
+| I2 · Grafo (GeoCircle en `areaServed`, 13 municipios secundarios) | Hecho en la rama de trabajo |
+| I3 · Contenido visible alineado | Hecho en la rama de trabajo |
+| I4 · Validación automática en `npm run build` | Hecho en la rama de trabajo |
+| I5 · Documentación | Hecho en la rama de trabajo |
+| Fusión a `main` | **Pendiente de aprobación del titular** |
+| Google Business Profile | Acción del titular: configurar las zonas de servicio acordes con el radio operativo |
 
 ## Puntos de restauración
 
