@@ -2,6 +2,10 @@
 // La consumen el grafo JSON-LD (src/lib/schema.ts), los metadatos (src/lib/seo.ts), la home,
 // el formulario de contacto, robots y sitemap.
 // Regla del proyecto: ningún dato de negocio se inventa. Lo que no consta queda fuera del grafo.
+// El territorio (sede, área servida, prioritarios y secundarios) se define en territorio.ts (ADR-001);
+// aquí solo se derivan de él las constantes que consumen el resto de módulos.
+
+import { SEDE, municipiosDe, territorio } from "@/lib/territorio";
 
 export const SITE_URL = "https://conductosergui.es";
 export const BRAND = "Conductos Ergui";
@@ -23,17 +27,17 @@ export function whatsappUrl(text: string = WHATSAPP_MSG_PRESUPUESTO): string {
 export const WHATSAPP_URL = whatsappUrl(WHATSAPP_MSG_PRESUPUESTO);
 export const WHATSAPP_URGENCIA_URL = whatsappUrl(WHATSAPP_MSG_URGENCIA);
 
-export const BASE_LOCALITY = "El Vendrell";
-export const BASE_COMARCA = "Baix Penedès";
-export const BASE_PROVINCE = "Tarragona";
+export const BASE_LOCALITY = territorio(SEDE.municipio).nombre;
+export const BASE_COMARCA = territorio(SEDE.comarca).nombre;
+export const BASE_PROVINCE = territorio(SEDE.provincia).nombre;
 
 // Dirección física del negocio (facilitada por el titular; coincide con la ficha de Google Business Profile).
 export const ADDRESS = {
-  streetAddress: "Carrer Romaní 11",
+  streetAddress: SEDE.direccion.streetAddress,
   addressLocality: BASE_LOCALITY,
-  postalCode: "43700",
+  postalCode: SEDE.direccion.postalCode,
   addressRegion: BASE_PROVINCE,
-  addressCountry: "ES",
+  addressCountry: SEDE.direccion.addressCountry,
 } as const;
 export const ADDRESS_TEXT = `${ADDRESS.streetAddress}, ${ADDRESS.postalCode} ${ADDRESS.addressLocality} (${ADDRESS.addressRegion})`;
 
@@ -43,29 +47,16 @@ export const GBP_URL = "https://share.google/vw7GEPfgwZeaARWBb";
 export const SAME_AS: readonly string[] = [GBP_URL];
 
 // Coordenadas exactas del local (Carrer Romaní 11), facilitadas por el titular.
-export const GEO = { latitude: 41.220202, longitude: 1.534805 } as const;
+export const GEO = SEDE.geo;
 
-// Municipios del Baix Penedès. Distancia en línea recta entre centroides desde El Vendrell.
-export const MUNICIPIOS_BAIX_PENEDES: readonly (readonly [string, number])[] = [
-  ["El Vendrell", 0],
-  ["Calafell", 3.5],
-  ["Santa Oliva", 3.9],
-  ["Bellvei", 4.2],
-  ["Albinyana", 5.0],
-  ["Llorenç del Penedès", 7.2],
-  ["Banyeres del Penedès", 7.6],
-  ["La Bisbal del Penedès", 7.8],
-  ["L'Arboç", 7.9],
-  ["Bonastre", 7.9],
-  ["Cunit", 8.7],
-  ["Sant Jaume dels Domenys", 9.1],
-  ["Masllorenç", 11.4],
-  ["El Montmell", 12.5],
-];
+// Municipios del Baix Penedès (prioritario + secundarios). Distancia en línea recta entre centroides desde El Vendrell.
+export const MUNICIPIOS_BAIX_PENEDES: readonly (readonly [string, number])[] = municipiosDe(SEDE.comarca).map(
+  (t) => [t.nombre, t.distanciaKm ?? 0] as const,
+);
 
-// Páginas de zona de servicio (fase 4). Las páginas por municipio solo se crean con contenido real propio.
-export const ZONA_COMARCA_PATH = "/baix-penedes";
-export const ZONA_SEDE_PATH = "/el-vendrell";
+// Páginas de los territorios prioritarios (ADR-001, D1–D2).
+export const ZONA_COMARCA_PATH = territorio(SEDE.comarca).ruta as string;
+export const ZONA_SEDE_PATH = territorio(SEDE.municipio).ruta as string;
 
 export const SITE_TITLE = "Conductos Ergui | Climatización, Conductos y Pladur en El Vendrell";
 export const SITE_DESCRIPTION =
@@ -94,6 +85,11 @@ export function breadcrumbId(path: string): string {
   return path === "/" ? `${SITE_URL}/#breadcrumb` : `${SITE_URL}${path}#breadcrumb`;
 }
 
+/** @id de un territorio del registro canónico (territorio.ts). */
+export function territorioId(clave: string): string {
+  return `${SITE_URL}${territorio(clave).idPath}`;
+}
+
 // Identificadores estables del grafo. Toda referencia a la empresa, el sitio o el autor usa estos @id.
 export const ID = {
   website: `${SITE_URL}/#website`,
@@ -109,13 +105,13 @@ export const ID = {
   catalogoPladur: `${SITE_URL}/servicios#catalogo-pladur`,
   // Capa de conceptos
   glosario: `${SITE_URL}/glosario#terminos`,
-  // Territorio
-  vendrell: `${SITE_URL}/#el-vendrell`,
-  comarca: `${SITE_URL}/#baix-penedes`,
-  provincia: `${SITE_URL}/#provincia-de-tarragona`,
-  cataluna: `${SITE_URL}/#cataluna`,
+  // Territorio (idPath en territorio.ts)
+  vendrell: territorioId(SEDE.municipio),
+  comarca: territorioId(SEDE.comarca),
+  provincia: territorioId(SEDE.provincia),
+  cataluna: territorioId("cataluna"),
   // Núcleo costero del municipio de El Vendrell (sección propia en /el-vendrell)
-  comaRuga: `${SITE_URL}/el-vendrell#coma-ruga`,
+  comaRuga: territorioId("coma-ruga"),
   logo: `${SITE_URL}/#logo`,
 } as const;
 

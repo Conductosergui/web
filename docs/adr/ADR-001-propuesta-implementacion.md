@@ -1,6 +1,6 @@
 # ADR-001 · Propuesta de implementación (D3 reabierta)
 
-- **Estado:** Propuesta. Sin cambios de código ni de contenido hasta su aprobación.
+- **Estado:** Aprobada con D5–D8 (10/10/2026). F1 (registro canónico) implementada en la rama de trabajo, sin fusionar a `main`. I2–I5 pendientes.
 - **Fecha:** 10/10/2026
 - **Base:** `ADR-001-territorio-canonico.md` (aprobado como documento base; D1, D2 y D4 cerradas).
 - **Dirección indicada por el titular:** sede en El Vendrell; área servida = radio operativo de 50 km; territorio prioritario de autoridad = Baix Penedès.
@@ -95,9 +95,13 @@ Cada fase en su propio commit en la rama de trabajo, con diff para aprobación. 
 
 - Google Business Profile: configurar las zonas de servicio para que coincidan con el radio declarado. Las restricciones de Google sobre la extensión de la zona de servicio no están verificadas en las referencias del proyecto; comprobarlas en la ayuda oficial antes de configurarlas.
 
-## 7. Decisiones pendientes
+## 7. Decisiones (10/10/2026)
 
-- **D5.** Composición de `areaServed`: opción A (círculo + Baix Penedès) u opción B (solo círculo).
-- **D6.** ¿Se nombran en el sitio localidades fuera del Baix Penedès? Si es así, ¿cuáles? No consta qué localidades atiende el negocio de forma habitual; la lista de 200 municipios de la skill se calculó desde el centroide y debería recalcularse desde la dirección real.
-- **D7.** Mensajes predefinidos de WhatsApp: ¿texto neutro (sin territorio) o mención del radio?
-- **D8.** Sustituto de la cifra "14 municipios atendidos" de la home: ¿"50 km de radio operativo", "Baix Penedès y alrededores" u otra formulación?
+- **D5 — APROBADA: opción A.** `areaServed` = `GeoCircle` de 50 km + Baix Penedès.
+- **D6 — APROBADA.** No se listan por ahora municipios fuera de la comarca; se usa una referencia genérica al radio operativo.
+- **D7 — APROBADA.** Mensajes predefinidos de WhatsApp sin mención territorial.
+- **D8 — APROBADA.** Se elimina la métrica "14 municipios atendidos" y se sustituye por un mensaje descriptivo de cobertura sin cifras.
+
+## 8. Registro de ejecución
+
+- **F1 / I1 — Registro canónico (10/10/2026):** `src/lib/territorio.ts` (territorios, `SEDE`, `AREA_SERVIDA`) y `src/lib/entidad.ts` derivando de él `BASE_*`, `ADDRESS`, `GEO`, `MUNICIPIOS_BAIX_PENEDES`, rutas de zona y `@id` de territorio (nueva función `territorioId`). Verificación: la salida compilada (texto, metadatos, enlaces, JSON-LD, sitemap, `llms.txt`, `robots.txt` de las 30 rutas) es idéntica antes y después del cambio. `AREA_SERVIDA` y los `@id` de los municipios secundarios quedan definidos pero aún no se publican (I2).
