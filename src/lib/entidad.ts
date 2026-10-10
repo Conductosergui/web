@@ -5,7 +5,7 @@
 // El territorio (sede, área servida, prioritarios y secundarios) se define en territorio.ts (ADR-001);
 // aquí solo se derivan de él las constantes que consumen el resto de módulos.
 
-import { SEDE, municipiosDe, territorio } from "@/lib/territorio";
+import { AREA_SERVIDA, SEDE, municipiosDe, territorio } from "@/lib/territorio";
 
 export const SITE_URL = "https://conductosergui.es";
 export const BRAND = "Conductos Ergui";
@@ -15,10 +15,9 @@ export const PHONE = "+34622368999";
 export const PHONE_FORMATTED = "+34 622 36 89 99";
 
 // Mensajes prerrellenados de WhatsApp.
-export const WHATSAPP_MSG_PRESUPUESTO =
-  "Hola, me gustaría solicitar información o un presupuesto para un proyecto en el Baix Penedès.";
-export const WHATSAPP_MSG_URGENCIA =
-  "Hola, necesito asistencia técnica o consulta urgente sobre una instalación en la zona del Baix Penedès.";
+// Sin mención territorial (ADR-001, D7).
+export const WHATSAPP_MSG_PRESUPUESTO = "Hola, me gustaría solicitar información o un presupuesto para un proyecto.";
+export const WHATSAPP_MSG_URGENCIA = "Hola, necesito asistencia técnica o consulta urgente sobre una instalación.";
 
 /** Enlace directo a WhatsApp con un mensaje prerrellenado. */
 export function whatsappUrl(text: string = WHATSAPP_MSG_PRESUPUESTO): string {
@@ -53,6 +52,9 @@ export const GEO = SEDE.geo;
 export const MUNICIPIOS_BAIX_PENEDES: readonly (readonly [string, number])[] = municipiosDe(SEDE.comarca).map(
   (t) => [t.nombre, t.distanciaKm ?? 0] as const,
 );
+
+// Referencia genérica al área servida en textos visibles (ADR-001, D3 y D6): sin listar municipios fuera de la comarca.
+export const RADIO_OPERATIVO = `radio operativo de ${AREA_SERVIDA.radioKm} km`;
 
 // Páginas de los territorios prioritarios (ADR-001, D1–D2).
 export const ZONA_COMARCA_PATH = territorio(SEDE.comarca).ruta as string;

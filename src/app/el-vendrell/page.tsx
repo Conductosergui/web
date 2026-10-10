@@ -19,6 +19,7 @@ import {
   ID,
   MUNICIPIOS_BAIX_PENEDES,
   PHONE_FORMATTED,
+  RADIO_OPERATIVO,
   ZONA_COMARCA_PATH,
   ZONA_SEDE_PATH,
 } from "@/lib/entidad";
@@ -59,7 +60,7 @@ const FICHA: [string, string, string?][] = [
   ["Fundador y titular", AUTHOR_NAME, AUTHOR_PATH],
   ["Experiencia", `${AUTHOR_YEARS_EXPERIENCE} años`],
   ["Dirección", ADDRESS_TEXT, GBP_URL],
-  ["Área de servicio", `Comarca del ${BASE_COMARCA}`, ZONA_COMARCA_PATH],
+  ["Área de servicio", `${RADIO_OPERATIVO.charAt(0).toUpperCase() + RADIO_OPERATIVO.slice(1)} · zona principal: ${BASE_COMARCA}`, ZONA_COMARCA_PATH],
   ["Teléfono y WhatsApp", PHONE_FORMATTED],
   ["Correo", EMAIL],
 ];
@@ -79,7 +80,7 @@ export default function ElVendrellPage() {
         <RespuestaRapida
           className="mt-10 max-w-4xl"
           pregunta={`¿Dónde tiene su base ${BRAND}?`}
-          respuesta={`En ${BASE_LOCALITY} (${BASE_PROVINCE}), capital de la comarca del ${BASE_COMARCA}. Desde aquí se atienden todo el municipio, incluido el núcleo costero de Coma-ruga, y el resto de la comarca. Su titular es su fundador, ${AUTHOR_NAME}, con ${AUTHOR_YEARS_EXPERIENCE} años de experiencia.`}
+          respuesta={`En ${BASE_LOCALITY} (${BASE_PROVINCE}), capital de la comarca del ${BASE_COMARCA}. Desde aquí se atienden todo el municipio, incluido el núcleo costero de Coma-ruga, el resto de la comarca y su ${RADIO_OPERATIVO}. Su titular es su fundador, ${AUTHOR_NAME}, con ${AUTHOR_YEARS_EXPERIENCE} años de experiencia.`}
         />
       </ZonaHero>
 
@@ -152,7 +153,7 @@ export default function ElVendrellPage() {
             Municipios cercanos
           </h2>
           <p className="mt-3 max-w-2xl text-[15px] leading-[1.7] text-white/60">
-            Desde {BASE_LOCALITY} se atienden los {MUNICIPIOS_BAIX_PENEDES.length} municipios del {BASE_COMARCA}. Los más próximos a la sede:
+            Desde {BASE_LOCALITY} se atienden los municipios del {BASE_COMARCA} y el resto del {RADIO_OPERATIVO}. Los más próximos a la sede:
           </p>
           <ul className="mt-6 flex flex-wrap gap-2">
             {CERCANOS.map(([m]) => (
@@ -165,7 +166,7 @@ export default function ElVendrellPage() {
             ))}
           </ul>
           <Link href={ZONA_COMARCA_PATH} className="ce-link mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#c7f35b]">
-            Toda la zona de servicio del {BASE_COMARCA} <ArrowRight size={15} />
+            Zona principal: {BASE_COMARCA} <ArrowRight size={15} />
           </Link>
         </div>
       </section>

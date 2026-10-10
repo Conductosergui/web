@@ -26,6 +26,7 @@ import {
   ID,
   MUNICIPIOS_BAIX_PENEDES,
   PHONE_FORMATTED,
+  RADIO_OPERATIVO,
   SITE_DESCRIPTION,
   SITE_TITLE,
   WHATSAPP_URL,
@@ -172,7 +173,7 @@ export default function HomePage() {
 
               <div className="ce-reveal-3 grid grid-cols-3 gap-6 border-t border-white/10 pt-7">
                 {[
-                  [String(MUNICIPIOS_BAIX_PENEDES.length), "Municipios atendidos"],
+                  ["Local", "Servicio de proximidad"],
                   ["02", "Especialidades técnicas"],
                   ["100%", "Transparencia documental"],
                 ].map(([n, l]) => (
@@ -208,10 +209,9 @@ export default function HomePage() {
                   <div>
                     <small className="ce-eyebrow text-[#c7f35b]">Disponibilidad</small>
                     <p className="mt-2 text-sm font-medium leading-snug text-white/75">
-                      Se ofrecen valoraciones técnicas en {BASE_LOCALITY} y en toda la comarca del {BASE_COMARCA}.
+                      Se ofrecen valoraciones técnicas en {BASE_LOCALITY}, en toda la comarca del {BASE_COMARCA} y en el resto del {RADIO_OPERATIVO}.
                     </p>
                   </div>
-                  <span className="ce-display text-2xl text-white/70">{MUNICIPIOS_BAIX_PENEDES.length}</span>
                 </div>
               </div>
             </div>
@@ -406,7 +406,7 @@ export default function HomePage() {
                 <span className="serif-it text-white/35">y el {BASE_COMARCA}.</span>
               </h2>
               <p className="mt-8 max-w-lg text-[16px] font-medium leading-[1.75] text-white/60">
-                Base en {BASE_LOCALITY}, capital del {BASE_COMARCA}; se atienden los municipios de la comarca. La cercanía permite responder con agilidad, coordinar visitas técnicas y conocer la tipología constructiva de la zona.
+                Base en {BASE_LOCALITY}, capital del {BASE_COMARCA}; se atienden los municipios de la comarca y el resto del {RADIO_OPERATIVO}. La cercanía permite responder con agilidad, coordinar visitas técnicas y conocer la tipología constructiva de la zona.
               </p>
               <div className="mt-10 flex flex-wrap gap-2">
                 {AREAS.map((a) => (
@@ -417,7 +417,7 @@ export default function HomePage() {
               </div>
               <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
                 <Link href={ZONA_COMARCA_PATH} className="ce-link inline-flex items-center gap-2 text-sm font-bold text-[#c7f35b]">
-                  Zona de servicio en el {BASE_COMARCA} <ArrowRight size={15} />
+                  Zona principal: {BASE_COMARCA} <ArrowRight size={15} />
                 </Link>
                 <Link href={ZONA_SEDE_PATH} className="ce-link inline-flex items-center gap-2 text-sm font-bold text-white/80 hover:text-white">
                   Sede en {BASE_LOCALITY} y Coma-ruga <ArrowRight size={15} />
@@ -430,8 +430,8 @@ export default function HomePage() {
                 </div>
                 <div className="h-10 w-px bg-white/10" />
                 <div>
-                  <strong className="ce-display block text-[36px] text-white">{MUNICIPIOS_BAIX_PENEDES.length}</strong>
-                  <small className="ce-eyebrow text-white/50">Municipios</small>
+                  <strong className="ce-display block text-[36px] text-white">Local</strong>
+                  <small className="ce-eyebrow text-white/50">Servicio de proximidad</small>
                 </div>
               </div>
             </div>
@@ -582,7 +582,7 @@ export default function HomePage() {
               <div className="relative mt-14 grid grid-cols-2 gap-6 border-t border-white/10 pt-8 md:grid-cols-4">
                 {[
                   [BASE_LOCALITY, "Base operativa"],
-                  [BASE_COMARCA, "Área de servicio"],
+                  [BASE_COMARCA, "Zona principal"],
                   ["24–48 h", "Respuesta técnica"],
                   ["100%", "Documentación clara"],
                 ].map(([n, l]) => (

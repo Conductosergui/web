@@ -2,7 +2,7 @@
 
 import { ArrowUpRight, Mail } from "lucide-react";
 import { useState, type FormEvent } from "react";
-import { BASE_LOCALITY, EMAIL, MUNICIPIOS_BAIX_PENEDES } from "@/lib/entidad";
+import { BASE_LOCALITY, EMAIL, MUNICIPIOS_BAIX_PENEDES, RADIO_OPERATIVO } from "@/lib/entidad";
 
 // Contacto sin base de datos, sin API y sin Server Actions:
 // el formulario compone un enlace mailto: con asunto y cuerpo según la selección del usuario.
@@ -110,6 +110,7 @@ export function ContactoMailto() {
           {MUNICIPIOS_BAIX_PENEDES.map(([m]) => (
             <option key={m}>{m}</option>
           ))}
+          <option>{`Otra localidad (${RADIO_OPERATIVO})`}</option>
         </select>
       </label>
 

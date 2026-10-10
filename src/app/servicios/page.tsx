@@ -5,7 +5,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { RespuestaRapida } from "@/components/RespuestaRapida";
 import { getConcepto } from "@/data/conceptos";
 import { SERVICIOS, SERVICIOS_PATH, servicioPath, serviciosDe, type Departamento } from "@/data/servicios";
-import { BASE_COMARCA, BASE_LOCALITY, ID, absoluteUrl } from "@/lib/entidad";
+import { BASE_COMARCA, BASE_LOCALITY, ID, RADIO_OPERATIVO, absoluteUrl } from "@/lib/entidad";
 import { breadcrumbNode, pageNode, ref } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
@@ -72,7 +72,7 @@ export default function ServiciosPage() {
           <RespuestaRapida
             className="mt-10 max-w-4xl"
             pregunta="¿Qué servicios ofrece Conductos Ergui?"
-            respuesta={`Seis servicios en dos áreas: climatización por conductos, conductos de aire y ventilación, por un lado; pladur, aislamiento térmico y aislamiento acústico, por otro. Se prestan en ${BASE_LOCALITY} y en la comarca del ${BASE_COMARCA}, y se coordinan en una misma obra cuando el proyecto combina instalación y construcción en seco.`}
+            respuesta={`Seis servicios en dos áreas: climatización por conductos, conductos de aire y ventilación, por un lado; pladur, aislamiento térmico y aislamiento acústico, por otro. Se prestan en ${BASE_LOCALITY}, en la comarca del ${BASE_COMARCA} y en el resto del ${RADIO_OPERATIVO}, y se coordinan en una misma obra cuando el proyecto combina instalación y construcción en seco.`}
           />
           <p className="mt-6 text-sm text-white/60">
             ¿Dudas concretas?{" "}

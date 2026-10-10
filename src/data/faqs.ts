@@ -230,10 +230,10 @@ export const FAQS: Faq[] = [
     id: "instalan-climatizacion",
     categoria: "climatizacion",
     pregunta: "¿Conductos Ergui instala sistemas de climatización?",
-    respuesta: "Sí. Conductos Ergui instala sistemas de climatización por conductos en El Vendrell y la comarca del Baix Penedès.",
+    respuesta: "Sí. Conductos Ergui instala sistemas de climatización por conductos en El Vendrell, el Baix Penedès y el resto de su radio operativo de 50 km.",
     conceptos: ["climatizacion"],
     servicio: "climatizacion",
-    fuente: "Confirmación del titular (09/10/2026)",
+    fuente: "Confirmación del titular (09/10/2026); área servida: ADR-001, D3 (10/10/2026)",
     estado: "publicada",
   },
   {
@@ -596,9 +596,9 @@ export const FAQS: Faq[] = [
     categoria: "general",
     pregunta: "¿En qué localidades presta servicio Conductos Ergui?",
     respuesta:
-      "En El Vendrell, donde tiene su base, y en la comarca del Baix Penedès: Calafell, Cunit, Santa Oliva, Bellvei, Albinyana, L'Arboç, Banyeres del Penedès, La Bisbal del Penedès, Llorenç del Penedès, Bonastre, Sant Jaume dels Domenys, Masllorenç y El Montmell.",
+      "En un radio operativo de 50 km desde El Vendrell, donde tiene su base. Su zona principal es la comarca del Baix Penedès: El Vendrell, Calafell, Cunit, Santa Oliva, Bellvei, Albinyana, L'Arboç, Banyeres del Penedès, La Bisbal del Penedès, Llorenç del Penedès, Bonastre, Sant Jaume dels Domenys, Masllorenç y El Montmell.",
     conceptos: [],
-    fuente: "src/lib/entidad.ts",
+    fuente: "src/lib/territorio.ts (ADR-001, D3: radio operativo de 50 km)",
     estado: "publicada",
   },
   {

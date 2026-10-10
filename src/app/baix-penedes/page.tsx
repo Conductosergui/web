@@ -66,7 +66,7 @@ export default function BaixPenedesPage() {
 
       <ZonaHero
         crumb={BASE_COMARCA}
-        eyebrow="Zona de servicio"
+        eyebrow="Zona principal"
         titulo={`${BASE_COMARCA},`}
         acento="toda la comarca."
         intro={DESCRIPTION}
@@ -81,7 +81,7 @@ export default function BaixPenedesPage() {
       <section aria-labelledby="municipios" className="bg-[#05111f] pb-16 md:pb-24">
         <div className="shell">
           <h2 id="municipios" className="text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-[1.1] tracking-[-0.03em] text-white">
-            {MUNICIPIOS.length} municipios atendidos
+            Municipios de la comarca
           </h2>
           <p className="mt-3 max-w-2xl text-[15px] leading-[1.7] text-white/60">
             Distancia aproximada desde {BASE_LOCALITY}, medida en línea recta entre los centros de cada municipio.

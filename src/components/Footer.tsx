@@ -12,9 +12,9 @@ import {
   BASE_PROVINCE,
   EMAIL,
   GBP_URL,
-  MUNICIPIOS_BAIX_PENEDES,
   PHONE,
   PHONE_FORMATTED,
+  RADIO_OPERATIVO,
   WHATSAPP_URL,
   ZONA_COMARCA_PATH,
   ZONA_SEDE_PATH,
@@ -37,7 +37,7 @@ export function Footer() {
             <p className="mb-5 text-xs font-bold uppercase tracking-[.14em] text-white/50">Secciones</p>
             <div className="grid gap-3 text-sm">
               <Link href="/servicios">Servicios</Link>
-              <Link href={ZONA_COMARCA_PATH}>Zona de servicio</Link>
+              <Link href={ZONA_COMARCA_PATH}>Zona principal</Link>
               <Link href="/#metodo">Método de trabajo</Link>
               <Link href="/guias">Guías</Link>
               <Link href="/glosario">Glosario técnico</Link>
@@ -79,7 +79,7 @@ export function Footer() {
                 <dt className="text-[11px] font-bold uppercase tracking-[.12em] text-white/50">Área de servicio</dt>
                 <dd className="mt-1">
                   <Link href={ZONA_COMARCA_PATH}>
-                    Comarca del {BASE_COMARCA} · {MUNICIPIOS_BAIX_PENEDES.length} municipios
+                    {RADIO_OPERATIVO.charAt(0).toUpperCase() + RADIO_OPERATIVO.slice(1)} · zona principal: {BASE_COMARCA}
                   </Link>
                 </dd>
               </div>

@@ -1,6 +1,6 @@
 # ADR-001 · Propuesta de implementación (D3 reabierta)
 
-- **Estado:** Aprobada con D5–D8 (10/10/2026). F1 e I2 implementadas en la rama de trabajo, sin fusionar a `main`. I3–I5 pendientes.
+- **Estado:** Aprobada con D5–D8 (10/10/2026). F1, I2 e I3 implementadas en la rama de trabajo, sin fusionar a `main`. I4–I5 pendientes.
 - **Fecha:** 10/10/2026
 - **Base:** `ADR-001-territorio-canonico.md` (aprobado como documento base; D1, D2 y D4 cerradas).
 - **Dirección indicada por el titular:** sede en El Vendrell; área servida = radio operativo de 50 km; territorio prioritario de autoridad = Baix Penedès.
@@ -101,6 +101,7 @@ Cada fase en su propio commit en la rama de trabajo, con diff para aprobación. 
 
 ## 8. Registro de ejecución
 
+- **I3 — Contenido visible (10/10/2026):** textos de cobertura alineados con el ADR (D3, D6, D7, D8) mediante la constante `RADIO_OPERATIVO` de `entidad.ts`: métrica "14 municipios atendidos" sustituida por "Local · Servicio de proximidad" (cabecera y Cobertura) y cifra "14" sin etiqueta retirada de la tarjeta "Disponibilidad"; "Área de servicio" = radio operativo + zona principal Baix Penedès (pie, ficha de `/el-vendrell`, `llms.txt`); FAQ de cobertura y de climatización; respuesta rápida de `/el-vendrell` y `/servicios`; textos de enlaces "Zona de servicio" → "Zona principal" (destinos sin cambios); WhatsApp sin mención territorial; opción "Otra localidad (radio operativo de 50 km)" en el formulario de contacto. Sin cambios en títulos, metaetiquetas, H1, sitemap ni destinos de enlaces (verificado). Validador: 0 problemas.
 - **I2 — Grafo (10/10/2026):** `areaServed` = `GeoCircle` de 50 km (`/#area-servida`, centro en las coordenadas del local) + Baix Penedès en `/#negocio`, los departamentos y los 6 `Service`. Los 13 municipios secundarios se publican como `City` (`/#<clave>`, `containedInPlace` → Baix Penedès) solo en `/baix-penedes`, y su `ItemList` los referencia por `@id`. Nodos de territorio de `schema.ts` leídos del registro. Sin cambios en títulos, descripciones, H1, sitemap, texto visible ni enlaces (verificado). Validador: 149 → 163 nodos con `@id`, 377 → 402 aristas, 0 problemas, 0 referencias rotas.
 - **D3 cerrada (10/10/2026):** definición de TERRITORIOS_SECUNDARIOS ampliada al resto de territorios atendidos dentro del radio. En el registro, el `@id` de los secundarios pasa a `/#<clave>` (antes `/baix-penedes#<clave>`), válido también para territorios fuera de la comarca. Aún no se publican, así que el cambio no afecta a la salida.
 - **F1 / I1 — Registro canónico (10/10/2026):** `src/lib/territorio.ts` (territorios, `SEDE`, `AREA_SERVIDA`) y `src/lib/entidad.ts` derivando de él `BASE_*`, `ADDRESS`, `GEO`, `MUNICIPIOS_BAIX_PENEDES`, rutas de zona y `@id` de territorio (nueva función `territorioId`). Verificación: la salida compilada (texto, metadatos, enlaces, JSON-LD, sitemap, `llms.txt`, `robots.txt` de las 30 rutas) es idéntica antes y después del cambio. `AREA_SERVIDA` y los `@id` de los municipios secundarios quedan definidos pero aún no se publican (I2).
