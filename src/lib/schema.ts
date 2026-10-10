@@ -35,7 +35,9 @@ import {
   conceptoId,
   pageId,
   servicioId,
+  territorioId,
 } from "@/lib/entidad";
+import { AREA_SERVIDA, territorio } from "@/lib/territorio";
 
 type Node = Record<string, unknown>;
 
@@ -44,7 +46,8 @@ export const ref = (id: string) => ({ "@id": id });
 const address = { "@type": "PostalAddress", ...ADDRESS };
 
 const geo = { "@type": "GeoCoordinates", latitude: GEO.latitude, longitude: GEO.longitude };
-const areaServed = [ref(ID.vendrell), ref(ID.comarca)];
+// Área servida (ADR-001, D3/D5 opción A): radio operativo de 50 km + territorios prioritarios declarados.
+const areaServed = [ref(ID.areaServida), ...AREA_SERVIDA.prioritariosEnAreaServed.map((c) => ref(territorioId(c)))];
 
 const DEPARTAMENTO_ID = { climatizacion: ID.climatizacion, pladur: ID.pladur } as const;
 const CATALOGO_ID = { climatizacion: ID.catalogoClimatizacion, pladur: ID.catalogoPladur } as const;
@@ -197,24 +200,46 @@ export function siteGraph(): Node[] {
     },
     ...CONCEPTOS.map(conceptoNode),
 
-    // ── Territorio ─────────────────────────────────────────────
+    // ── Territorio (registro canónico: src/lib/territorio.ts) ──
+    {
+      "@type": "GeoCircle",
+      "@id": ID.areaServida,
+      name: `Radio operativo de ${AREA_SERVIDA.radioKm} km desde ${BASE_LOCALITY}`,
+      geoMidpoint: geo,
+      geoRadius: AREA_SERVIDA.radioKm * 1000,
+    },
     {
       "@type": "City",
       "@id": ID.vendrell,
       name: BASE_LOCALITY,
-      sameAs: "https://es.wikipedia.org/wiki/El_Vendrell",
+      sameAs: territorio("el-vendrell").sameAs,
       containedInPlace: ref(ID.comarca),
     },
     {
       "@type": "AdministrativeArea",
       "@id": ID.comarca,
       name: BASE_COMARCA,
-      sameAs: "https://es.wikipedia.org/wiki/Bajo_Panad%C3%A9s",
+      sameAs: territorio("baix-penedes").sameAs,
       containedInPlace: ref(ID.provincia),
     },
     { "@type": "AdministrativeArea", "@id": ID.provincia, name: `Provincia de ${BASE_PROVINCE}`, containedInPlace: ref(ID.cataluna) },
     { "@type": "AdministrativeArea", "@id": ID.cataluna, name: "Cataluña", containedInPlace: { "@type": "Country", name: "España" } },
   ];
+}
+
+/**
+ * Nodo City de un territorio secundario (ADR-001). Se declara solo en la página que lo cita,
+ * no en el grafo común, para no repetirlo en todas las rutas.
+ */
+export function municipioNode(clave: string): Node {
+  const t = territorio(clave);
+  return {
+    "@type": "City",
+    "@id": territorioId(clave),
+    name: t.nombre,
+    ...(t.sameAs ? { sameAs: t.sameAs } : {}),
+    ...(t.contenidoEn ? { containedInPlace: ref(territorioId(t.contenidoEn)) } : {}),
+  };
 }
 
 /** Nodo Person del fundador y autor de las guías, con @id estable y vínculo a la empresa. */

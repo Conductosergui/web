@@ -112,6 +112,8 @@ export const ID = {
   cataluna: territorioId("cataluna"),
   // Núcleo costero del municipio de El Vendrell (sección propia en /el-vendrell)
   comaRuga: territorioId("coma-ruga"),
+  // Área servida: radio operativo desde la sede (GeoCircle, ADR-001 D3/D5)
+  areaServida: `${SITE_URL}/#area-servida`,
   logo: `${SITE_URL}/#logo`,
 } as const;
 

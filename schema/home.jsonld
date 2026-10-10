@@ -54,7 +54,7 @@
       ],
       "areaServed": [
         {
-          "@id": "https://conductosergui.es/#el-vendrell"
+          "@id": "https://conductosergui.es/#area-servida"
         },
         {
           "@id": "https://conductosergui.es/#baix-penedes"
@@ -110,7 +110,7 @@
         "telephone": "+34622368999",
         "areaServed": [
           {
-            "@id": "https://conductosergui.es/#el-vendrell"
+            "@id": "https://conductosergui.es/#area-servida"
           },
           {
             "@id": "https://conductosergui.es/#baix-penedes"
@@ -184,7 +184,7 @@
       },
       "areaServed": [
         {
-          "@id": "https://conductosergui.es/#el-vendrell"
+          "@id": "https://conductosergui.es/#area-servida"
         },
         {
           "@id": "https://conductosergui.es/#baix-penedes"
@@ -237,7 +237,7 @@
       },
       "areaServed": [
         {
-          "@id": "https://conductosergui.es/#el-vendrell"
+          "@id": "https://conductosergui.es/#area-servida"
         },
         {
           "@id": "https://conductosergui.es/#baix-penedes"
@@ -348,7 +348,7 @@
       },
       "areaServed": [
         {
-          "@id": "https://conductosergui.es/#el-vendrell"
+          "@id": "https://conductosergui.es/#area-servida"
         },
         {
           "@id": "https://conductosergui.es/#baix-penedes"
@@ -386,7 +386,7 @@
       },
       "areaServed": [
         {
-          "@id": "https://conductosergui.es/#el-vendrell"
+          "@id": "https://conductosergui.es/#area-servida"
         },
         {
           "@id": "https://conductosergui.es/#baix-penedes"
@@ -427,7 +427,7 @@
       },
       "areaServed": [
         {
-          "@id": "https://conductosergui.es/#el-vendrell"
+          "@id": "https://conductosergui.es/#area-servida"
         },
         {
           "@id": "https://conductosergui.es/#baix-penedes"
@@ -459,7 +459,7 @@
       },
       "areaServed": [
         {
-          "@id": "https://conductosergui.es/#el-vendrell"
+          "@id": "https://conductosergui.es/#area-servida"
         },
         {
           "@id": "https://conductosergui.es/#baix-penedes"
@@ -500,7 +500,7 @@
       },
       "areaServed": [
         {
-          "@id": "https://conductosergui.es/#el-vendrell"
+          "@id": "https://conductosergui.es/#area-servida"
         },
         {
           "@id": "https://conductosergui.es/#baix-penedes"
@@ -538,7 +538,7 @@
       },
       "areaServed": [
         {
-          "@id": "https://conductosergui.es/#el-vendrell"
+          "@id": "https://conductosergui.es/#area-servida"
         },
         {
           "@id": "https://conductosergui.es/#baix-penedes"
@@ -668,6 +668,17 @@
       "inDefinedTermSet": {
         "@id": "https://conductosergui.es/glosario#terminos"
       }
+    },
+    {
+      "@type": "GeoCircle",
+      "@id": "https://conductosergui.es/#area-servida",
+      "name": "Radio operativo de 50 km desde El Vendrell",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": 41.220202,
+        "longitude": 1.534805
+      },
+      "geoRadius": 50000
     },
     {
       "@type": "City",

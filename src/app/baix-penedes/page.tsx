@@ -15,8 +15,10 @@ import {
   ZONA_COMARCA_PATH,
   ZONA_SEDE_PATH,
   absoluteUrl,
+  territorioId,
 } from "@/lib/entidad";
-import { breadcrumbNode, pageNode, ref } from "@/lib/schema";
+import { breadcrumbNode, municipioNode, pageNode, ref } from "@/lib/schema";
+import { SEDE, municipiosDe } from "@/lib/territorio";
 import { buildMetadata } from "@/lib/seo";
 
 const PATH = ZONA_COMARCA_PATH;
@@ -27,6 +29,10 @@ const DESCRIPTION = `${BRAND} atiende los ${MUNICIPIOS.length} municipios de la 
 export const metadata: Metadata = buildMetadata({ title: TITLE, description: DESCRIPTION, path: PATH });
 
 const listId = `${absoluteUrl(PATH)}#municipios`;
+
+// Municipios de la comarca en el registro canónico: El Vendrell (prioritario, nodo común) y los secundarios.
+const TERRITORIOS_COMARCA = municipiosDe(SEDE.comarca);
+const SECUNDARIOS = TERRITORIOS_COMARCA.filter((t) => t.categoria === "SECUNDARIO");
 
 const graph = [
   pageNode({
@@ -41,15 +47,13 @@ const graph = [
     "@id": listId,
     name: `Municipios del ${BASE_COMARCA} atendidos por ${BRAND}`,
     numberOfItems: MUNICIPIOS.length,
-    itemListElement: MUNICIPIOS.map((m, i) => ({
+    itemListElement: TERRITORIOS_COMARCA.map((t, i) => ({
       "@type": "ListItem",
       position: i + 1,
-      item:
-        m === BASE_LOCALITY
-          ? ref(ID.vendrell)
-          : { "@type": "City", name: m, containedInPlace: ref(ID.comarca) },
+      item: ref(territorioId(t.clave)),
     })),
   },
+  ...SECUNDARIOS.map((t) => municipioNode(t.clave)),
   breadcrumbNode(PATH, [{ name: BASE_COMARCA, path: PATH }]),
 ];
 
