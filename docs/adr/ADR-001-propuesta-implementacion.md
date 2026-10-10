@@ -17,12 +17,9 @@
 3. **TERRITORIOS_PRIORITARIOS (autoridad)**
    - Baix Penedès (`/#baix-penedes`, página `/baix-penedes`).
    - El Vendrell (`/#el-vendrell`, página `/el-vendrell`), con la sección Coma-ruga.
-4. **TERRITORIOS_SECUNDARIOS**
-   - Los 13 municipios del Baix Penedès distintos de El Vendrell: entidad `City` con `@id` y `containedInPlace` → Baix Penedès, declarada solo en `/baix-penedes`, sin página propia.
-5. **COBERTURA OPERATIVA (nueva subcapa)**
-   - Territorios dentro del radio y fuera del Baix Penedès.
-   - Sin nodos de entidad, sin páginas y sin listados en el sitio, salvo decisión D6.
-   - Se comunican de forma genérica: "radio de 50 km desde El Vendrell".
+4. **TERRITORIOS_SECUNDARIOS** (D3: resto de territorios atendidos dentro del radio, según la evolución del negocio)
+   - Hoy: los 13 municipios del Baix Penedès distintos de El Vendrell. Entidad `City` con `@id` (`/#<clave>`) y `containedInPlace` → Baix Penedès, declarada solo en `/baix-penedes`, sin página propia.
+   - Territorios atendidos fuera de la comarca: se incorporan al registro cuando el titular los confirme (hoy no consta ninguno). Mientras D6 siga vigente, no se listan en el sitio; se comunican de forma genérica: "radio de 50 km desde El Vendrell".
 
 ## 2. Representación en schema.org
 
@@ -33,12 +30,12 @@
 3. **Prioridad de autoridad:** se mantiene con `about` y `mainEntity` en `/baix-penedes` y `/el-vendrell`, sin cambios de ruta.
 4. **Limitación conocida:** según la referencia del proyecto (`references/google-oficial.md`), Google no documenta `areaServed` entre las propiedades que admite para negocios locales, ni para usarla ni para descartarla. El cambio aporta coherencia para otros consumidores (motores generativos, `llms.txt`), pero no hay respaldo oficial de que Google lo use. El área de servicio que Google muestra se configura en Google Business Profile (acción del titular, ver §6).
 
-## 3. Invariantes revisados (sustituyen a los del ADR §2.5 al aprobarse)
+## 3. Invariantes definitivos (sustituyen a los del ADR §2.5)
 
 1. Existe exactamente una SEDE con dirección y coordenadas.
 2. AREA_SERVIDA es un único `GeoCircle` centrado en las coordenadas de la SEDE.
 3. TERRITORIOS_PRIORITARIOS = {Baix Penedès, El Vendrell}; cambiar la lista exige una decisión registrada en el ADR.
-4. TERRITORIOS_SECUNDARIOS = municipios de los territorios prioritarios sin página propia (los 13 del Baix Penedès).
+4. Todo TERRITORIO_SECUNDARIO está dentro de AREA_SERVIDA, no tiene página propia y figura en el registro solo con confirmación del titular.
 5. TERRITORIOS_PRIORITARIOS ∩ TERRITORIOS_SECUNDARIOS = ∅.
 6. Todo territorio con nodo en el grafo tiene un único `@id` estable.
 7. `areaServed` solo contiene el `GeoCircle` de AREA_SERVIDA y, según D5, territorios prioritarios.
@@ -104,4 +101,5 @@ Cada fase en su propio commit en la rama de trabajo, con diff para aprobación. 
 
 ## 8. Registro de ejecución
 
+- **D3 cerrada (10/10/2026):** definición de TERRITORIOS_SECUNDARIOS ampliada al resto de territorios atendidos dentro del radio. En el registro, el `@id` de los secundarios pasa a `/#<clave>` (antes `/baix-penedes#<clave>`), válido también para territorios fuera de la comarca. Aún no se publican, así que el cambio no afecta a la salida.
 - **F1 / I1 — Registro canónico (10/10/2026):** `src/lib/territorio.ts` (territorios, `SEDE`, `AREA_SERVIDA`) y `src/lib/entidad.ts` derivando de él `BASE_*`, `ADDRESS`, `GEO`, `MUNICIPIOS_BAIX_PENEDES`, rutas de zona y `@id` de territorio (nueva función `territorioId`). Verificación: la salida compilada (texto, metadatos, enlaces, JSON-LD, sitemap, `llms.txt`, `robots.txt` de las 30 rutas) es idéntica antes y después del cambio. `AREA_SERVIDA` y los `@id` de los municipios secundarios quedan definidos pero aún no se publican (I2).

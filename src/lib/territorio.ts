@@ -6,8 +6,9 @@
 // - SEDE: ubicación física del negocio. Hay exactamente una.
 // - AREA_SERVIDA: radio operativo de 50 km desde las coordenadas de la sede (GeoCircle). No enumera municipios.
 // - PRIORITARIO: territorio con página indexable y estrategia de autoridad (Baix Penedès y El Vendrell).
-// - SECUNDARIO: municipio de un territorio prioritario sin página propia (los 13 del Baix Penedès).
-// - Cobertura operativa (dentro del radio y fuera del Baix Penedès): sin registro, solo referencia genérica al radio.
+// - SECUNDARIO: resto de territorios atendidos dentro del radio, según la evolución del negocio (D3). Sin página propia.
+//   Hoy, los 13 municipios del Baix Penedès. Los de fuera de la comarca se añaden solo con confirmación del titular
+//   y no se listan en el sitio mientras rija D6.
 
 export type TipoTerritorio = "pais" | "comunidad" | "provincia" | "comarca" | "municipio" | "nucleo";
 export type Categoria = "PRIORITARIO" | "SECUNDARIO" | "CONTEXTO";
@@ -22,7 +23,7 @@ export type Territorio = {
   contenidoEn?: string;
   /**
    * Ruta y fragmento que forman su @id: `${SITE_URL}${idPath}`. Los @id existentes se conservan
-   * tal cual (ADR-001 §4); los municipios secundarios aún no se publican en el grafo (fase F2).
+   * tal cual (ADR-001 §4). Los secundarios usan `/#<clave>` y aún no se publican en el grafo (fase I2).
    */
   idPath: string;
   /** Página propia indexable (solo territorios prioritarios). */
@@ -79,20 +80,20 @@ export const TERRITORIOS: readonly Territorio[] = [
     idPath: "/el-vendrell#coma-ruga",
   },
 
-  // Territorios secundarios: municipios del Baix Penedès sin página propia, ordenados por distancia
-  { clave: "calafell", nombre: "Calafell", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/baix-penedes#calafell", distanciaKm: 3.5 },
-  { clave: "santa-oliva", nombre: "Santa Oliva", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/baix-penedes#santa-oliva", distanciaKm: 3.9 },
-  { clave: "bellvei", nombre: "Bellvei", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/baix-penedes#bellvei", distanciaKm: 4.2 },
-  { clave: "albinyana", nombre: "Albinyana", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/baix-penedes#albinyana", distanciaKm: 5.0 },
-  { clave: "llorenc-del-penedes", nombre: "Llorenç del Penedès", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/baix-penedes#llorenc-del-penedes", distanciaKm: 7.2 },
-  { clave: "banyeres-del-penedes", nombre: "Banyeres del Penedès", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/baix-penedes#banyeres-del-penedes", distanciaKm: 7.6 },
-  { clave: "la-bisbal-del-penedes", nombre: "La Bisbal del Penedès", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/baix-penedes#la-bisbal-del-penedes", distanciaKm: 7.8 },
-  { clave: "l-arboc", nombre: "L'Arboç", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/baix-penedes#l-arboc", distanciaKm: 7.9 },
-  { clave: "bonastre", nombre: "Bonastre", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/baix-penedes#bonastre", distanciaKm: 7.9 },
-  { clave: "cunit", nombre: "Cunit", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/baix-penedes#cunit", distanciaKm: 8.7 },
-  { clave: "sant-jaume-dels-domenys", nombre: "Sant Jaume dels Domenys", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/baix-penedes#sant-jaume-dels-domenys", distanciaKm: 9.1 },
-  { clave: "masllorenc", nombre: "Masllorenç", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/baix-penedes#masllorenc", distanciaKm: 11.4 },
-  { clave: "el-montmell", nombre: "El Montmell", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/baix-penedes#el-montmell", distanciaKm: 12.5 },
+  // Territorios secundarios atendidos (D3). Hoy, municipios del Baix Penedès, ordenados por distancia.
+  { clave: "calafell", nombre: "Calafell", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/#calafell", distanciaKm: 3.5 },
+  { clave: "santa-oliva", nombre: "Santa Oliva", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/#santa-oliva", distanciaKm: 3.9 },
+  { clave: "bellvei", nombre: "Bellvei", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/#bellvei", distanciaKm: 4.2 },
+  { clave: "albinyana", nombre: "Albinyana", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/#albinyana", distanciaKm: 5.0 },
+  { clave: "llorenc-del-penedes", nombre: "Llorenç del Penedès", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/#llorenc-del-penedes", distanciaKm: 7.2 },
+  { clave: "banyeres-del-penedes", nombre: "Banyeres del Penedès", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/#banyeres-del-penedes", distanciaKm: 7.6 },
+  { clave: "la-bisbal-del-penedes", nombre: "La Bisbal del Penedès", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/#la-bisbal-del-penedes", distanciaKm: 7.8 },
+  { clave: "l-arboc", nombre: "L'Arboç", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/#l-arboc", distanciaKm: 7.9 },
+  { clave: "bonastre", nombre: "Bonastre", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/#bonastre", distanciaKm: 7.9 },
+  { clave: "cunit", nombre: "Cunit", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/#cunit", distanciaKm: 8.7 },
+  { clave: "sant-jaume-dels-domenys", nombre: "Sant Jaume dels Domenys", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/#sant-jaume-dels-domenys", distanciaKm: 9.1 },
+  { clave: "masllorenc", nombre: "Masllorenç", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/#masllorenc", distanciaKm: 11.4 },
+  { clave: "el-montmell", nombre: "El Montmell", tipo: "municipio", categoria: "SECUNDARIO", contenidoEn: "baix-penedes", idPath: "/#el-montmell", distanciaKm: 12.5 },
 ];
 
 /** Sede: ubicación física del negocio (dirección y coordenadas facilitadas por el titular). */

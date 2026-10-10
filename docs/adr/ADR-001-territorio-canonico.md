@@ -1,6 +1,6 @@
 # ADR-001 — Territorio canónico
 
-- **Estado:** Aprobado como documento base (10/10/2026). D1, D2 y D4 cerradas; D3 reabierta (ver `ADR-001-propuesta-implementacion.md`).
+- **Estado:** Aprobado (10/10/2026). D1–D8 cerradas. Implementación en `ADR-001-propuesta-implementacion.md`.
 - **Fecha:** 10/10/2026
 - **Ámbito:** datos de entidad (`src/lib/entidad.ts`), grafo JSON-LD (`src/lib/schema.ts`), páginas, rutas generadas y documentación.
 
@@ -34,34 +34,26 @@ El territorio se modela en **cuatro categorías canónicas**, definidas en una s
 
 ### 2.2 AREA_SERVIDA
 
-- **Definición:** conjunto completo de territorios donde se presta el servicio.
-- **Valor vigente:** comarca del Baix Penedès, con sus 14 municipios, según el sitio publicado y las decisiones de las fases 2–4.
-- **Schema.org:** `areaServed` de `/#negocio`, de los departamentos y de los `Service`. Solo puede referenciar territorios de esta categoría.
-- **No adoptado:** el radio de 50 km (200 municipios) de la skill y de `copilot-instructions.md`. Queda como decisión abierta D3.
+- **Definición:** radio operativo de 50 km desde la sede (D3, cerrada 10/10/2026).
+- **Valor:** círculo de 50 km centrado en las coordenadas del local. No enumera municipios.
+- **Schema.org:** `areaServed` de `/#negocio`, de los departamentos y de los `Service` = `GeoCircle` de 50 km + Baix Penedès (D5, opción A).
 
 ### 2.3 TERRITORIOS_PRIORITARIOS
 
-- **Definición:** subconjunto de AREA_SERVIDA con presencia propia e indexable en la web (página dedicada).
-- **Valor vigente:** El Vendrell (`/el-vendrell`, municipio de la sede) y Baix Penedès (`/baix-penedes`, comarca).
-- **Criterio de entrada:** pendiente (D1). La referencia aprobada en la fase 4 es disponer de contenido real propio del territorio (umbral de trabajos documentados; valor exacto no consta).
+- **Definición:** territorio dentro de AREA_SERVIDA con página indexable y estrategia de autoridad (D1).
+- **Valor:** Baix Penedès (`/baix-penedes`) y El Vendrell (`/el-vendrell`, con su núcleo Coma-ruga) (D2, D4).
 - **Schema.org:** `City`/`AdministrativeArea` con `@id` propio, `sameAs` verificado y página con `about` → territorio.
 
 ### 2.4 TERRITORIOS_SECUNDARIOS
 
-- **Definición:** territorios de AREA_SERVIDA sin página propia. Se citan en la página de la comarca y existen como entidad.
-- **Valor vigente:** los 13 municipios del Baix Penedès distintos de El Vendrell.
-- **Schema.org:** `City` con `@id` propio, `containedInPlace` → comarca y `sameAs` cuando se verifique. Se declaran solo en la página que los cita, no en el grafo común.
+- **Definición:** resto de territorios atendidos dentro del radio operativo, según la evolución del negocio (D3, cerrada 10/10/2026). No tienen página propia.
+- **Valor vigente:** los 13 municipios del Baix Penedès distintos de El Vendrell. Los territorios atendidos fuera de la comarca se añaden al registro solo cuando el titular los confirme; hoy no consta ninguno y no se listan en el sitio (D6).
+- **Schema.org:** `City` con `@id` propio (`/#<clave>`), `containedInPlace` → territorio que lo contiene y `sameAs` cuando se verifique. Se declaran solo en la página que los cita, no en el grafo común.
 - **Promoción:** un territorio secundario pasa a prioritario cuando cumple el criterio D1. El cambio es un único dato en la fuente canónica.
 
 ### 2.5 Invariantes (comprobables en la compilación)
 
-1. Existe exactamente una SEDE y su municipio pertenece a AREA_SERVIDA.
-2. TERRITORIOS_PRIORITARIOS ∩ TERRITORIOS_SECUNDARIOS = ∅.
-3. Los municipios de TERRITORIOS_PRIORITARIOS ∪ TERRITORIOS_SECUNDARIOS son exactamente los municipios de AREA_SERVIDA.
-4. Todo territorio tiene un único `@id` estable.
-5. `areaServed` solo referencia territorios de AREA_SERVIDA.
-6. Solo los TERRITORIOS_PRIORITARIOS tienen ruta indexable propia y entrada en sitemap y `llms.txt`.
-7. Ningún texto, nodo ni ruta publicada nombra un territorio fuera de AREA_SERVIDA como zona de servicio.
+Sustituidos por los invariantes definitivos de `ADR-001-propuesta-implementacion.md` §3.
 
 ### 2.6 Modelo de datos propuesto (no implementado)
 
@@ -81,7 +73,12 @@ Las constantes actuales (`BASE_LOCALITY`, `BASE_COMARCA`, `MUNICIPIOS_BAIX_PENED
 
 - **D1. Criterio de prioridad — CERRADA (10/10/2026):** prioritario = territorio con página indexable y estrategia de autoridad.
 - **D2. Lista de prioritarios — CERRADA (10/10/2026):** Baix Penedès y El Vendrell. Coma-ruga pertenece a El Vendrell.
-- **D3. Alcance de AREA_SERVIDA — REABIERTA (10/10/2026):** el titular confirma servicio habitual fuera del Baix Penedès. Dirección indicada: sede en El Vendrell, área servida = radio operativo de 50 km, territorio prioritario de autoridad = Baix Penedès. Propuesta de implementación en `docs/adr/ADR-001-propuesta-implementacion.md`. Mientras no se apruebe, rige el valor vigente (comarca, 14 municipios) y los invariantes 3 y 7 se revisarán con esa propuesta.
+- **D3. Alcance de AREA_SERVIDA — CERRADA (10/10/2026):** el titular confirma servicio habitual fuera del Baix Penedès.
+  - SEDE: El Vendrell.
+  - ÁREA SERVIDA: radio operativo de 50 km desde la sede.
+  - TERRITORIOS PRIORITARIOS: Baix Penedès y El Vendrell.
+  - TERRITORIOS SECUNDARIOS: resto de territorios atendidos dentro del radio operativo, según la evolución del negocio.
+- **D5–D8 — CERRADAS (10/10/2026):** detalle en `ADR-001-propuesta-implementacion.md` §7.
 - **D4. Núcleos — CERRADA (10/10/2026):** Coma-ruga se modela como núcleo dependiente de El Vendrell (`Place`, `containedInPlace` → El Vendrell; sección de `/el-vendrell`, sin página propia).
 
 ## 4. Consecuencias
